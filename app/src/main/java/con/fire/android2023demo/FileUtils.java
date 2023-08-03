@@ -28,6 +28,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.webkit.MimeTypeMap;
 
 import java.io.File;
@@ -39,9 +40,7 @@ import java.util.UUID;
 
 
 public class FileUtils {
-    /**
-     * @return extension of image with dot, or null if it's empty.
-     */
+
     private static String getImageExtension(Context context, Uri uriImage) {
         String extension;
 
@@ -95,29 +94,18 @@ public class FileUtils {
         return fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
-    /**
-     * Copies the file from the given content URI to a temporary directory, retaining the original
-     * file name if possible.
-     *
-     * <p>Each file is placed in its own directory to avoid conflicts according to the following
-     * scheme: {cacheDir}/{randomUuid}/{fileName}
-     *
-     * <p>File extension is changed to match MIME type of the file, if known. Otherwise, the extension
-     * is left unchanged.
-     *
-     * <p>If the original file name is unknown, a predefined "image_picker" filename is used and the
-     * file extension is deduced from the mime type (with fallback to ".jpg" in case of failure).
-     */
+
     public String getPathFromUri(final Context context, final Uri uri) {
         try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
             String uuid = UUID.randomUUID().toString();
             File targetDirectory = new File(context.getCacheDir(), uuid);
             targetDirectory.mkdir();
-            // TODO(SynSzakala) according to the docs, `deleteOnExit` does not work reliably on Android; we should preferably
-            //  just clear the picked files after the app startup.
             targetDirectory.deleteOnExit();
             String fileName = getImageName(context, uri);
             String extension = getImageExtension(context, uri);
+
+            Log.d("getPathFroi", "" + fileName);
+            Log.d("getPathFroi", "" + extension);
 
             if (fileName == null) {
                 if (extension == null) extension = ".jpg";
@@ -131,16 +119,8 @@ public class FileUtils {
                 return file.getPath();
             }
         } catch (IOException e) {
-            // If closing the output stream fails, we cannot be sure that the
-            // target file was written in full. Flushing the stream merely moves
-            // the bytes into the OS, not necessarily to the file.
             return null;
         } catch (SecurityException e) {
-            // Calling `ContentResolver#openInputStream()` has been reported to throw a
-            // `SecurityException` on some devices in certain circumstances. Instead of crashing, we
-            // return `null`.
-            //
-            // See https://github.com/flutter/flutter/issues/100025 for more details.
             return null;
         }
     }

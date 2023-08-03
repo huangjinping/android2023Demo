@@ -1,4 +1,4 @@
-package con.fire.android2023demo.utils;
+package con.fire.android2023demo.photo;
 
 
 import android.app.Activity;
@@ -30,8 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
+
 
 
 public class PhotoUtilsOnline {
@@ -114,27 +113,27 @@ public class PhotoUtilsOnline {
 //                Log.d(TAG, "onStartCompress"+source.get(0).getPath());
 
 
-                Luban.with(context).load(source).ignoreBy(100).setCompressListener(new OnCompressListener() {
-                    @Override
-                    public void onStart() {
-                        Log.d(TAG, "onStart");
-
-                    }
-
-                    @Override
-                    public void onSuccess(int index, File compressFile) {
-                        Log.d(TAG, "onSuccess" + compressFile.getAbsolutePath());
-                        displayImage(compressFile.getAbsolutePath());
-                        call.onCallback(String.valueOf(source), compressFile.getAbsolutePath());
-                    }
-
-                    @Override
-                    public void onError(int index, Throwable e) {
-                        Log.d(TAG, "onError");
-
-                    }
-
-                }).launch();
+//                Luban.with(context).load(source).ignoreBy(100).setCompressListener(new OnCompressListener() {
+//                    @Override
+//                    public void onStart() {
+//                        Log.d(TAG, "onStart");
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(int index, File compressFile) {
+//                        Log.d(TAG, "onSuccess" + compressFile.getAbsolutePath());
+//                        displayImage(compressFile.getAbsolutePath());
+//                        call.onCallback(String.valueOf(source), compressFile.getAbsolutePath());
+//                    }
+//
+//                    @Override
+//                    public void onError(int index, Throwable e) {
+//                        Log.d(TAG, "onError");
+//
+//                    }
+//
+//                }).launch();
             }
         });
         camera.forResult(new OnResultCallbackListener<LocalMedia>() {

@@ -7,13 +7,16 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -26,23 +29,27 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 
-import con.fire.android2023demo.utils.PhotoUtils;
+import con.fire.android2023demo.photo.PhotoCallback;
+import con.fire.android2023demo.photo.PhotoSo;
+import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
+
 
 public class MainActivity extends AppCompatActivity {
-    String[] permissionArr = {Manifest.permission.CAMERA,
-//            Manifest.permission.READ_EXTERNAL_STORAGE,
-//            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-
-    };
-    PhotoUtils photoUtils;
-    private ImageView img_load;
+    String[] permissionArr = {Manifest.permission.CAMERA};
+    PhotoSo photoSo;
+    String tempMemory = "tempMemorytempMemorytempMemorytempMemorytempMemorytempMemory";
+    StringBuilder builder = new StringBuilder();
+    private ImageView img_load_take;
+    private ImageView img_load_album;
+    private ImageView image_target;
+    private boolean toLone = true;
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
     }
-
 
     public void onwhatApp(Context context, String phone) {
         Intent intent = new Intent();
@@ -67,46 +74,141 @@ public class MainActivity extends AppCompatActivity {
 //        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    void addchange() {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        img_load = findViewById(R.id.img_load);
+        img_load_take = findViewById(R.id.img_load_take);
+        img_load_album = findViewById(R.id.img_load_album);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            addchange();
+        }
+        Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        photoUtils = new PhotoUtils(this, new PhotoUtils.Callback() {
+        photoSo = new PhotoUtilsImagePicker(this);
+        photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
-
-                Log.d("getPath", "======" + path);
                 compress(path);
             }
         });
 
-
-        img_load.setOnClickListener(new View.OnClickListener() {
+        img_load_take.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                image_target = img_load_take;
                 Log.d("okhttps", "====000===11==>>>>");
-//                BranchEvent be = new BranchEvent("dd1d");
-//                be.logEvent(MainActivity.this);
-
-//                FileUtils.saveToSDCard(MainActivity.this,"siiw.txt","ddd");
-//                String fileContent = FileUtils.getFileContent(MainActivity.this, "siiw.txt");
-//                Log.d("okhttps", "www"+fileContent);
-
-
+                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+            }
+        });
+        img_load_album.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                image_target = img_load_album;
+                Log.d("okhttps", "====000===11==>>>>");
                 ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
             }
         });
 
         try {
             createLockTerm();
-
 //            createLockApplyAmount();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
+//    private void compress(String path){
+//        Luban.with(this)
+//                .load(new File(path))
+//                .ignoreBy(100)
+////                .setTargetDir(getExternalCacheDir().getAbsolutePath())
+//
+//                .setCompressListener(new OnCompressListener() {
+//                    @Override
+//                    public void onStart() {
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(int index, File compressFile) {
+//                        Log.d("onActivityResult", "0000000000000000005" + compressFile.getAbsolutePath());
+//
+//                        Glide.with(MainActivity.this).load(compressFile).into(image_target);
+//                    }
+//
+//                    @Override
+//                    public void onError(int index, Throwable e) {
+//
+//                    }
+//                }).launch();
+//    }
+
+
+//    private void compress(String path){
+//        new Compressor(this)
+//                .compressToFileAsFlowable(new File(path))
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Consumer<File>() {
+//                    @Override
+//                    public void accept(File file) {
+//                        try {
+//                            Glide.with(MainActivity.this).load(file).into(image_target);
+//                            Log.d("onActivityResult", "0000000000000000005");
+//                            Log.d("onActivityResult", "0000000000000000005" + file.getAbsolutePath());
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new Consumer<Throwable>() {
+//                    @Override
+//                    public void accept(Throwable throwable) {
+//                        Log.d("onActivityResult", "0000000000000000006");
+//
+//                        throwable.printStackTrace();
+////                        DisplayToast("压缩失败了");
+//                    }
+//                });
+//    }
+
+//    private void compress(String path) {
+//        try {
+//            new Thread() {
+//                @Override
+//                public void run() {
+//                    super.run();
+//
+//                    try {
+//                        Bitmap bitmap = Glide.with(MainActivity.this).asBitmap().load(path).submit(1080, 1920).get();
+//                        File file = PhotoUtilsSelf.saveBitmap(bitmap, System.currentTimeMillis() + "ko.jpg", MainActivity.this);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                Log.d("compress", "============" + file.getAbsolutePath());
+//                                Glide.with(MainActivity.this).load(file).into(image_target);
+//                            }
+//                        });
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
+//
+//                }
+//            }.start();
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//
+//    }
 
     private void createLockTerm() throws JSONException {
 
@@ -144,62 +246,86 @@ public class MainActivity extends AppCompatActivity {
         Log.d("lockAmountList", lockAmountList.toString());
     }
 
-
-    private void compress(String path) {
+    private void setTest() {
 
         try {
-            new Thread() {
-                @Override
-                public void run() {
-                    super.run();
+            Log.d("compress", "=========0===12");
 
-                    try {
-                        Bitmap bitmap = Glide.with(MainActivity.this).asBitmap().load(path).submit(1080, 1920).get();
-                        File file = PhotoUtils.saveBitmap(bitmap, System.currentTimeMillis() + "ko.jpg", MainActivity.this);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Log.d("compress", "============" + file.getAbsolutePath());
-                                Glide.with(MainActivity.this).load(file).into(img_load);
+            for (int i = 0; i < 100; i++) {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        try {
+                            Log.d("compress", "=========0===" + Thread.currentThread().getName());
+                            while (toLone) {
+
+                                builder.append(tempMemory);
+                                tempMemory = tempMemory + builder.toString();
                             }
-                        });
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                            Log.d("compress", "=========view===" + builder.length());
+
+                            Log.d("compress", "=========1===" + Thread.currentThread().getName());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-
-                }
-            }.start();
-
-
+                }.start();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
 
-//        Luban.with(this)
-//                .load(new File(path))
-//                .ignoreBy(100)
-////                .setTargetDir(getExternalCacheDir().getAbsolutePath())
-//
-//                .setCompressListener(new OnCompressListener() {
-//
-//                    @Override
-//                    public void onStart() {
-//                        Log.d("getPath", "======11");
-//
-//                    }
-//
-//                    @Override
-//                    public void onSuccess(File file) {
-//                        Glide.with(MainActivity.this).load(file).into(img_load);
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        Log.d("getPath", "======" + e.getMessage());
-//
-//                    }
-//                }).launch();
+    private void compress(String path) {
+        setTest();
+        Log.d("compress", "======start===0===" + path);
+        if ("moto e40".equals(Build.MODEL)) {
+            //系统照相机
+        }
+
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                try {
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Log.d("compress", "=======start===000==");
+
+                Luban.with(MainActivity.this).load(new File(path))
+                        .ignoreBy(350)
+                        .setCompressListener(new OnCompressListener() {
+
+                            @Override
+                            public void onStart() {
+
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                toLone = false;
+                                Log.d("compress", "=======end===11==" + file.getAbsolutePath());
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Glide.with(MainActivity.this).load(file).into(image_target);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+                        }).launch();
+            }
+        }.start();
     }
 
     @Override
@@ -210,9 +336,17 @@ public class MainActivity extends AppCompatActivity {
 
             if (checkPermission(this, permissions)) {
 //                startCamareActivity();
-//                photoUtils.take_Album();
-                photoUtils.take_photo();
+//                photoSo.take_Album();
+
+                if (img_load_album == image_target) {
+                    photoSo.take_Album();
+                } else if (img_load_take == image_target) {
+                    photoSo.take_photo();
+                }
+
 //                onwhatApp(this,"13611290917");
+            } else {
+                Toast.makeText(this, "权限没开！！！！", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -230,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        photoUtils.onActivityResult(requestCode, resultCode, data);
+        photoSo.onActivityResult(requestCode, resultCode, data);
         Log.d("okhttps", "==onActivityResult==>onActivityResult>>>");
 //        setCompress(mImageUri.getPath(), CALLBACK_TYPE_CODE);
     }
@@ -271,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
             out.flush();
             out.close();
 
-            Glide.with(MainActivity.this).load(file).into(img_load);
+            Glide.with(MainActivity.this).load(file).into(image_target);
 
         } catch (Exception e) {
 // TODO Auto-generated catch block

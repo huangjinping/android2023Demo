@@ -1,4 +1,4 @@
-package con.fire.android2023demo.utils;
+package con.fire.android2023demo.photo;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package con.fire.android2023demo.utils;
+package con.fire.android2023demo.photo;
 
 
 import android.app.Activity;
@@ -31,22 +31,22 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import con.fire.android2023demo.utils.BitmapUtils;
 
-public class PhotoUtils {
+
+public class PhotoUtilsSelf extends PhotoSo {
 
     public static final int TAKE_PHOTO = 1;//启动相机标识
     public static final int SELECT_PHOTO = 2;//启动相册标识
     private static final String TAG = "Photo12Utils";
-    public AppCompatActivity activity;
-    public Callback callback;
     private File outputImagepath;//存储拍完照后的图片
     private Bitmap orc_bitmap;//拍照和相册获取图片的Bitmap
     private Uri uri = null;
 
-    public PhotoUtils(AppCompatActivity activity, Callback callback) {
-        this.activity = activity;
-        this.callback = callback;
+    public PhotoUtilsSelf(AppCompatActivity activity) {
+        super(activity);
     }
+
 
     /*
      * 判断sdcard是否被挂载
@@ -149,6 +149,7 @@ public class PhotoUtils {
     public void take_photo() {
 
 
+        Log.d(TAG, "take_photo");
         try {
             //获取系統版本
             int currentapiVersion = Build.VERSION.SDK_INT;
@@ -214,6 +215,7 @@ public class PhotoUtils {
                 try {
                     if (requestCode == TAKE_PHOTO && resultCode == Activity.RESULT_OK) {
                         displayImage(outputImagepath.getAbsolutePath());
+
                     } else if (requestCode == SELECT_PHOTO && resultCode == Activity.RESULT_OK) {
                         Uri data1 = data.getData();
 
@@ -367,7 +369,4 @@ public class PhotoUtils {
     }
 
 
-    public interface Callback {
-        void getPath(Uri uri, String path);
-    }
 }
