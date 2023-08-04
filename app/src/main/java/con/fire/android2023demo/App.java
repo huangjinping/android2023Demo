@@ -5,8 +5,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import con.fire.android2023demo.utils.BugCrash;
-
 //https://blog.csdn.net/qq_48656522/article/details/126011280
 public class App extends Application implements Thread.UncaughtExceptionHandler {
     @Override
@@ -15,9 +13,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 //        Branch.enableTestMode();
 //        Branch.getAutoInstance(this);
 
-        Thread.setDefaultUncaughtExceptionHandler(this);
-        BugCrash.initStatus(this);
-
+//        Thread.setDefaultUncaughtExceptionHandler(this);
+//        BugCrash.initStatus(this);
 
 
     }

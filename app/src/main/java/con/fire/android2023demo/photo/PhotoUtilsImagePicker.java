@@ -24,6 +24,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 import con.fire.android2023demo.FileUtils;
+import con.fire.android2023demo.utils.ExifDataCopier;
+import con.fire.android2023demo.utils.ImageResizer;
 
 
 public class PhotoUtilsImagePicker extends PhotoSo {
@@ -39,10 +41,12 @@ public class PhotoUtilsImagePicker extends PhotoSo {
     private Uri pendingCameraMediaUri;
     private FileUriResolver fileUriResolver;
     private String fileProviderName;
+    private ImageResizer imageResizer;
 
     public PhotoUtilsImagePicker(AppCompatActivity activity) {
         super(activity);
         this.fileUtils = new FileUtils();
+        this.imageResizer = new ImageResizer(activity, new ExifDataCopier());
         this.fileProviderName = activity.getPackageName() + ".flutter.image_provider";
         this.fileUriResolver = new FileUriResolver() {
             @Override
@@ -104,6 +108,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         File imageFile = createTemporaryWritableImageFile();
         pendingCameraMediaUri = Uri.parse("file:" + imageFile.getAbsolutePath());
 
+        useFrontCamera(intent);
         Log.d(TAG, "" + imageFile.getAbsolutePath());
         Uri imageUri = fileUriResolver.resolveFileProviderUriForFile(fileProviderName, imageFile);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -157,9 +162,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                  *以下工具类从Uri转换path。自行百度，google 等
                  */
                 String path = fileUtils.getPathFromUri(activity, data.getData());
-
             }
-
         }
 
 
@@ -177,11 +180,9 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                 }
                 break;
             case TAKE_PHOTO:
-
                 Log.d(TAG, "=======TAKE_PHOTO===0===");
                 if (resultCode == Activity.RESULT_OK) {
                     Log.d(TAG, "=======TAKE_PHOTO===1===");
-
                     handleCaptureImageResult(resultCode);
                 }
                 break;
@@ -194,12 +195,15 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         if (resultCode != Activity.RESULT_OK) {
             return;
         }
-
-
         fileUriResolver.getFullImagePath(pendingCameraMediaUri != null ? pendingCameraMediaUri : Uri.parse(retrievePendingCameraMediaUriPath()), path -> {
-            Log.d(TAG, "==path==" + path);
+            Log.d(TAG, "==path==1=" + path);
+            path = imageResizer.resizeImageIfNeeded(path, 1080d, 1920d, 90);
+            Log.d(TAG, "==path==2=" + path);
+
             callback.getPath(pendingCameraMediaUri, path);
         });
+
+
     }
 
     void savePendingCameraMediaUriPath(Uri uri) {

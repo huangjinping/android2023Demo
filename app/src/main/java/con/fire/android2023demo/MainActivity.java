@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void compress(String path) {
-        setTest();
+//        setTest();
         Log.d("compress", "======start===0===" + path);
         if ("moto e40".equals(Build.MODEL)) {
             //系统照相机
