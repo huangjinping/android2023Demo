@@ -3,6 +3,7 @@ package con.fire.android2023demo;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,10 @@ public class Hao123Activity extends AppCompatActivity {
 
         binding.txtWeb.setOnClickListener(v -> {
             Intent intent = new Intent(Hao123Activity.this, WebViewActivity.class);
+            startActivity(intent);
+        });
+        binding.txtPermission.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, PermissionActivity.class);
             startActivity(intent);
         });
     }

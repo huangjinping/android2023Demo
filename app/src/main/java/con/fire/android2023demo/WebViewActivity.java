@@ -66,7 +66,7 @@ public class WebViewActivity extends AppCompatActivity {
         url = "https://sandbox-short.payv.co/nM5RJ8x1zFx6";
         url = "https://secure-short.payv.co/RxbJMwSJh1";
         url = "http://111.203.220.52:93/t4est.html";
-        url="https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401872_1690962067396";
+        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401872_1690962067396";
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0
