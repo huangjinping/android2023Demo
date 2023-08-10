@@ -32,6 +32,7 @@ import java.io.FileOutputStream;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
+import con.fire.android2023demo.photo.PhotoUtilsSelf;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -291,39 +292,38 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 super.run();
 
-                try {
-                    Thread.sleep(3000);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 Log.d("compress", "=======start===000==");
 
-                Luban.with(MainActivity.this).load(new File(path))
-                        .ignoreBy(350)
-                        .setCompressListener(new OnCompressListener() {
+                Luban.with(MainActivity.this).load(path).ignoreBy(350).setCompressListener(new OnCompressListener() {
 
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        toLone = false;
+                        Log.d("compress", "=======end===11==" + file.getAbsolutePath());
+
+                        runOnUiThread(new Runnable() {
                             @Override
-                            public void onStart() {
-
+                            public void run() {
+                                Glide.with(MainActivity.this).load(file).into(image_target);
                             }
+                        });
+                    }
 
-                            @Override
-                            public void onSuccess(File file) {
-                                toLone = false;
-                                Log.d("compress", "=======end===11==" + file.getAbsolutePath());
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        Glide.with(MainActivity.this).load(file).into(image_target);
-                                    }
-                                });
-                            }
+                    @Override
+                    public void onError(Throwable e) {
 
-                            @Override
-                            public void onError(Throwable e) {
-
-                            }
-                        }).launch();
+                    }
+                }).launch();
             }
         }.start();
     }
@@ -373,7 +373,6 @@ public class MainActivity extends AppCompatActivity {
     public void setCompress(String path, int requestCode) {
 
         Log.d("okhttps", "=" + path);
-
         int maxWidth = 1000, maxHeight = 1000;//定义目标图片的最大宽高，若原图高于这个数值，直接赋值为以上的数值
         Bitmap bitmap = BitmapFactory.decodeFile(path);
         int originWidth = bitmap.getWidth();

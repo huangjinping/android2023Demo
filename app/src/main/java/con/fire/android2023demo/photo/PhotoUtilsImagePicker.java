@@ -154,23 +154,10 @@ public class PhotoUtilsImagePicker extends PhotoSo {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-
-        if (SELECT_PHOTO == resultCode) {
-            if (resultCode == Activity.RESULT_OK && data != null) {
-
-                /**
-                 *以下工具类从Uri转换path。自行百度，google 等
-                 */
-                String path = fileUtils.getPathFromUri(activity, data.getData());
-            }
-        }
-
-
         switch (requestCode) {
             case SELECT_PHOTO:
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     String path = fileUtils.getPathFromUri(activity, data.getData());
-
                     if (callback != null) {
                         callback.getPath(uri, path);
                     }
@@ -187,8 +174,6 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                 }
                 break;
         }
-
-
     }
 
     private void handleCaptureImageResult(int resultCode) {

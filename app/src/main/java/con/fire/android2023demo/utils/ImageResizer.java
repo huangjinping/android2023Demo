@@ -170,7 +170,7 @@ public class ImageResizer {
             throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         boolean saveAsPNG = bitmap.hasAlpha();
-        
+
         bitmap.compress(
                 saveAsPNG ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG,
                 imageQuality,

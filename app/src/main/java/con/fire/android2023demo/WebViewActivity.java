@@ -2,6 +2,7 @@ package con.fire.android2023demo;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ public class WebViewActivity extends AppCompatActivity {
     final String tag = "WebV1iewActi1vity";
     WebView webview;
 
-
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -41,7 +41,6 @@ public class WebViewActivity extends AppCompatActivity {
 //        WebView.setWebContentsDebuggingEnabled(true);
         webview.setWebViewClient(new MyWebViewClient());
         webview.setWebChromeClient(new MyWebChromeClient());
-
         WebSettings settings = webview.getSettings();
         settings.setDomStorageEnabled(true);//是否支持 Local Storage
         settings.setJavaScriptEnabled(true);//支持JavaScript
@@ -66,7 +65,11 @@ public class WebViewActivity extends AppCompatActivity {
         url = "https://sandbox-short.payv.co/nM5RJ8x1zFx6";
         url = "https://secure-short.payv.co/RxbJMwSJh1";
         url = "http://111.203.220.52:93/t4est.html";
-        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401872_1690962067396";
+//        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401872_1690962067396";
+//        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401966_1691563606699";
+        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401966_1691563983838";
+//        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401947_1691492760839";
+//        url = "https://www.baidu.com";
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0
@@ -114,11 +117,32 @@ public class WebViewActivity extends AppCompatActivity {
 //        在api 24及以上版本的时候，只会回调shouldOverrideUrlLoading（WebView view, WebResourceRequest request)方法
 //        注：方法中return true 进行url拦截自己处理，return false由webview系统自己处理。
 
+
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
+            try {
+                Log.d(tag, "==UrlLoading====" + url);
+
+
+                if (!url.startsWith("http") && !url.startsWith("http")) {
+                    try {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    return true;
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
             return super.shouldOverrideUrlLoading(view, url);
         }
+
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
@@ -146,6 +170,7 @@ public class WebViewActivity extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            Log.d(tag, "onPageStarted " + url);
             try {
                 if (url.contains("static/Mpsuccess.html")) {
                     //跳转页面

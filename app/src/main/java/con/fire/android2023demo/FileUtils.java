@@ -49,9 +49,7 @@ public class FileUtils {
                 final MimeTypeMap mime = MimeTypeMap.getSingleton();
                 extension = mime.getExtensionFromMimeType(context.getContentResolver().getType(uriImage));
             } else {
-                extension =
-                        MimeTypeMap.getFileExtensionFromUrl(
-                                Uri.fromFile(new File(uriImage.getPath())).toString());
+                extension = MimeTypeMap.getFileExtensionFromUrl(Uri.fromFile(new File(uriImage.getPath())).toString());
             }
         } catch (Exception e) {
             return null;
@@ -75,9 +73,7 @@ public class FileUtils {
     }
 
     private static Cursor queryImageName(Context context, Uri uriImage) {
-        return context
-                .getContentResolver()
-                .query(uriImage, new String[]{MediaStore.MediaColumns.DISPLAY_NAME}, null, null, null);
+        return context.getContentResolver().query(uriImage, new String[]{MediaStore.MediaColumns.DISPLAY_NAME}, null, null, null);
     }
 
     private static void copy(InputStream in, OutputStream out) throws IOException {
@@ -107,11 +103,15 @@ public class FileUtils {
             Log.d("getPathFroi", "" + fileName);
             Log.d("getPathFroi", "" + extension);
 
-            if (fileName == null) {
-                if (extension == null) extension = ".jpg";
-                fileName = "image_picker" + extension;
-            } else if (extension != null) {
-                fileName = getBaseName(fileName) + extension;
+            try {
+                if (fileName == null) {
+                    if (extension == null) extension = ".jpg";
+                    fileName = "image_picker" + extension;
+                } else if (extension != null) {
+                    fileName = getBaseName(fileName) + extension;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             File file = new File(targetDirectory, fileName);
             try (OutputStream outputStream = new FileOutputStream(file)) {
