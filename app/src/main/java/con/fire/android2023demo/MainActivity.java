@@ -91,11 +91,13 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        photoSo = new PhotoUtilsImagePicker(this);
+        photoSo = new PhotoUtilsSelf(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
                 compress(path);
+//                Glide.with(MainActivity.this).load(path).into(image_target);
+
             }
         });
 

@@ -260,7 +260,8 @@ public class PhotoUtilsSelf extends PhotoSo {
      */
     private void displayImage(String imagePath) {
         try {
-            Log.d(TAG, "========displayImage===");
+            Log.d(TAG, "========displayImage==="+imagePath);
+
             if (!TextUtils.isEmpty(imagePath)) {
                 orc_bitmap = comp(BitmapFactory.decodeFile(imagePath)); //压缩图片
 

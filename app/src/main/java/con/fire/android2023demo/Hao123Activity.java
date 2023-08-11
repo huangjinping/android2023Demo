@@ -30,6 +30,7 @@ public class Hao123Activity extends AppCompatActivity {
 //            ToastUtils.makeText(Hao123Activity.this, "" + msg, ToastUtils.LENGTH_LONG).show();
 //            Toast.makeText(Hao123Activity.this, msg, Toast.LENGTH_SHORT).show();
         });
+
         binding.txtImage.setText("照片" + Build.VERSION.SDK_INT);
         binding.txtImage.setOnClickListener(v -> startActivity(new Intent(Hao123Activity.this, MainActivity.class)));
 
@@ -39,6 +40,11 @@ public class Hao123Activity extends AppCompatActivity {
         });
         binding.txtPermission.setOnClickListener(v -> {
             Intent intent = new Intent(Hao123Activity.this, PermissionActivity.class);
+            startActivity(intent);
+        });
+
+        binding.txtSelectContract.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, SelectContractActivity.class);
             startActivity(intent);
         });
     }
