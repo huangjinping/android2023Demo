@@ -1,5 +1,6 @@
 package con.fire.android2023demo;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,8 +13,6 @@ import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import android.Manifest;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -131,7 +130,6 @@ public class ContractTestActivity extends AppCompatActivity {
         Cursor cursor = managedQuery(contactData, null, null, null, null);
         if (cursor.moveToFirst()) {
             String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
 
             contactMap.put("name", username);
             String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));

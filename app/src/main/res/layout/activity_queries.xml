@@ -9,37 +9,18 @@
         android:id="@+id/button0"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="选择联系人0" />
+        android:text="OPEN_DOCUMENT" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="选择联系人1" />
+        android:text="GET_CONTENT" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="选择联系人2" />
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="选择联系人3" />
-
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="选择联系人4" />
 
     <TextView
         android:id="@+id/txt_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
         android:text="TextView" />
 </LinearLayout>

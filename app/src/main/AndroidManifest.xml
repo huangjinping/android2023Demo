@@ -42,11 +42,22 @@
         <intent>
             <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
         </intent>
+        <!--        <intent>-->
+        <!--            <action android:name="android.intent.action.PICK" />-->
+        <!--            <data android:mimeType="*/*" />-->
+        <!--        </intent>-->
 
-        <intent>
-                    <action android:name="android.intent.action.PICK" />
-                    <data android:mimeType="*/*" />
-        </intent>
+<!--        <intent>-->
+<!--            <action android:name="android.intent.action.OPEN_DOCUMENT" />-->
+<!--        </intent>-->
+<!--        <intent>-->
+<!--            <action android:name="android.intent.action.PICK" />-->
+<!--            <data android:mimeType="*/*" />-->
+<!--        </intent>-->
+<!--        <intent>-->
+<!--            <action android:name="android.intent.action.GET_CONTENT" />-->
+<!--            <data android:mimeType="*/*" />-->
+<!--        </intent>-->
     </queries>
 
     <application
@@ -81,6 +92,11 @@
         <activity
             android:name=".Hao123Activity"
             android:exported="true">
+            <intent-filter>
+                <data
+                    android:host="rockguest"
+                    android:scheme="firepay" />
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -135,6 +151,7 @@
 
         </activity>
 
+        <activity android:name=".QueriesActivity"></activity>
 
         <service android:name=".PostErrorService"></service>
 

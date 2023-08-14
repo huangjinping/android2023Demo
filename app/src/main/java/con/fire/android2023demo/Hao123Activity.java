@@ -47,6 +47,11 @@ public class Hao123Activity extends AppCompatActivity {
             Intent intent = new Intent(Hao123Activity.this, SelectContractActivity.class);
             startActivity(intent);
         });
+
+        binding.txtQueries.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, QueriesActivity.class);
+            startActivity(intent);
+        });
     }
 
 
