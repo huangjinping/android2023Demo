@@ -120,8 +120,8 @@ public class FileUtils {
             }
         } catch (IOException e) {
             return null;
-        } catch (SecurityException e) {
-            return null;
+        } catch (Exception e) {
+            return "";
         }
     }
 }

@@ -63,5 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="queries"></TextView>
+
+        <TextView
+            android:id="@+id/txt_timer"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TimerCount"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
@@ -91,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        photoSo = new PhotoUtilsSelf(this);
+        photoSo = new PhotoUtilsImagePicker(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {

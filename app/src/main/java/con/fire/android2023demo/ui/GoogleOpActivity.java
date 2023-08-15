@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import con.fire.android2023demo.R;
 
 public class GoogleOpActivity extends AppCompatActivity {
 

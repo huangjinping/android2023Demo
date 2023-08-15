@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.content.Intent;
 import android.os.Bundle;

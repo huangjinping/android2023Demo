@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -70,6 +70,11 @@ public class SelectContractActivity extends AppCompatActivity {
         resetData();
         startActivityForResult(new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI), REQUEST_CONTRACT);
 
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     private void startIntent3() {

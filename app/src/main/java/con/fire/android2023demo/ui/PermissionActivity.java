@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -61,6 +61,8 @@ public class PermissionActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (checkPermission(PermissionActivity.this, permissionArr)) {
             Toast.makeText(PermissionActivity.this, "判断有权限2", Toast.LENGTH_SHORT).show();
+
+
         } else {
             Toast.makeText(PermissionActivity.this, "判断没有权限1", Toast.LENGTH_SHORT).show();
         }

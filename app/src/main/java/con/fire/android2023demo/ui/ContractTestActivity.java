@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -21,6 +21,8 @@ import androidx.core.app.ActivityCompat;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import con.fire.android2023demo.R;
 
 public class ContractTestActivity extends AppCompatActivity {
     public static int REQUEST_CONTRACT = 1002;

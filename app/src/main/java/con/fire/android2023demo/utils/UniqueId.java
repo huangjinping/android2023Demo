@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;

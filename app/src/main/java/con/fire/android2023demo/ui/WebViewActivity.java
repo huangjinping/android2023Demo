@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -22,6 +22,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.fingerprintjs.android.fingerprint.Fingerprinter;
 import com.fingerprintjs.android.fingerprint.FingerprinterFactory;
+
+import con.fire.android2023demo.R;
 
 public class WebViewActivity extends AppCompatActivity {
 

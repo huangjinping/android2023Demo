@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.service;
 
 import android.app.Service;
 import android.content.Intent;

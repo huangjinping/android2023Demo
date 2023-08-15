@@ -9,6 +9,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
+import con.fire.android2023demo.ui.MainActivity;
+import con.fire.android2023demo.ui.PermissionActivity;
+import con.fire.android2023demo.ui.QueriesActivity;
+import con.fire.android2023demo.ui.SelectContractActivity;
+import con.fire.android2023demo.ui.TimerActivity;
+import con.fire.android2023demo.ui.WebViewActivity;
 import con.fire.android2023demo.utils.ToastUtils;
 
 public class Hao123Activity extends AppCompatActivity {
@@ -51,6 +57,13 @@ public class Hao123Activity extends AppCompatActivity {
         binding.txtQueries.setOnClickListener(v -> {
             Intent intent = new Intent(Hao123Activity.this, QueriesActivity.class);
             startActivity(intent);
+        });
+        binding.txtTimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123Activity.this, TimerActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

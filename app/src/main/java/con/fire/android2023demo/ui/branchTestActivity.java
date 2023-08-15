@@ -1,4 +1,4 @@
-package con.fire.android2023demo;
+package con.fire.android2023demo.ui;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,6 +13,8 @@ import com.fingerprintjs.android.fingerprint.FingerprinterFactory;
 
 import java.text.SimpleDateFormat;
 
+import con.fire.android2023demo.R;
+import con.fire.android2023demo.utils.UniqueId;
 import io.branch.referral.util.BranchEvent;
 
 public class branchTestActivity extends AppCompatActivity {

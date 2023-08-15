@@ -154,25 +154,30 @@ public class PhotoUtilsImagePicker extends PhotoSo {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        switch (requestCode) {
-            case SELECT_PHOTO:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    String path = fileUtils.getPathFromUri(activity, data.getData());
-                    if (callback != null) {
-                        callback.getPath(uri, path);
-                    }
-                    Log.d(TAG, path);
+        try {
+            switch (requestCode) {
+                case SELECT_PHOTO:
+                    if (resultCode == Activity.RESULT_OK && data != null) {
+                        String path = fileUtils.getPathFromUri(activity, data.getData());
+                        if (callback != null) {
+                            callback.getPath(uri, path);
+                        }
+                        Log.d(TAG, path + "");
 //            handleImageResult(path, false);
-                    return;
-                }
-                break;
-            case TAKE_PHOTO:
-                Log.d(TAG, "=======TAKE_PHOTO===0===");
-                if (resultCode == Activity.RESULT_OK) {
-                    Log.d(TAG, "=======TAKE_PHOTO===1===");
-                    handleCaptureImageResult(resultCode);
-                }
-                break;
+                        return;
+                    }
+                    break;
+                case TAKE_PHOTO:
+                    Log.d(TAG, "=======TAKE_PHOTO===0===");
+                    if (resultCode == Activity.RESULT_OK) {
+                        Log.d(TAG, "=======TAKE_PHOTO===1===");
+                        handleCaptureImageResult(resultCode);
+                    }
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
 
