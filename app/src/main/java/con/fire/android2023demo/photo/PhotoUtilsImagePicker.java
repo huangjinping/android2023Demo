@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.activity.result.PickVisualMediaRequest;
@@ -158,11 +159,14 @@ public class PhotoUtilsImagePicker extends PhotoSo {
             switch (requestCode) {
                 case SELECT_PHOTO:
                     if (resultCode == Activity.RESULT_OK && data != null) {
+
+                        Log.d(TAG,  "==189="+data.getData().getEncodedPath());
+
+
                         String path = fileUtils.getPathFromUri(activity, data.getData());
-                        if (callback != null) {
+                        if (callback != null && !TextUtils.isEmpty(path)) {
                             callback.getPath(uri, path);
                         }
-                        Log.d(TAG, path + "");
 //            handleImageResult(path, false);
                         return;
                     }
@@ -214,10 +218,6 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         Uri resolveFileProviderUriForFile(String fileProviderName, File imageFile);
 
         void getFullImagePath(Uri imageUri, OnPathReadyListener listener);
-    }
-
-    public interface Callback {
-        void getPath(Uri uri, String path);
     }
 
 

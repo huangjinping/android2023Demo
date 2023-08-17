@@ -26,6 +26,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Permission"></TextView>
+        <TextView
+            android:id="@+id/txt_permission_new"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PermissionNew"></TextView>
 
     </com.google.android.flexbox.FlexboxLayout>
 
@@ -70,5 +76,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TimerCount"></TextView>
+
+        <TextView
+            android:id="@+id/txt_pop"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PopWindow"></TextView>
+
+        <TextView
+            android:id="@+id/txt_uiFragment"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UIFragment"></TextView>
+
+
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

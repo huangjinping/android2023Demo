@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +26,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+import con.fire.android2023demo.FileUtils;
 
 
 public class PhotoPrestamoPlus extends PhotoSo {
@@ -44,12 +47,16 @@ public class PhotoPrestamoPlus extends PhotoSo {
      * 存放拍摄图片的文件夹
      */
     private static final String SAVETUPIAN_FILEPATH = "/Photos";
+    FileUtils fileUtils;
     private File outputImagepath;//存储拍完照后的图片
     private Bitmap orc_bitmap;//拍照和相册获取图片的Bitmap
     private Uri UrdizhiL = null;
 
+
     public PhotoPrestamoPlus(AppCompatActivity activity) {
         super(activity);
+        this.fileUtils = new FileUtils();
+
     }
 
     /*
@@ -281,10 +288,21 @@ public class PhotoPrestamoPlus extends PhotoSo {
     }
 
     public void take_Album() {
+
+
+        /**
+         * https://blog.csdn.net/zldd0373/article/details/107683407
+         * 这种做法弊端
+         */
         try {
-            Intent intent = new Intent(Intent.ACTION_PICK, null);
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-            activity.startActivityForResult(intent, SELECT_PHOTO);
+//            Intent intent = new Intent(Intent.ACTION_PICK, null);
+//            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+//            activity.startActivityForResult(intent, SELECT_PHOTO);
+
+            Intent pickImageIntent = new Intent();
+            pickImageIntent.setAction(Intent.ACTION_PICK);
+            pickImageIntent.setData(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            activity.startActivityForResult(pickImageIntent, SELECT_PHOTO);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -316,6 +334,15 @@ public class PhotoPrestamoPlus extends PhotoSo {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+
+        if (requestCode == SELECT_PHOTO && resultCode == Activity.RESULT_OK) {
+            String path = fileUtils.getPathFromUri(activity, data.getData());
+            if (callback != null && !TextUtils.isEmpty(path)) {
+                callback.getPath(null, path);
+            }
+            return;
+        }
+
         try {
             if (AppCompatActivity.RESULT_OK == resultCode) {
                 Uri[] jieguoShuzu = null;
@@ -345,7 +372,7 @@ public class PhotoPrestamoPlus extends PhotoSo {
                         String beimianTu = chuliXuanhuanhouTupian(path1.getAbsolutePath(), activity);
                         Uri uri = Uri.fromFile(new File(beimianTu));
 
-                        Log.d(TAG,""+beimianTu);
+                        Log.d(TAG, "" + beimianTu);
                         if (callback != null) {
                             callback.getPath(uri, path1.getAbsolutePath());
                         }

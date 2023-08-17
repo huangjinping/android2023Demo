@@ -3,6 +3,7 @@ package con.fire.android2023demo;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
 //https://blog.csdn.net/qq_48656522/article/details/126011280
@@ -22,6 +23,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
     @Override
     public void uncaughtException(@NonNull Thread t, @NonNull Throwable e) {
+
+
 
         StackTraceElement[] elements = e.getStackTrace();
         StringBuilder reason = new StringBuilder(e.toString());

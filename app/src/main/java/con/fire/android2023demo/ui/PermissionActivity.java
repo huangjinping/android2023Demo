@@ -59,14 +59,12 @@ public class PermissionActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        
         if (checkPermission(PermissionActivity.this, permissionArr)) {
             Toast.makeText(PermissionActivity.this, "判断有权限2", Toast.LENGTH_SHORT).show();
-
-
         } else {
             Toast.makeText(PermissionActivity.this, "判断没有权限1", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public boolean checkPermission(Context context, String[] perm) {

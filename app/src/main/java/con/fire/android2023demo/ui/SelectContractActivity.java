@@ -37,15 +37,17 @@ public class SelectContractActivity extends AppCompatActivity {
         binding.button2.setOnClickListener(v -> startIntent2());
         binding.button3.setOnClickListener(v -> startIntent3());
         binding.button4.setOnClickListener(v -> startIntent4());
+        binding.button5.setOnClickListener(v -> startIntent5());
+
+
     }
 
 
-
-
     /**
-     * 线上
+     * 有选项弹框
      */
     private void startIntent0() {
+
         try {
             Log.d(TAG, "startIntent0");
             resetData();
@@ -56,15 +58,22 @@ public class SelectContractActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * 没有选项弹框
+     */
     private void startIntent1() {
+
         Log.d(TAG, "startIntent1");
         resetData();
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+
         startActivityForResult(intent, REQUEST_CONTRACT);
     }
 
+    /**
+     * 有默认选项弹框
+     */
     private void startIntent2() {
         Log.d(TAG, "startIntent2");
         resetData();
@@ -77,11 +86,15 @@ public class SelectContractActivity extends AppCompatActivity {
         super.onNewIntent(intent);
     }
 
+    /**
+     * 没有选项弹框
+     */
     private void startIntent3() {
         Log.d(TAG, "startIntent3");
         resetData();
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("vnd.android.cursor.dir/phone");
+
         startActivityForResult(i, REQUEST_CONTRACT);
     }
 
@@ -93,15 +106,25 @@ public class SelectContractActivity extends AppCompatActivity {
         startActivityForResult(i, REQUEST_CONTRACT);
     }
 
+    private void startIntent5() {
+        Log.d(TAG, "startIntent5");
+        resetData();
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        startActivityForResult(intent, REQUEST_CONTRACT);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        onResult0(requestCode, resultCode, data);
+//        onResult0(requestCode, resultCode, data);
 //        onResult1(requestCode, resultCode, data);
 //        onResult2(requestCode, resultCode, data);
 //        onResult3(requestCode, resultCode, data);
 //        onResult4(requestCode, resultCode, data);
+        onResult5(requestCode, resultCode, data);
 
 
     }
@@ -235,7 +258,6 @@ public class SelectContractActivity extends AppCompatActivity {
             if (cursor != null) {
                 cursor.moveToFirst();
                 String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
-
                 //取得电话号码
                 String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
                 Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
@@ -243,16 +265,38 @@ public class SelectContractActivity extends AppCompatActivity {
                 if (phone != null) {
                     phone.moveToFirst();
                     String phoneNum = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
                     setData(phoneNum, username);
                 }
                 phone.close();
                 cursor.close();
             }
-
         }
     }
 
+    @SuppressLint("Range")
+    private void onResult5(int requestCode, int resultCode, @Nullable Intent data) {
+
+        Log.d(TAG, "requestCode:" + requestCode + "resultCode:" + resultCode);
+        if (RESULT_OK == resultCode) {
+            if (data == null) {
+                return;
+            }
+            Cursor query = getContentResolver().query(data.getData(), new String[]{"data1", "display_name"}, null, null, null);
+            String str2 = "", str = "";
+            if (query != null) {
+                if (query.moveToFirst()) {
+                    str = query.getString(query.getColumnIndex("data1"));
+                    str2 = query.getString(query.getColumnIndex("display_name"));
+                } else {
+                    str = "";
+                }
+                query.close();
+            } else {
+                str = "";
+            }
+            setData(str, str2);
+        }
+    }
 
     private void resetData() {
         setData("", "");

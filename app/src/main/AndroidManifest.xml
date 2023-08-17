@@ -41,23 +41,25 @@
         </intent>
         <intent>
             <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+
         </intent>
+
         <!--        <intent>-->
         <!--            <action android:name="android.intent.action.PICK" />-->
         <!--            <data android:mimeType="*/*" />-->
         <!--        </intent>-->
 
-<!--        <intent>-->
-<!--            <action android:name="android.intent.action.OPEN_DOCUMENT" />-->
-<!--        </intent>-->
-<!--        <intent>-->
-<!--            <action android:name="android.intent.action.PICK" />-->
-<!--            <data android:mimeType="*/*" />-->
-<!--        </intent>-->
-<!--        <intent>-->
-<!--            <action android:name="android.intent.action.GET_CONTENT" />-->
-<!--            <data android:mimeType="*/*" />-->
-<!--        </intent>-->
+        <!--        <intent>-->
+        <!--            <action android:name="android.intent.action.OPEN_DOCUMENT" />-->
+        <!--        </intent>-->
+        <!--        <intent>-->
+        <!--            <action android:name="android.intent.action.PICK" />-->
+        <!--            <data android:mimeType="*/*" />-->
+        <!--        </intent>-->
+        <!--        <intent>-->
+        <!--            <action android:name="android.intent.action.GET_CONTENT" />-->
+        <!--            <data android:mimeType="*/*" />-->
+        <!--        </intent>-->
     </queries>
 
     <application
@@ -146,10 +148,16 @@
 
 
         </activity>
+        <activity android:name=".ui.UIFragmentActivity"></activity>
 
         <activity android:name=".ui.SelectContractActivity">
 
+
         </activity>
+
+        <activity android:name=".ui.PermissionNewActivity"></activity>
+
+        <activity android:name=".ui.ViewActivity"></activity>
 
         <activity android:name=".ui.QueriesActivity"></activity>
 

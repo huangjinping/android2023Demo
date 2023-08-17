@@ -11,9 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
+import con.fire.android2023demo.ui.PermissionNewActivity;
 import con.fire.android2023demo.ui.QueriesActivity;
 import con.fire.android2023demo.ui.SelectContractActivity;
 import con.fire.android2023demo.ui.TimerActivity;
+import con.fire.android2023demo.ui.UIFragmentActivity;
+import con.fire.android2023demo.ui.ViewActivity;
 import con.fire.android2023demo.ui.WebViewActivity;
 import con.fire.android2023demo.utils.ToastUtils;
 
@@ -58,10 +61,22 @@ public class Hao123Activity extends AppCompatActivity {
             Intent intent = new Intent(Hao123Activity.this, QueriesActivity.class);
             startActivity(intent);
         });
-        binding.txtTimer.setOnClickListener(new View.OnClickListener() {
+        binding.txtTimer.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, TimerActivity.class);
+            startActivity(intent);
+        });
+        binding.txtPop.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, ViewActivity.class);
+            startActivity(intent);
+        });
+        binding.txtUiFragment.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, UIFragmentActivity.class);
+            startActivity(intent);
+        });
+        binding.txtPermissionNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Hao123Activity.this, TimerActivity.class);
+                Intent intent = new Intent(Hao123Activity.this, PermissionNewActivity.class);
                 startActivity(intent);
             }
         });
