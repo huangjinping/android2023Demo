@@ -26,12 +26,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Permission"></TextView>
+
         <TextView
             android:id="@+id/txt_permission_new"
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PermissionNew"></TextView>
+
+
+        <TextView
+            android:id="@+id/txt_screen_record"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ScreenRecord"></TextView>
 
     </com.google.android.flexbox.FlexboxLayout>
 

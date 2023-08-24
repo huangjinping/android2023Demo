@@ -13,6 +13,7 @@ import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
 import con.fire.android2023demo.ui.PermissionNewActivity;
 import con.fire.android2023demo.ui.QueriesActivity;
+import con.fire.android2023demo.ui.ScreenRecordActivity;
 import con.fire.android2023demo.ui.SelectContractActivity;
 import con.fire.android2023demo.ui.TimerActivity;
 import con.fire.android2023demo.ui.UIFragmentActivity;
@@ -79,6 +80,11 @@ public class Hao123Activity extends AppCompatActivity {
                 Intent intent = new Intent(Hao123Activity.this, PermissionNewActivity.class);
                 startActivity(intent);
             }
+        });
+
+        binding.txtScreenRecord.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, ScreenRecordActivity.class);
+            startActivity(intent);
         });
     }
 

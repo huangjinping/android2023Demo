@@ -34,7 +34,7 @@ public class PermissionNewActivity extends AppCompatActivity {
              */
         }
     });
-    String[] permissions = {Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.READ_SMS, Manifest.permission.READ_CALL_LOG,};
+    String[] permissions = {Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED, Manifest.permission.READ_MEDIA_IMAGES};
 
     String permissionsSingle = Manifest.permission.CAMERA;
 
@@ -52,6 +52,7 @@ public class PermissionNewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityPermissionnewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         binding.buttonSingle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,8 +105,6 @@ public class PermissionNewActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 
 
 }

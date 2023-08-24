@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        photoSo = new PhotoLauncher(this);
+        photoSo = new PhotoUtilsImagePicker(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
@@ -117,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 image_target = img_load_album;
                 Log.d("okhttps", "====000===11==>>>>");
-                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+//                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+                photoSo.take_Album();
             }
         });
 

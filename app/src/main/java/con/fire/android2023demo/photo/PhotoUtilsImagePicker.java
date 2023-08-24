@@ -160,10 +160,10 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                 case SELECT_PHOTO:
                     if (resultCode == Activity.RESULT_OK && data != null) {
 
-                        Log.d(TAG,  "==189="+data.getData().getEncodedPath());
-
+                        Log.d(TAG, "==189=" + data.getData().getEncodedPath());
 
                         String path = fileUtils.getPathFromUri(activity, data.getData());
+
                         if (callback != null && !TextUtils.isEmpty(path)) {
                             callback.getPath(uri, path);
                         }
