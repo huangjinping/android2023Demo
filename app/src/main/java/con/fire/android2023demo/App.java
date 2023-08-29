@@ -6,6 +6,8 @@ import android.util.Log;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 
+import me.jessyan.autosize.AutoSizeConfig;
+
 //https://blog.csdn.net/qq_48656522/article/details/126011280
 public class App extends Application implements Thread.UncaughtExceptionHandler {
     @Override
@@ -16,6 +18,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 //        Thread.setDefaultUncaughtExceptionHandler(this);
 //        BugCrash.initStatus(this);
+        AutoSizeConfig.getInstance().setCustomFragment(true);
 
 
     }

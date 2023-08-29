@@ -58,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="照片"></TextView>
 
+
         <TextView
             android:id="@+id/txt_web"
             style="@style/flex_item"
@@ -98,7 +99,9 @@
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="UIFragment"></TextView>
+
 
 
     </com.google.android.flexbox.FlexboxLayout>

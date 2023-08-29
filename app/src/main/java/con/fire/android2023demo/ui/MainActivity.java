@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -96,13 +98,14 @@ public class MainActivity extends AppCompatActivity {
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
-                
+
                 compress(path);
 
 //                Glide.with(MainActivity.this).load(path).into(image_target);
 
             }
         });
+
 
         img_load_take.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -417,5 +420,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
 }
