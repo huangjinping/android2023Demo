@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -67,6 +68,13 @@
             android:text="webView"></TextView>
 
         <TextView
+            android:id="@+id/txt_web_bottom"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WebView buttom"></TextView>
+
+        <TextView
             android:id="@+id/txt_selectContract"
             style="@style/flex_item"
             android:layout_width="wrap_content"
@@ -92,16 +100,15 @@
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PopWindow"></TextView>
+            android:text="View"></TextView>
 
         <TextView
             android:id="@+id/txt_uiFragment"
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="UIFragment"></TextView>
-
+            android:text="UIFragment"
+            android:textStyle="bold"></TextView>
 
 
     </com.google.android.flexbox.FlexboxLayout>

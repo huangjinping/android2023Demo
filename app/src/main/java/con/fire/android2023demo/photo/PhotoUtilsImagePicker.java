@@ -139,6 +139,14 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         activity.startActivityForResult(pickImageIntent, SELECT_PHOTO);
     }
 
+//    public void take_Album() {
+//        Intent pickMediaIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//        pickMediaIntent.setType("*/*");
+//        String[] mimeTypes = {"image/*"};
+//        pickMediaIntent.putExtra("CONTENT_TYPE", mimeTypes);
+//        activity.startActivityForResult(pickMediaIntent, SELECT_PHOTO);
+//    }
+
     public void take_Album1() {
         Intent pickImageIntent;
         boolean usePhotoPicker = false;

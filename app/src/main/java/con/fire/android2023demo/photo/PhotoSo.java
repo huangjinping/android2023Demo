@@ -4,9 +4,14 @@ import android.content.Intent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public abstract class PhotoSo {
     public PhotoCallback callback;
     protected AppCompatActivity activity;
+
+
 
     public PhotoSo(AppCompatActivity activity) {
         this.activity = activity;

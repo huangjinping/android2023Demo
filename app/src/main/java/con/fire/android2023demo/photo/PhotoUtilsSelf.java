@@ -165,7 +165,9 @@ public class PhotoUtilsSelf extends PhotoSo {
                     uri = Uri.fromFile(outputImagepath);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 } else {
+
                     uri = FileProvider.getUriForFile(activity, activity.getPackageName() + ".fileProvider", outputImagepath);
+
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
                 }
             }

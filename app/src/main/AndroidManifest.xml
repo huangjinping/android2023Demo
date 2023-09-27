@@ -146,24 +146,15 @@
         <activity
             android:name=".ui.GoogleOpActivity"
             android:exported="true">
-
-
         </activity>
         <activity android:name=".ui.UIFragmentActivity"></activity>
-
         <activity android:name=".ui.SelectContractActivity">
-
-
         </activity>
-
         <activity android:name=".ui.PermissionNewActivity"></activity>
-
-        <activity android:name=".ui.ViewActivity"></activity>
+        <activity android:name=".ui.ViewActivity" android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".ui.ScreenRecordActivity"></activity>
         <activity android:name=".ui.WebView2Activity"></activity>
-
         <activity android:name=".ui.QueriesActivity"></activity>
-
         <service android:name=".service.PostErrorService"></service>
         <service
             android:name=".service.ScreenRecordService"

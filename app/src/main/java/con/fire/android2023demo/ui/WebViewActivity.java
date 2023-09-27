@@ -1,5 +1,6 @@
 package con.fire.android2023demo.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -72,11 +73,27 @@ public class WebViewActivity extends AppCompatActivity {
         url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401966_1691563983838";
 //        url = "https://sandbox.combopay.co/payment-link/peso-efectivo-sas/401947_1691492760839";
 //        url = "https://www.baidu.com";
+
+        url = "https://checkout.toppaylatam.com/form/#/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoyNjMzMDcyfQ.2Dxxx29MsveldyS_ryALt5mQmWIqc-C6Q7EZdUyfzmM";
+
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0
         onstFinger();
+
+        installapklink(this, url);
+
+
     }
+
+    public void installapklink(Activity context, String apkLink) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        Uri content_url = Uri.parse(apkLink);
+        intent.setData(content_url);
+        startActivity(intent);
+    }
+
 
     private void onstFinger() {
 

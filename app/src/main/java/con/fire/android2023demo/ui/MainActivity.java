@@ -1,13 +1,12 @@
 package con.fire.android2023demo.ui;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Rect;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,6 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,14 +37,14 @@ import java.io.FileOutputStream;
 
 import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
-import con.fire.android2023demo.photo.PhotoLauncher;
 import con.fire.android2023demo.photo.PhotoSo;
-import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
+import con.fire.android2023demo.photo.PhotoUtils131;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
 
 public class MainActivity extends AppCompatActivity {
+
     String[] permissionArr = {Manifest.permission.CAMERA};
     PhotoSo photoSo;
     String tempMemory = "tempMemorytempMemorytempMemorytempMemorytempMemorytempMemory";
@@ -49,6 +53,37 @@ public class MainActivity extends AppCompatActivity {
     private ImageView img_load_album;
     private ImageView image_target;
     private boolean toLone = true;
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        startGooglePlay(this);
+
+    }
+
+    public void startGooglePlay(Activity activity) {
+        ReviewManager manager = ReviewManagerFactory.create(activity);
+        Task<ReviewInfo> request = manager.requestReviewFlow();
+        Log.d("okhttp", "=====ReviewManager" + manager.getClass().getSimpleName());
+        //平台埋点
+        //
+        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
+            @Override
+            public void onComplete(@NonNull Task<ReviewInfo> task) {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    reviewInfo.describeContents();
+                    Task<Void> flow = manager.launchReviewFlow(activity, reviewInfo);
+                    flow.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task2) {
+
+                        }
+                    });
+                }
+            }
+        });
+    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -94,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        photoSo = new PhotoUtilsImagePicker(this);
+        photoSo = new PhotoUtils131(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
@@ -420,7 +455,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 
 
 }

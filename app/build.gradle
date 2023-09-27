@@ -1,5 +1,7 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+
 }
 
 android {
@@ -11,7 +13,7 @@ android {
     defaultConfig {
         applicationId "con.fire.android2023demo"
         minSdk 21
-        targetSdk 34
+        targetSdk 33
         versionCode 3
         versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -27,6 +29,9 @@ android {
 
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
     buildTypes {
         debug {
             minifyEnabled false
@@ -95,6 +100,7 @@ dependencies {
 //    implementation 'com.github.nanchen2251:CompressHelper:1.0.5'
     implementation 'top.zibin:Luban:1.1.8'
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+    implementation 'com.google.android.play:review:2.0.1'
 
 
 }

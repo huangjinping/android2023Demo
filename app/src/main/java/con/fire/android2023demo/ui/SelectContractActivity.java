@@ -21,8 +21,10 @@ import con.fire.android2023demo.databinding.ActivitySelectcontractBinding;
 
 //https://blog.csdn.net/s779528166/article/details/79061258
 //https://blog.csdn.net/windowsxp2014/article/details/131117214
+//官方地址  https://developer.android.com/guide/components/intents-common?hl=zh-cn
 public class SelectContractActivity extends AppCompatActivity {
 
+    static final int REQUEST_SELECT_PHONE_NUMBER = 1;
     public static int REQUEST_CONTRACT = 1002;
     final String TAG = "SELCS";
     ActivitySelectcontractBinding binding;
@@ -38,10 +40,9 @@ public class SelectContractActivity extends AppCompatActivity {
         binding.button3.setOnClickListener(v -> startIntent3());
         binding.button4.setOnClickListener(v -> startIntent4());
         binding.button5.setOnClickListener(v -> startIntent5());
-
+        binding.button6.setOnClickListener(v -> startIntent6());
 
     }
-
 
     /**
      * 有选项弹框
@@ -115,6 +116,26 @@ public class SelectContractActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_CONTRACT);
     }
 
+    public void startIntent6() {
+        /**
+         * 官方
+         *
+         * 选择特定联系人数据
+         * 如需让用户选择某一条具体的联系人信息，如电话号码、电子邮件地址或其他数据类型，请使用 ACTION_PICK 操作，并将 MIME 类型指定为下列其中一个内容类型（如 CommonDataKinds.Phone.CONTENT_TYPE），以获取联系人的电话号码。
+         *
+         * 如果您只需要检索一种类型的联系人数据，则将此方法与来自 ContactsContract.CommonDataKinds 类的 CONTENT_TYPE 配合使用要比使用 Contacts.CONTENT_TYPE 更高效（如上一部分所示），因为结果可让您直接访问所需数据，无需对联系人提供程序执行更复杂的查询。
+         *
+         * 传送至您的 onActivityResult() 回调的结果 Intent 包含指向所选联系人数据的 content: URI。响应会为您的应用授予该联系人数据的临时读取权限，即使您的应用不具备 READ_CONTACTS 权限也没有关系。
+         *
+         */
+        // Start an activity for the user to pick a phone number from contacts
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_PHONE_NUMBER);
+        }
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -124,7 +145,8 @@ public class SelectContractActivity extends AppCompatActivity {
 //        onResult2(requestCode, resultCode, data);
 //        onResult3(requestCode, resultCode, data);
 //        onResult4(requestCode, resultCode, data);
-        onResult5(requestCode, resultCode, data);
+//        onResult5(requestCode, resultCode, data);
+        onResult6(requestCode, resultCode, data);
 
 
     }
@@ -161,10 +183,7 @@ public class SelectContractActivity extends AppCompatActivity {
 
     @SuppressLint("Range")
     private void onResult1(int requestCode, int resultCode, @Nullable Intent data) {
-        String[] projection = new String[]{
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER
-        };
+        String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
         Uri contactUri = data.getData();
 //
         Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null);
@@ -186,18 +205,13 @@ public class SelectContractActivity extends AppCompatActivity {
         Map<String, String> contactMap = new HashMap<>();
         ContentResolver reContentResolverol = getContentResolver();
         Uri contactData = data.getData();
-        @SuppressWarnings("deprecation")
-        Cursor cursor = managedQuery(contactData, null, null, null, null);
+        @SuppressWarnings("deprecation") Cursor cursor = managedQuery(contactData, null, null, null, null);
         if (cursor.moveToFirst()) {
             String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
 
             contactMap.put("name", username);
             String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-                    null,
-                    ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
-                    null,
-                    null);
+            Cursor phone = reContentResolverol.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId, null, null);
 
             while (phone.moveToNext()) {
                 String mobile = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
@@ -222,9 +236,7 @@ public class SelectContractActivity extends AppCompatActivity {
             if (data != null) {
                 Uri uri = data.getData();
                 if (uri != null) {
-                    Cursor cursor = getContentResolver()
-                            .query(uri, new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME},
-                                    null, null, null);
+                    Cursor cursor = getContentResolver().query(uri, new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME}, null, null, null);
                     while (cursor.moveToNext()) {
                         String number = cursor.getString(0);
                         String phoneNum = number.replaceAll("-", "");
@@ -260,8 +272,7 @@ public class SelectContractActivity extends AppCompatActivity {
                 String username = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                 //取得电话号码
                 String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-                Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
-                        ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+                Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
                 if (phone != null) {
                     phone.moveToFirst();
                     String phoneNum = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
@@ -272,6 +283,7 @@ public class SelectContractActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @SuppressLint("Range")
     private void onResult5(int requestCode, int resultCode, @Nullable Intent data) {
@@ -295,6 +307,43 @@ public class SelectContractActivity extends AppCompatActivity {
                 str = "";
             }
             setData(str, str2);
+        }
+    }
+
+    @SuppressLint("Range")
+    private void onResult6(int requestCode, int resultCode, @Nullable Intent data) {
+        /**
+         * 官方
+         * 选择特定联系人数据
+         * 如需让用户选择某一条具体的联系人信息，如电话号码、电子邮件地址或其他数据类型，请使用 ACTION_PICK 操作，并将 MIME 类型指定为下列其中一个内容类型（如 CommonDataKinds.Phone.CONTENT_TYPE），以获取联系人的电话号码。
+         *
+         * 如果您只需要检索一种类型的联系人数据，则将此方法与来自 ContactsContract.CommonDataKinds 类的 CONTENT_TYPE 配合使用要比使用 Contacts.CONTENT_TYPE 更高效（如上一部分所示），因为结果可让您直接访问所需数据，无需对联系人提供程序执行更复杂的查询。
+         *
+         * 传送至您的 onActivityResult() 回调的结果 Intent 包含指向所选联系人数据的 content: URI。响应会为您的应用授予该联系人数据的临时读取权限，即使您的应用不具备 READ_CONTACTS 权限也没有关系。
+         */
+        Log.d(TAG, "requestCode:" + requestCode + "resultCode:" + resultCode);
+        if (RESULT_OK == resultCode) {
+            if (data == null) {
+                return;
+            }
+            if (requestCode == REQUEST_SELECT_PHONE_NUMBER && resultCode == RESULT_OK) {
+                // Get the URI and query the content provider for the phone number
+                Uri contactUri = data.getData();
+                String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+                Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null);
+                // If the cursor returned is valid, get the phone number
+                if (cursor != null && cursor.moveToFirst()) {
+                    int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                    String number = cursor.getString(numberIndex);
+                    if (TextUtils.isEmpty(number)){
+                        number=number.replaceAll(" ","");
+                    }
+                    int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                    String display_name = cursor.getString(nameIndex);
+                    setData(number, display_name);
+
+                }
+            }
         }
     }
 
