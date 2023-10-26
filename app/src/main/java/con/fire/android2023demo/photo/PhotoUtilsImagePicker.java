@@ -172,6 +172,11 @@ public class PhotoUtilsImagePicker extends PhotoSo {
 
                         String path = fileUtils.getPathFromUri(activity, data.getData());
 
+                        if (!fileUtils.isPicture(new File(path))) {
+                            return;
+                        }
+
+
                         if (callback != null && !TextUtils.isEmpty(path)) {
                             callback.getPath(uri, path);
                         }

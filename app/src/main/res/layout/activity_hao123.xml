@@ -110,6 +110,31 @@
             android:text="UIFragment"
             android:textStyle="bold"></TextView>
 
+        <TextView
+            android:id="@+id/txt_editText"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EditText"
+            android:textStyle="bold"></TextView>
 
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:alignContent="stretch"
+        app:alignItems="stretch"
+        app:flexWrap="wrap">
+
+
+        <TextView
+            android:id="@+id/txt_test"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="test"
+            android:textStyle="bold"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

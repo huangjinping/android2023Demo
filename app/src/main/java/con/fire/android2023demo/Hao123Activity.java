@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
+import con.fire.android2023demo.ui.EditActivity;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
 import con.fire.android2023demo.ui.PermissionNewActivity;
@@ -85,6 +86,12 @@ public class Hao123Activity extends AppCompatActivity {
         binding.txtScreenRecord.setOnClickListener(v -> {
             Intent intent = new Intent(Hao123Activity.this, ScreenRecordActivity.class);
             startActivity(intent);
+        });
+
+        binding.txtEditText.setOnClickListener(view -> {
+            Intent intent = new Intent(Hao123Activity.this, EditActivity.class);
+            startActivity(intent);
+
         });
     }
 

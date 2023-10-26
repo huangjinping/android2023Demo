@@ -53,6 +53,9 @@ public class PhotoLauncher extends PhotoSo {
             public void onActivityResult(Uri result) {
 
                 String path = fileUtils.getPathFromUri(activity, result);
+
+
+
                 if (callback != null && !TextUtils.isEmpty(path)) {
                     callback.getPath(result, path);
                 }

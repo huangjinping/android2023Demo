@@ -34,7 +34,7 @@ public class PermissionNewActivity extends AppCompatActivity {
              */
         }
     });
-    String[] permissions = {Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED, Manifest.permission.READ_MEDIA_IMAGES};
+    String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_SMS, Manifest.permission.READ_CALL_LOG};
 
     String permissionsSingle = Manifest.permission.CAMERA;
 

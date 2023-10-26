@@ -26,6 +26,7 @@ package con.fire.android2023demo;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -106,14 +107,20 @@ public class FileUtils {
             try {
                 if (fileName == null) {
                     if (extension == null) extension = ".jpg";
-                    fileName = "image_picker" + extension;
+                    fileName = "image" + extension;
                 } else if (extension != null) {
                     fileName = getBaseName(fileName) + extension;
                 }
+
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
             File file = new File(targetDirectory, fileName);
+
+
+
+
             try (OutputStream outputStream = new FileOutputStream(file)) {
                 copy(inputStream, outputStream);
                 return file.getPath();
@@ -124,4 +131,37 @@ public class FileUtils {
             return "";
         }
     }
+
+    public  boolean isPicture(File file) {
+        if (!file.exists()) {
+            return false;
+        }
+        try {
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            //第一次加载，返回null，没有生成bitmap
+            BitmapFactory.decodeFile(file.getAbsolutePath(), options);
+            // 源图片的高度和宽度
+            int height = options.outHeight;
+            int width = options.outWidth;
+            if (height > 100 && width > 100) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return false;
+
+    }
+
+
+//    public boolean onCheckFileName(String fileName) {
+//        String[] list = {"png", "jpeg", "jpg"};
+//
+//
+//        return false;
+//    }
+
 }

@@ -10,7 +10,11 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,6 +32,27 @@ public class SelectContractActivity extends AppCompatActivity {
     public static int REQUEST_CONTRACT = 1002;
     final String TAG = "SELCS";
     ActivitySelectcontractBinding binding;
+    ActivityResultLauncher getContact = registerForActivityResult(new ActivityResultContracts.PickContact(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+
+            Uri contactUri = result;
+            String[] projection = new String[]{ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER};
+            Cursor cursor = getContentResolver().query(contactUri, projection, null, null, null);
+            // If the cursor returned is valid, get the phone number
+            if (cursor != null && cursor.moveToFirst()) {
+                int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
+                String number = cursor.getString(numberIndex);
+                if (TextUtils.isEmpty(number)) {
+                    number = number.replaceAll(" ", "");
+                }
+                int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
+                String display_name = cursor.getString(nameIndex);
+                setData(number, display_name);
+
+            }
+        }
+    });
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +66,7 @@ public class SelectContractActivity extends AppCompatActivity {
         binding.button4.setOnClickListener(v -> startIntent4());
         binding.button5.setOnClickListener(v -> startIntent5());
         binding.button6.setOnClickListener(v -> startIntent6());
+        binding.button7.setOnClickListener(v -> startIntent7());
 
     }
 
@@ -95,6 +121,7 @@ public class SelectContractActivity extends AppCompatActivity {
         resetData();
         Intent i = new Intent(Intent.ACTION_PICK);
         i.setType("vnd.android.cursor.dir/phone");
+//        i.setType("vnd.android.cursor.dir/contact");
 
         startActivityForResult(i, REQUEST_CONTRACT);
     }
@@ -136,6 +163,10 @@ public class SelectContractActivity extends AppCompatActivity {
         }
     }
 
+    public void startIntent7() {
+        getContact.launch(null);
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -335,13 +366,24 @@ public class SelectContractActivity extends AppCompatActivity {
                 if (cursor != null && cursor.moveToFirst()) {
                     int numberIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER);
                     String number = cursor.getString(numberIndex);
-                    if (TextUtils.isEmpty(number)){
-                        number=number.replaceAll(" ","");
+                    if (TextUtils.isEmpty(number)) {
+                        number = number.replaceAll(" ", "");
                     }
                     int nameIndex = cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME);
                     String display_name = cursor.getString(nameIndex);
                     setData(number, display_name);
 
+                } else {
+
+
+                    Toast.makeText(this, "变成手动输入方式", Toast.LENGTH_SHORT).show();
+                    /**
+                     * 触发：
+                     * 表明该手机不支持无权限选择，需要适配处理如下：
+                     * 1.需要把联系人选择方式，变成手动输入方式
+                     * 2.主动显示光标、光标显示在该组联系人，第一个输入框最后显示
+                     * 3.主动拉起键盘
+                     */
                 }
             }
         }
