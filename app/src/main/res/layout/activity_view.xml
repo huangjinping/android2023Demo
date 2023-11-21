@@ -183,6 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:background="@color/white"
+                
                 android:layout_marginBottom="20dp"
                 android:completionThreshold="1"
                 android:dropDownHorizontalOffset="5dp"

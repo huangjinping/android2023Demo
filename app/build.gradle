@@ -36,12 +36,12 @@ android {
         debug {
             minifyEnabled false
 //            shrinkResources false
-            signingConfig signingConfigs.key
+//            signingConfig signingConfigs.key
         }
 
         release {
-            minifyEnabled true
-            signingConfig signingConfigs.key
+            minifyEnabled false
+//            signingConfig signingConfigs.key
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -101,6 +101,11 @@ dependencies {
     implementation 'top.zibin:Luban:1.1.8'
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
     implementation 'com.google.android.play:review:2.0.1'
+
+
+    implementation 'com.appsflyer:af-android-sdk:6.12.1'
+    implementation "com.android.installreferrer:installreferrer:2.2"
+
 
 
 }

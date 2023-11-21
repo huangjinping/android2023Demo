@@ -3,10 +3,20 @@ package con.fire.android2023demo;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.appsflyer.AFInAppEventParameterName;
+import com.appsflyer.AFInAppEventType;
+import com.appsflyer.AppsFlyerLib;
+import com.appsflyer.attribution.AppsFlyerRequestListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.EditActivity;
@@ -31,6 +41,26 @@ public class Hao123Activity extends AppCompatActivity {
         binding = ActivityHao123Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickListener();
+
+        Log.d("233Act", "" + io.branch.referral.util.BRANCH_STANDARD_EVENT.COMPLETE_REGISTRATION);
+
+        Map<String, Object> eventValues = new HashMap<String, Object>();
+        eventValues.put(AFInAppEventParameterName.CONTENT_ID, "1234567");
+
+
+        AppsFlyerLib.getInstance().logEvent(getApplicationContext(), AFInAppEventType.LOGIN, eventValues, new AppsFlyerRequestListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+
+            @Override
+            public void onError(int i, @NonNull String s) {
+
+            }
+        });
+
+
     }
 
     private void onClickListener() {
