@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -36,7 +35,7 @@ public class PermissionNewActivity extends AppCompatActivity {
     });
     String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.READ_SMS, Manifest.permission.READ_CALL_LOG};
 
-    String permissionsSingle = Manifest.permission.CAMERA;
+    String permissionsSingle = Manifest.permission.READ_PHONE_STATE;
 
     ActivityResultLauncher activityResultSingle = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
         @Override
@@ -45,7 +44,14 @@ public class PermissionNewActivity extends AppCompatActivity {
 
         }
     });
-    
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            LogUtils.logS(TAG, result.getResultCode() + "");
+
+        }
+    });
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +74,6 @@ public class PermissionNewActivity extends AppCompatActivity {
         binding.buttonResult.setOnClickListener(v -> regForActivity());
 
     }
-
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
-        @Override
-        public void onActivityResult(ActivityResult result) {
-            LogUtils.logS(TAG, result.getResultCode() + "");
-
-        }
-    });
 
     private void regForActivity() {
         Intent intent = new Intent(this, SelectContractActivity.class);

@@ -29,7 +29,6 @@
             android:text="Permission"></TextView>
 
 
-
         <TextView
             android:id="@+id/txt_permission_new"
             style="@style/flex_item"
@@ -138,5 +137,46 @@
             android:layout_height="wrap_content"
             android:text="test"
             android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_crisp"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="crisp"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/txt_peopleApi"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PeopleApi"
+            android:textStyle="bold"></TextView>
+    </com.google.android.flexbox.FlexboxLayout>
+
+
+    <TextView
+        style="@style/flex_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Web"></TextView>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:alignContent="stretch"
+        app:alignItems="stretch"
+        app:flexWrap="wrap">
+
+
+        <TextView
+            android:id="@+id/txt_webAgent"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WebAgent"
+            android:textStyle="bold"></TextView>
+
+
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

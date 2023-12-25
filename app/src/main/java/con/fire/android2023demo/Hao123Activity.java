@@ -1,6 +1,7 @@
 package con.fire.android2023demo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +21,9 @@ import java.util.Map;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.EditActivity;
+import con.fire.android2023demo.ui.GoogleOpActivity;
+import con.fire.android2023demo.ui.GooleLogin2Activity;
+import con.fire.android2023demo.ui.InxAgentwebActivity;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
 import con.fire.android2023demo.ui.PermissionNewActivity;
@@ -31,6 +35,8 @@ import con.fire.android2023demo.ui.UIFragmentActivity;
 import con.fire.android2023demo.ui.ViewActivity;
 import con.fire.android2023demo.ui.WebViewActivity;
 import con.fire.android2023demo.utils.ToastUtils;
+import im.crisp.client.ChatActivity;
+import im.crisp.client.Crisp;
 
 public class Hao123Activity extends AppCompatActivity {
     ActivityHao123Binding binding;
@@ -123,7 +129,52 @@ public class Hao123Activity extends AppCompatActivity {
             startActivity(intent);
 
         });
+
+        binding.txtCrisp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Crisp.configure(Hao123Activity.this, "6d124072-1b0f-461a-bec3-6e3ad6fa0287");
+                Crisp.setTokenID("182000000");
+                Crisp.setUserPhone("182000000");
+                Crisp.setSessionSegment(getString(R.string.app_name));
+                Intent crispIntent = new Intent(Hao123Activity.this, ChatActivity.class);
+                startActivity(crispIntent);
+
+//                openOutUrl("https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill&hl=en-TW");
+            }
+        });
+        binding.txtWebAgent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent crispIntent = new Intent(Hao123Activity.this, InxAgentwebActivity.class);
+                startActivity(crispIntent);
+
+            }
+        });
+        binding.txtPeopleApi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                PeopleApi api = new PeopleApi(Hao123Activity.this);
+//                api.startLocal();
+                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
+                startActivity(intent);
+
+
+            }
+        });
     }
 
+
+    public void openOutUrl(String url) {
+        try {
+            Intent intent = new Intent();
+            intent.setAction("android.intent.action.VIEW");
+            Uri content_url = Uri.parse(url);
+            intent.setData(content_url);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -37,7 +37,6 @@ import java.io.FileOutputStream;
 
 import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
-import con.fire.android2023demo.photo.PhotoLauncher;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
 import top.zibin.luban.Luban;
@@ -130,6 +129,9 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
+        ImageView img_banner=findViewById(R.id.img_banner);
+        img_banner.setImageResource(R.mipmap.banner);
+
         photoSo = new PhotoUtilsImagePicker(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
@@ -148,9 +150,20 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 image_target = img_load_take;
                 Log.d("okhttps", "====000===11==>>>>");
-                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+//                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+
+
+                if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.QUERY_ALL_PACKAGES) != PackageManager.PERMISSION_GRANTED) {
+                    Log.d("okhttps", "===QUERY_ALL_PACKAGES==>>0>>");
+
+                } else {
+                    Log.d("okhttps", "===QUERY_ALL_PACKAGES==>>1>>");
+
+                }
             }
         });
+
+
         img_load_album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

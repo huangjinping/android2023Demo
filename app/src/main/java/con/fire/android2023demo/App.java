@@ -5,6 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.lzy.okgo.OkGo;
+
 import me.jessyan.autosize.AutoSizeConfig;
 
 //https://blog.csdn.net/qq_48656522/article/details/126011280
@@ -16,6 +18,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     public void onCreate() {
         super.onCreate();
         application=this;
+        OkGo.getInstance().init(this);
+
 //        Branch.enableTestMode();
 //        Branch.getAutoInstance(this);
 

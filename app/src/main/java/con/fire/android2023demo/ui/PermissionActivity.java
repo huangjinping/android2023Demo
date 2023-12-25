@@ -42,6 +42,7 @@ public class PermissionActivity extends AppCompatActivity {
         hashMap.put(Manifest.permission.READ_CALL_LOG, "需要获取通话记录权限");
         hashMap.put(Manifest.permission.READ_CALENDAR, "需要获取读取日历权限");
         hashMap.put(Manifest.permission.ACCESS_COARSE_LOCATION, "需要获取读取您的定位权限");
+        AlertDialog.Builder builder=null;
 
         binding.buttonTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,7 +191,6 @@ public class PermissionActivity extends AppCompatActivity {
             if (checkPermission(PermissionActivity.this, permissionArr)) {
                 Toast.makeText(PermissionActivity.this, "判断有权限--开始读取json", Toast.LENGTH_SHORT).show();
             } else {
-
                 if (requestCount > 2) {
                     requestCount = 0;
                     showSettingV2();
