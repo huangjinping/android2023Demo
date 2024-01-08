@@ -4,9 +4,16 @@ plugins {
     id 'com.google.gms.google-services'
 }
 
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 
     viewBinding {
@@ -49,6 +56,13 @@ android {
             signingConfig signingConfigs.key
 
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def buildTypeName = variant.buildType.name
+        def timer = releaseTime()
+        variant.outputs.all { output -> outputFileName = "android2023demo${timer}.apk"
         }
     }
 
@@ -142,5 +156,6 @@ dependencies {
     implementation 'com.google.apis:google-api-services-people:v1-rev20220531-2.0.0'
     implementation 'pub.devrel:easypermissions:3.0.0'
 
+    implementation 'com.meituan.android.walle:library:1.1.7'
 
 }

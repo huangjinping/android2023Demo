@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "con.fire.android2023demo",
+  "applicationId": "con.modhe.myapplication",
   "variantName": "release",
   "elements": [
     {
@@ -13,7 +13,7 @@
       "attributes": [],
       "versionCode": 3,
       "versionName": "3.0",
-      "outputFile": "app-release.apk"
+      "outputFile": "android2023demo20240104114924.apk"
     }
   ],
   "elementType": "File"

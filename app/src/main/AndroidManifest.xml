@@ -24,6 +24,7 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
 
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission>
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission
@@ -167,7 +168,11 @@
         <activity android:name=".ui.EditActivity"></activity>
         <activity android:name=".ui.InxAgentwebActivity"></activity>
         <activity android:name=".ui.GooleLogin2Activity"></activity>
+        <activity android:name=".ui.ReferrerActivity"></activity>
+        <activity android:name=".ui.BaseWeb154Activity"></activity>
 
+        <activity android:name=".ui.DialogTestActivity"></activity>
+        <activity android:name=".ui.UploadWebActivity"></activity>
 
         <service android:name=".service.PostErrorService"></service>
         <service
@@ -175,6 +180,25 @@
             android:exported="true"
             android:foregroundServiceType="mediaProjection"
             android:stopWithTask="false"></service>
+
+
+        <receiver
+            android:name=".receiver.PackageStatusReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".receiver.InstallTrackingReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.INSTALL_PACKAGES">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
 
 
         <meta-data
@@ -187,5 +211,21 @@
             android:name="io.branch.sdk.TestMode"
             android:value="false" />
     </application>
+    <queries package="${applicationId}">
+        <package android:name="com.facebook.katana" />
 
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="text/plain" />
+        </intent>
+    </queries>
 </manifest>

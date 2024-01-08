@@ -66,7 +66,7 @@
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="webView"></TextView>
+            android:text="webVie1w"></TextView>
 
         <TextView
             android:id="@+id/txt_web_bottom"
@@ -145,12 +145,29 @@
             android:layout_height="wrap_content"
             android:text="crisp"
             android:textStyle="bold"></TextView>
+
         <TextView
             android:id="@+id/txt_peopleApi"
             style="@style/flex_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="PeopleApi"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_Referrer"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Referrer"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_testdialog"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dialog"
             android:textStyle="bold"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 
@@ -175,6 +192,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="WebAgent"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_web154"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Web154"
+            android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:id="@+id/txt_webupload"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WebUpload"
             android:textStyle="bold"></TextView>
 
 

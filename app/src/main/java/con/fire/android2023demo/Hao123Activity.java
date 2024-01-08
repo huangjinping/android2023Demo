@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,18 +19,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
+import con.fire.android2023demo.ui.BaseWeb154Activity;
+import con.fire.android2023demo.ui.DialogTestActivity;
 import con.fire.android2023demo.ui.EditActivity;
 import con.fire.android2023demo.ui.GoogleOpActivity;
-import con.fire.android2023demo.ui.GooleLogin2Activity;
 import con.fire.android2023demo.ui.InxAgentwebActivity;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
 import con.fire.android2023demo.ui.PermissionNewActivity;
 import con.fire.android2023demo.ui.QueriesActivity;
+import con.fire.android2023demo.ui.ReferrerActivity;
 import con.fire.android2023demo.ui.ScreenRecordActivity;
 import con.fire.android2023demo.ui.SelectContractActivity;
 import con.fire.android2023demo.ui.TimerActivity;
 import con.fire.android2023demo.ui.UIFragmentActivity;
+import con.fire.android2023demo.ui.UploadWebActivity;
 import con.fire.android2023demo.ui.ViewActivity;
 import con.fire.android2023demo.ui.WebViewActivity;
 import con.fire.android2023demo.utils.ToastUtils;
@@ -47,17 +49,13 @@ public class Hao123Activity extends AppCompatActivity {
         binding = ActivityHao123Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickListener();
-
         Log.d("233Act", "" + io.branch.referral.util.BRANCH_STANDARD_EVENT.COMPLETE_REGISTRATION);
-
         Map<String, Object> eventValues = new HashMap<String, Object>();
         eventValues.put(AFInAppEventParameterName.CONTENT_ID, "1234567");
-
 
         AppsFlyerLib.getInstance().logEvent(getApplicationContext(), AFInAppEventType.LOGIN, eventValues, new AppsFlyerRequestListener() {
             @Override
             public void onSuccess() {
-
             }
 
             @Override
@@ -111,12 +109,9 @@ public class Hao123Activity extends AppCompatActivity {
             Intent intent = new Intent(Hao123Activity.this, UIFragmentActivity.class);
             startActivity(intent);
         });
-        binding.txtPermissionNew.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Hao123Activity.this, PermissionNewActivity.class);
-                startActivity(intent);
-            }
+        binding.txtPermissionNew.setOnClickListener(v -> {
+            Intent intent = new Intent(Hao123Activity.this, PermissionNewActivity.class);
+            startActivity(intent);
         });
 
         binding.txtScreenRecord.setOnClickListener(v -> {
@@ -130,37 +125,48 @@ public class Hao123Activity extends AppCompatActivity {
 
         });
 
-        binding.txtCrisp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Crisp.configure(Hao123Activity.this, "6d124072-1b0f-461a-bec3-6e3ad6fa0287");
-                Crisp.setTokenID("182000000");
-                Crisp.setUserPhone("182000000");
-                Crisp.setSessionSegment(getString(R.string.app_name));
-                Intent crispIntent = new Intent(Hao123Activity.this, ChatActivity.class);
-                startActivity(crispIntent);
+        binding.txtReferrer.setOnClickListener(view -> {
+            Intent intent = new Intent(Hao123Activity.this, ReferrerActivity.class);
+            startActivity(intent);
+        });
+
+        binding.txtCrisp.setOnClickListener(view -> {
+            Crisp.configure(Hao123Activity.this, "6d124072-1b0f-461a-bec3-6e3ad6fa0287");
+            Crisp.setTokenID("182000000");
+            Crisp.setUserPhone("182000000");
+            Crisp.setSessionSegment(getString(R.string.app_name));
+            Intent crispIntent = new Intent(Hao123Activity.this, ChatActivity.class);
+            startActivity(crispIntent);
 
 //                openOutUrl("https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill&hl=en-TW");
-            }
         });
-        binding.txtWebAgent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent crispIntent = new Intent(Hao123Activity.this, InxAgentwebActivity.class);
-                startActivity(crispIntent);
+        binding.txtWebAgent.setOnClickListener(view -> {
+            Intent crispIntent = new Intent(Hao123Activity.this, InxAgentwebActivity.class);
+            startActivity(crispIntent);
 
-            }
         });
-        binding.txtPeopleApi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        binding.txtPeopleApi.setOnClickListener(view -> {
 //                PeopleApi api = new PeopleApi(Hao123Activity.this);
 //                api.startLocal();
-                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
+            Intent intent = new Intent(Hao123Activity.this, GoogleOpActivity.class);
+            startActivity(intent);
 
+        });
 
-            }
+        binding.txtWeb154.setOnClickListener(view -> {
+            Intent intent = new Intent(Hao123Activity.this, BaseWeb154Activity.class);
+            startActivity(intent);
+        });
+        binding.txtTestdialog.setOnClickListener(view -> {
+            Intent intent = new Intent(Hao123Activity.this, DialogTestActivity.class);
+            startActivity(intent);
+
+        });
+
+        binding.txtWebupload.setOnClickListener(view -> {
+            Intent intent = new Intent(Hao123Activity.this, UploadWebActivity.class);
+            startActivity(intent);
         });
     }
 

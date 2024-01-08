@@ -184,6 +184,8 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
             case REQUEST_ACCOUNT_PICKER:
                 if (resultCode == RESULT_OK && data != null && data.getExtras() != null) {
                     String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
+                    Logss.log(TAG,"========="+accountName);
+
                     if (accountName != null) {
                         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
@@ -348,6 +350,8 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
                 return new ArrayList<>();
             } catch (Exception e) {
 //                mLastError = e;
+                e.printStackTrace();
+                Logss.log(TAG,"==========="+e.getMessage());
                 cancel(true);
                 return null;
             }

@@ -1,23 +1,29 @@
 package con.fire.android2023demo;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.android.installreferrer.api.InstallReferrerClient;
+import com.android.installreferrer.api.InstallReferrerStateListener;
+import com.android.installreferrer.api.ReferrerDetails;
 import com.lzy.okgo.OkGo;
 
+import con.fire.android2023demo.utils.LogUtils;
 import me.jessyan.autosize.AutoSizeConfig;
 
 //https://blog.csdn.net/qq_48656522/article/details/126011280
 public class App extends Application implements Thread.UncaughtExceptionHandler {
 
 
- public static   App  application;
+    public static App application;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        application=this;
+        application = this;
         OkGo.getInstance().init(this);
 
 //        Branch.enableTestMode();
@@ -26,7 +32,75 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 //        Thread.setDefaultUncaughtExceptionHandler(this);
 //        BugCrash.initStatus(this);
         AutoSizeConfig.getInstance().setCustomFragment(true);
-        
+
+        startReferrer(this);
+    }
+
+
+    public void startReferrer(Context context) {
+
+        try {
+            final InstallReferrerClient installReferrerClient = InstallReferrerClient.newBuilder(context).build();
+            installReferrerClient.startConnection(new InstallReferrerStateListener() {
+                @Override
+                public void onInstallReferrerSetupFinished(int responseCode) {
+                    switch (responseCode) {
+                        case InstallReferrerClient.InstallReferrerResponse.OK:
+                            if (installReferrerClient != null) {
+                                try {
+                                    ReferrerDetails response = installReferrerClient.getInstallReferrer();
+                                    String referrer = response.getInstallReferrer();// 你要得referrer值
+                                    long referrerClickTime = response.getReferrerClickTimestampSeconds();
+                                    long appInstallTime = response.getInstallBeginTimestampSeconds();
+                                    String version = response.getInstallVersion();
+
+                                    StringBuilder builder = new StringBuilder();
+                                    builder.append("referrer:" + referrer);
+                                    builder.append("\n");
+                                    builder.append("referrerClickTime:" + referrerClickTime);
+                                    builder.append("\n");
+                                    builder.append("appInstallTime:" + appInstallTime);
+                                    builder.append("\n");
+                                    builder.append("version:" + version);
+
+                                    Log.d("InstallReferrerHelper", builder.toString());
+
+                                    LogUtils.logSLocation(context, "InstallReferrerHelper", builder.toString());
+
+                                    installReferrerClient.endConnection();
+                                } catch (Exception ex) {
+                                    Log.e("InstallReferrerHelper", ex.toString());
+                                    LogUtils.logSLocation(context, "InstallReferrerHelper", ex.toString());
+
+                                }
+                            }
+
+                            break;
+                        case InstallReferrerClient.InstallReferrerResponse.FEATURE_NOT_SUPPORTED:
+                            // API not available on the current Play Store app
+                            Log.d("InstallReferrerHelper", "FEATURE_NOT_SUPPORTED");
+                            LogUtils.logSLocation(context, "InstallReferrerHelper", "FEATURE_NOT_SUPPORTED");
+
+                            break;
+                        case InstallReferrerClient.InstallReferrerResponse.SERVICE_UNAVAILABLE:
+                            // Connection could not be established
+                            Log.d("InstallReferrerHelper", "SERVICE_UNAVAILABLE");
+                            LogUtils.logSLocation(context, "InstallReferrerHelper", "SERVICE_UNAVAILABLE");
+
+                            break;
+                    }
+                }
+
+                @Override
+                public void onInstallReferrerServiceDisconnected() {
+                    // Try to restart the connection on the next request to
+                    // Google Play by calling the startConnection() method.
+                }
+            });
+        } catch (Exception ex) {
+            LogUtils.logSLocation(context, "InstallReferrerHelper", ex.toString());
+            Log.e("InstallReferrerHelper", ex.toString());
+        }
     }
 
 

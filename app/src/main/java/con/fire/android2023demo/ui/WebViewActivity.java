@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -55,6 +56,19 @@ public class WebViewActivity extends AppCompatActivity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSupportMultipleWindows(true);
 
+
+//        -----------------------------___>>>>>>>>>>>>>>>>>1>>>>>>>
+        settings.setDatabaseEnabled(true);
+        settings.setTextZoom(100);
+        //不显示滚动条
+        webview.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+        webview.setVerticalScrollBarEnabled(false);
+        webview.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        //        -----------------------------___>>>>>>>>>>>>>>>>>1>>>>>>>
+
+
+
+
         String url = "https://qr.pay.wave.com/c/cos-1ctbn5v7g21zm?a=1025&c=XOF&m=S-FINTECH%20TECHNOLOGIE";
 //        webview.loadUrl("http://www.baidu.com");
 //        url = "https://www.jianshu.com/p/4860097148c0";
@@ -76,12 +90,13 @@ public class WebViewActivity extends AppCompatActivity {
 
         url = "https://checkout.toppaylatam.com/form/#/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoyNjMzMDcyfQ.2Dxxx29MsveldyS_ryALt5mQmWIqc-C6Q7EZdUyfzmM";
 
+        url="https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb";
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0
         onstFinger();
 
-        installapklink(this, url);
+//        installapklink(this, url);
 
 
     }
