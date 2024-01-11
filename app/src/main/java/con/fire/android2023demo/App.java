@@ -3,6 +3,7 @@ package con.fire.android2023demo;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
@@ -19,6 +20,12 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
 
     public static App application;
+
+    String EVENT_REGISTRATION = "EVENT_REGISTRATION";
+    String EVENT_SUBSCRIBE = "EVENT_REGISTRATION";
+    String EVENT_ADDED_TO_CART = "EVENT_SUBSCRIBE";
+    String EVENT_CHECKOUT = "EVENT_SUBSCRIBE";
+
 
     @Override
     public void onCreate() {

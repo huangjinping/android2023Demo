@@ -23,6 +23,7 @@ import con.fire.android2023demo.ui.BaseWeb154Activity;
 import con.fire.android2023demo.ui.DialogTestActivity;
 import con.fire.android2023demo.ui.EditActivity;
 import con.fire.android2023demo.ui.GoogleOpActivity;
+import con.fire.android2023demo.ui.GooleLogin2Activity;
 import con.fire.android2023demo.ui.InxAgentwebActivity;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
@@ -143,6 +144,14 @@ public class Hao123Activity extends AppCompatActivity {
         binding.txtWebAgent.setOnClickListener(view -> {
             Intent crispIntent = new Intent(Hao123Activity.this, InxAgentwebActivity.class);
             startActivity(crispIntent);
+
+        });
+        binding.txtGoogleLogin.setOnClickListener(view -> {
+//                PeopleApi api = new PeopleApi(Hao123Activity.this);
+//                api.startLocal();
+                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
+//            Intent intent = new Intent(Hao123Activity.this, GoogleOpActivity.class);
+            startActivity(intent);
 
         });
         binding.txtPeopleApi.setOnClickListener(view -> {

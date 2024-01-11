@@ -112,6 +112,7 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
      * appropriate.
      */
     private void getResultsFromApi() {
+
         Logss.log(TAG, "--------------------0");
         if (!isGooglePlayServicesAvailable()) {
             Logss.log(TAG, "--------------------1");
@@ -127,7 +128,7 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
             mOutputText.setText("No network connection available.");
         } else {
             Logss.log(TAG, "--------------------4");
-
+                
             new MakeRequestTask(mCredential).execute();
         }
     }
@@ -184,7 +185,7 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
             case REQUEST_ACCOUNT_PICKER:
                 if (resultCode == RESULT_OK && data != null && data.getExtras() != null) {
                     String accountName = data.getStringExtra(AccountManager.KEY_ACCOUNT_NAME);
-                    Logss.log(TAG,"========="+accountName);
+                    Logss.log(TAG, "=========" + accountName);
 
                     if (accountName != null) {
                         SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
@@ -351,7 +352,7 @@ public class GooleLogin2Activity extends Activity implements EasyPermissions.Per
             } catch (Exception e) {
 //                mLastError = e;
                 e.printStackTrace();
-                Logss.log(TAG,"==========="+e.getMessage());
+                Logss.log(TAG, "===========" + e.getMessage());
                 cancel(true);
                 return null;
             }
