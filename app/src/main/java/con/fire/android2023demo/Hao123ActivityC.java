@@ -41,7 +41,7 @@ import con.fire.android2023demo.utils.ToastUtils;
 import im.crisp.client.ChatActivity;
 import im.crisp.client.Crisp;
 
-public class Hao123Activity extends AppCompatActivity {
+public class Hao123ActivityC extends AppCompatActivity {
     ActivityHao123Binding binding;
 
     @Override
@@ -72,84 +72,84 @@ public class Hao123Activity extends AppCompatActivity {
         binding.txtToast01.setOnClickListener(v -> {
             String msg = "以下服务端接口可免 access_token 调用的场景：使用微信云托管通过微信令牌/开放接口服务调用；使用微信云开发通过云函数免服务器发起云调用以下服务端接口可免 access_token 调用的场景：使用微信云托管通过微信令牌/开放接口服务调用；使用微信云开发通过云函数免服务器发起云调用。 ";
 //            ToastUtils.showToast(Hao123Activity.this, msg);
-            ToastUtils.makeTextOrder(Hao123Activity.this).show();
+            ToastUtils.makeTextOrder(Hao123ActivityC.this).show();
 //            ToastUtils.makeText(Hao123Activity.this, "" + msg, ToastUtils.LENGTH_LONG).show();
 //            Toast.makeText(Hao123Activity.this, msg, Toast.LENGTH_SHORT).show();
         });
 
         binding.txtImage.setText("照片" + Build.VERSION.SDK_INT);
-        binding.txtImage.setOnClickListener(v -> startActivity(new Intent(Hao123Activity.this, MainActivity.class)));
+        binding.txtImage.setOnClickListener(v -> startActivity(new Intent(Hao123ActivityC.this, MainActivity.class)));
 
         binding.txtWeb.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, WebViewActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, WebViewActivity.class);
             startActivity(intent);
         });
         binding.txtPermission.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, PermissionActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, PermissionActivity.class);
             startActivity(intent);
         });
 
         binding.txtSelectContract.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, SelectContractActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, SelectContractActivity.class);
             startActivity(intent);
         });
 
         binding.txtQueries.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, QueriesActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, QueriesActivity.class);
             startActivity(intent);
         });
         binding.txtTimer.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, TimerActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, TimerActivity.class);
             startActivity(intent);
         });
         binding.txtPop.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, ViewActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, ViewActivity.class);
             startActivity(intent);
         });
         binding.txtUiFragment.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, UIFragmentActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, UIFragmentActivity.class);
             startActivity(intent);
         });
         binding.txtPermissionNew.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, PermissionNewActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, PermissionNewActivity.class);
             startActivity(intent);
         });
 
         binding.txtScreenRecord.setOnClickListener(v -> {
-            Intent intent = new Intent(Hao123Activity.this, ScreenRecordActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, ScreenRecordActivity.class);
             startActivity(intent);
         });
 
         binding.txtEditText.setOnClickListener(view -> {
-            Intent intent = new Intent(Hao123Activity.this, EditActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, EditActivity.class);
             startActivity(intent);
 
         });
 
         binding.txtReferrer.setOnClickListener(view -> {
-            Intent intent = new Intent(Hao123Activity.this, ReferrerActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, ReferrerActivity.class);
             startActivity(intent);
         });
 
         binding.txtCrisp.setOnClickListener(view -> {
-            Crisp.configure(Hao123Activity.this, "6d124072-1b0f-461a-bec3-6e3ad6fa0287");
+            Crisp.configure(Hao123ActivityC.this, "6d124072-1b0f-461a-bec3-6e3ad6fa0287");
             Crisp.setTokenID("182000000");
             Crisp.setUserPhone("182000000");
             Crisp.setSessionSegment(getString(R.string.app_name));
-            Intent crispIntent = new Intent(Hao123Activity.this, ChatActivity.class);
+            Intent crispIntent = new Intent(Hao123ActivityC.this, ChatActivity.class);
             startActivity(crispIntent);
 
 //                openOutUrl("https://play.google.com/store/apps/details?id=com.ss.android.ugc.trill&hl=en-TW");
         });
         binding.txtWebAgent.setOnClickListener(view -> {
-            Intent crispIntent = new Intent(Hao123Activity.this, InxAgentwebActivity.class);
+            Intent crispIntent = new Intent(Hao123ActivityC.this, InxAgentwebActivity.class);
             startActivity(crispIntent);
 
         });
         binding.txtGoogleLogin.setOnClickListener(view -> {
 //                PeopleApi api = new PeopleApi(Hao123Activity.this);
 //                api.startLocal();
-                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
+                Intent intent = new Intent(Hao123ActivityC.this, GooleLogin2Activity.class);
 //            Intent intent = new Intent(Hao123Activity.this, GoogleOpActivity.class);
             startActivity(intent);
 
@@ -158,23 +158,23 @@ public class Hao123Activity extends AppCompatActivity {
 //                PeopleApi api = new PeopleApi(Hao123Activity.this);
 //                api.startLocal();
 //                Intent intent = new Intent(Hao123Activity.this, GooleLogin2Activity.class);
-            Intent intent = new Intent(Hao123Activity.this, GoogleOpActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, GoogleOpActivity.class);
             startActivity(intent);
 
         });
 
         binding.txtWeb154.setOnClickListener(view -> {
-            Intent intent = new Intent(Hao123Activity.this, BaseWeb154Activity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, BaseWeb154Activity.class);
             startActivity(intent);
         });
         binding.txtTestdialog.setOnClickListener(view -> {
-            Intent intent = new Intent(Hao123Activity.this, DialogTestActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, DialogTestActivity.class);
             startActivity(intent);
 
         });
 
         binding.txtWebupload.setOnClickListener(view -> {
-            Intent intent = new Intent(Hao123Activity.this, UploadWebActivity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, UploadWebActivity.class);
             startActivity(intent);
         });
     }

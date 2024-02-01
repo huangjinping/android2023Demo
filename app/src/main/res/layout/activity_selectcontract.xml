@@ -53,6 +53,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="选择联系人7" />
+    <Button
+        android:id="@+id/button8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择联系人8" />
     <TextView
         android:id="@+id/txt_result"
         android:layout_width="match_parent"

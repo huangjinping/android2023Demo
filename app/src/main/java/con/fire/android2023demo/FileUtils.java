@@ -92,6 +92,18 @@ public class FileUtils {
     }
 
 
+//    public String getUniqueId(Context context) {
+//
+//        SharedPreferences pref = context.getSharedPreferences("UniqueId", Context.MODE_PRIVATE);
+//        String uniqueId = pref.getString("uuid", "");
+//        if (TextUtils.isEmpty(uniqueId)) {
+//            uniqueId = UUID.randomUUID().toString();
+//            pref.edit().putString("uuid", uniqueId).commit();
+//        }
+//        return uniqueId;
+//    }
+
+
     public String getPathFromUri(final Context context, final Uri uri) {
         try (InputStream inputStream = context.getContentResolver().openInputStream(uri)) {
             String uuid = UUID.randomUUID().toString();
@@ -119,8 +131,6 @@ public class FileUtils {
             File file = new File(targetDirectory, fileName);
 
 
-
-
             try (OutputStream outputStream = new FileOutputStream(file)) {
                 copy(inputStream, outputStream);
                 return file.getPath();
@@ -132,7 +142,7 @@ public class FileUtils {
         }
     }
 
-    public  boolean isPicture(File file) {
+    public boolean isPicture(File file) {
         if (!file.exists()) {
             return false;
         }

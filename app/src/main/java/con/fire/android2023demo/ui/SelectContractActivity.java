@@ -67,6 +67,7 @@ public class SelectContractActivity extends AppCompatActivity {
         binding.button5.setOnClickListener(v -> startIntent5());
         binding.button6.setOnClickListener(v -> startIntent6());
         binding.button7.setOnClickListener(v -> startIntent7());
+        binding.button8.setOnClickListener(v -> startIntent8());
 
     }
 
@@ -161,11 +162,22 @@ public class SelectContractActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivityForResult(intent, REQUEST_SELECT_PHONE_NUMBER);
         }
+
+
     }
 
     public void startIntent7() {
         getContact.launch(null);
 
+    }
+
+    public void startIntent8(){
+        Intent intent = new Intent();
+        intent.setData(Uri.parse("content://contacts"));
+        intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(intent, REQUEST_SELECT_PHONE_NUMBER);
+        }
     }
 
     @Override

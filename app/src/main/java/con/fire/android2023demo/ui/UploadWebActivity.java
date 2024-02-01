@@ -4,14 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.webkit.SslErrorHandler;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -39,6 +36,7 @@ import con.fire.android2023demo.utils.ImageResizer;
 public class UploadWebActivity extends AppCompatActivity {
 
     public static final int SELECT_PHOTO = 2;//启动相册标识
+    final String TAG = "UploadWe";
     WebView webView;
     ValueCallback mUploadCallBack;
     ValueCallback<Uri[]> mUploadCallBackAboveL;
@@ -52,10 +50,10 @@ public class UploadWebActivity extends AppCompatActivity {
         binding = ActivityUploadwebBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         webView = binding.webView;
-        webView = new WebView(this);
-
-        ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
-        decorView.addView(webView, 1, 1);
+//        webView = new WebView(this);
+//
+//        ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
+//        decorView.addView(webView, 1, 1);
 
 
         webView.setWebViewClient(new MyWebViewClient());
@@ -82,7 +80,7 @@ public class UploadWebActivity extends AppCompatActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.setVerticalScrollBarEnabled(false);
         webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        webView.loadUrl("http://10.1.2.95:8092/inxupload.html?v=" + System.currentTimeMillis());
+        webView.loadUrl("http://10.1.2.98:8092/inxupload.html?v=" + System.currentTimeMillis());
 //        webView.loadUrl("https://www.baidu.com");
 
         binding.btnSubmit.setOnClickListener(view -> {
@@ -100,6 +98,8 @@ public class UploadWebActivity extends AppCompatActivity {
         pickImageIntent.setType("image/*");
         startActivityForResult(pickImageIntent, SELECT_PHOTO);
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -124,7 +124,6 @@ public class UploadWebActivity extends AppCompatActivity {
                                 mUploadCallBackAboveL = null;
                                 return;
                             }
-
                         }
                     } else if (mUploadCallBack != null) {
                         if (newUri != null) {
@@ -164,9 +163,15 @@ public class UploadWebActivity extends AppCompatActivity {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
             try {
+                Log.d(TAG, "====");
+                if (!url.startsWith("http") && !url.startsWith("https")) {
 
-
-                if (!url.startsWith("http") && !url.startsWith("http")) {
+                    if (url.startsWith("whatsapp://")){
+                        /**
+                         * 判断是不是安装了whatApp  包名为com.whatsapp
+                         * 若没有安装系统浏览器请打开https://api.whatsapp.com 即可
+                         */
+                    }
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent);
@@ -210,9 +215,13 @@ public class UploadWebActivity extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+
+            Log.d("onPageStarted", "==========" + url);
+
             try {
-                if (url.contains("static/Mpsuccess.html")) {
+                if (url.contains("/MPsuccess.html")) {
                     //跳转页面
+                    finish();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -220,12 +229,12 @@ public class UploadWebActivity extends AppCompatActivity {
         }
 
         //        onReceivedSslError  此方法最好不要使用。
-        @Override
-        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            super.onReceivedSslError(view, handler, error);
-
-            handler.proceed();
-        }
+//        @Override
+//        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+//            super.onReceivedSslError(view, handler, error);
+//
+//            handler.proceed();
+//        }
     }
 
     private class MyWebChromeClient extends WebChromeClient {
@@ -253,10 +262,10 @@ public class UploadWebActivity extends AppCompatActivity {
         @Override
         public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
             mUploadCallBackAboveL = filePathCallback;
+            fileChooserParams.getMode();
             showFileChooser();
             return true;
         }
-
 
         @Override
         public void onReceivedTitle(WebView view, String title) {

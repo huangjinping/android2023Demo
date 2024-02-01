@@ -39,6 +39,7 @@ import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
+import con.fire.android2023demo.photo.PhotoUtilsImagePickerMul;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView img_banner=findViewById(R.id.img_banner);
         img_banner.setImageResource(R.mipmap.banner);
 
-        photoSo = new PhotoUtilsImagePicker(this);
+        photoSo = new PhotoUtilsImagePickerMul(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
