@@ -19,8 +19,6 @@ import top.zibin.luban.OnCompressListener;
 public class ImageUtil131 {
 
 
-    
-
     /**
      * 压缩图片
      *
@@ -28,16 +26,13 @@ public class ImageUtil131 {
      * @return
      */
     public static void openCompress(final Uri path, final ImgCompressLinster linster) {
-        Luban.with(App.application)
-                .load(path)
-                .ignoreBy(100)//不压缩的阈值，单位为K
+        Luban.with(App.application).load(path).ignoreBy(100)//不压缩的阈值，单位为K
                 .filter(new CompressionPredicate() {//设置开启压缩条件(图片为空或gif格式不压缩)
                     @Override
                     public boolean apply(String path) {
                         return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif") || path.toLowerCase().endsWith(".mp4"));
                     }
-                })
-                .setCompressListener(new OnCompressListener() {
+                }).setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
                         // TODO 压缩开始前调用，可以在方法内启动 loading UI
@@ -66,16 +61,13 @@ public class ImageUtil131 {
      * @return
      */
     public static void openCompress(final String path, final ImgCompressLinster linster) {
-        Luban.with(App.application)
-                .load(path)
-                .ignoreBy(100)//不压缩的阈值，单位为K
+        Luban.with(App.application).load(path).ignoreBy(100)//不压缩的阈值，单位为K
                 .filter(new CompressionPredicate() {//设置开启压缩条件(图片为空或gif格式不压缩)
                     @Override
                     public boolean apply(String path) {
                         return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif") || path.toLowerCase().endsWith(".mp4"));
                     }
-                })
-                .setCompressListener(new OnCompressListener() {
+                }).setCompressListener(new OnCompressListener() {
                     @Override
                     public void onStart() {
                         // TODO 压缩开始前调用，可以在方法内启动 loading UI

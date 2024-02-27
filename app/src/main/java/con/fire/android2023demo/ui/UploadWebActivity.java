@@ -1,5 +1,6 @@
 package con.fire.android2023demo.ui;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceError;
@@ -41,9 +43,11 @@ public class UploadWebActivity extends AppCompatActivity {
     ValueCallback mUploadCallBack;
     ValueCallback<Uri[]> mUploadCallBackAboveL;
     FileUtils fileUtils;
+    String isCanBack = "1";
     private ActivityUploadwebBinding binding;
     private ImageResizer imageResizer;
 
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +75,9 @@ public class UploadWebActivity extends AppCompatActivity {
         settings.setDisplayZoomControls(true);//显示缩放控制按钮
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSupportMultipleWindows(true);
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            WebView.setWebContentsDebuggingEnabled(true);
+        }
 
 //        -----------------------------___>>>>>>>>>>>>>>>>>1>>>>>>>
         settings.setDatabaseEnabled(true);
@@ -80,13 +86,20 @@ public class UploadWebActivity extends AppCompatActivity {
         webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.setVerticalScrollBarEnabled(false);
         webView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        webView.loadUrl("http://10.1.2.98:8092/inxupload.html?v=" + System.currentTimeMillis());
+
+//        webView.loadUrl("http://10.1.2.91:8092/inxupload.html?v=" + System.currentTimeMillis());
+
+        webView.loadUrl("https://mx.ultracreditosmx.com/customer/index.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
+//        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
 //        webView.loadUrl("https://www.baidu.com");
+        webView.addJavascriptInterface(this, "nativeWkObc");
 
         binding.btnSubmit.setOnClickListener(view -> {
             String result = System.currentTimeMillis() + "";
-            webView.loadUrl("javascript:onVSLogEvent('" + result + "')");
+//            webView.loadUrl("javascript:onVSLogEvent('" + result + "')");
+
         });
+
     }
 
     private void showFileChooser() {
@@ -98,8 +111,6 @@ public class UploadWebActivity extends AppCompatActivity {
         pickImageIntent.setType("image/*");
         startActivityForResult(pickImageIntent, SELECT_PHOTO);
     }
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -151,6 +162,31 @@ public class UploadWebActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+
+        webView.evaluateJavascript("javascript:onBackPressed()", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String s) {
+                if ("0".equals(s)) {
+
+                    Toast.makeText(UploadWebActivity.this, "不返回", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    if (webView.canGoBack()) {
+                        webView.goBack();
+                    } else {
+                        UploadWebActivity.super.onBackPressed();
+                    }
+                }
+            }
+        });
+    }
+
+    @JavascriptInterface
+    public void setNativeBacKFlag(String flag) {
+        Toast.makeText(this, "showToast===" + flag, Toast.LENGTH_SHORT).show();
+    }
 
     private class MyWebViewClient extends WebViewClient {
 
@@ -161,12 +197,13 @@ public class UploadWebActivity extends AppCompatActivity {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Log.d("shouloading", "==========" + url);
 
             try {
                 Log.d(TAG, "====");
                 if (!url.startsWith("http") && !url.startsWith("https")) {
 
-                    if (url.startsWith("whatsapp://")){
+                    if (url.startsWith("whatsapp://")) {
                         /**
                          * 判断是不是安装了whatApp  包名为com.whatsapp
                          * 若没有安装系统浏览器请打开https://api.whatsapp.com 即可
@@ -216,7 +253,6 @@ public class UploadWebActivity extends AppCompatActivity {
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
 
-            Log.d("onPageStarted", "==========" + url);
 
             try {
                 if (url.contains("/MPsuccess.html")) {
@@ -280,4 +316,5 @@ public class UploadWebActivity extends AppCompatActivity {
             super.onProgressChanged(view, newProgress);
         }
     }
+
 }

@@ -171,7 +171,7 @@ public class SelectContractActivity extends AppCompatActivity {
 
     }
 
-    public void startIntent8(){
+    public void startIntent8() {
         Intent intent = new Intent();
         intent.setData(Uri.parse("content://contacts"));
         intent.setType(ContactsContract.CommonDataKinds.Phone.CONTENT_TYPE);
@@ -183,6 +183,8 @@ public class SelectContractActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        Log.d(TAG, requestCode + "==========" + resultCode);
 //        onResult0(requestCode, resultCode, data);
 //        onResult1(requestCode, resultCode, data);
 //        onResult2(requestCode, resultCode, data);

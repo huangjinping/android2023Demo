@@ -39,7 +39,10 @@ import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
-import con.fire.android2023demo.photo.PhotoUtilsImagePickerMul;
+import con.fire.android2023demo.utils.Compressor;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
@@ -130,16 +133,16 @@ public class MainActivity extends AppCompatActivity {
         }
         Log.d("img_load", Build.VERSION.RELEASE + "");
 
-        ImageView img_banner=findViewById(R.id.img_banner);
+        ImageView img_banner = findViewById(R.id.img_banner);
         img_banner.setImageResource(R.mipmap.banner);
 
-        photoSo = new PhotoUtilsImagePickerMul(this);
+        photoSo = new PhotoUtilsImagePicker(this);
         photoSo.setCallback(new PhotoCallback() {
             @Override
             public void getPath(Uri uri, String path) {
+//                compress(path);
 
-                compress(path);
-
+                compress2(path);
 //                Glide.with(MainActivity.this).load(path).into(image_target);
 
             }
@@ -151,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 image_target = img_load_take;
                 Log.d("okhttps", "====000===11==>>>>");
-//                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
+                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
 
 
                 if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.QUERY_ALL_PACKAGES) != PackageManager.PERMISSION_GRANTED) {
@@ -210,33 +213,31 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
 
-//    private void compress(String path){
-//        new Compressor(this)
-//                .compressToFileAsFlowable(new File(path))
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<File>() {
-//                    @Override
-//                    public void accept(File file) {
-//                        try {
-//                            Glide.with(MainActivity.this).load(file).into(image_target);
-//                            Log.d("onActivityResult", "0000000000000000005");
-//                            Log.d("onActivityResult", "0000000000000000005" + file.getAbsolutePath());
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(Throwable throwable) {
-//                        Log.d("onActivityResult", "0000000000000000006");
-//
-//                        throwable.printStackTrace();
-////                        DisplayToast("压缩失败了");
-//                    }
-//                });
-//    }
+    private void compress2(String path) {
+        new Compressor(this).compressToFileAsFlowable(new File(path)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
+            @Override
+            public void accept(File file) {
+                try {
+
+
+                    Glide.with(MainActivity.this).load(file).into(image_target);
+                    Log.d("onActivityResult", "0000000000000000005");
+                    Log.d("onActivityResult", "0000000000000000005" + file.getAbsolutePath());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) {
+                Log.d("onActivityResult", "0000000000000000006");
+
+                throwable.printStackTrace();
+//                        DisplayToast("压缩失败了");
+            }
+        });
+    }
 
 //    private void compress(String path) {
 //        try {

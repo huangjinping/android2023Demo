@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.appsflyer.attribution.AppsFlyerRequestListener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.BaseWeb154Activity;
@@ -26,6 +28,7 @@ import con.fire.android2023demo.ui.GoogleOpActivity;
 import con.fire.android2023demo.ui.GooleLogin2Activity;
 import con.fire.android2023demo.ui.InxAgentwebActivity;
 import con.fire.android2023demo.ui.MainActivity;
+import con.fire.android2023demo.ui.PackageUsageStatsActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
 import con.fire.android2023demo.ui.PermissionNewActivity;
 import con.fire.android2023demo.ui.QueriesActivity;
@@ -50,6 +53,14 @@ public class Hao123ActivityC extends AppCompatActivity {
         binding = ActivityHao123Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickListener();
+        String uuid = UUID.randomUUID().toString();
+
+        Log.d("uuid", "" + uuid);
+        Log.d("uuid", "cbc060ee4a6141729083d75c13bcf325".length()+"");
+
+
+
+
         Log.d("233Act", "" + io.branch.referral.util.BRANCH_STANDARD_EVENT.COMPLETE_REGISTRATION);
         Map<String, Object> eventValues = new HashMap<String, Object>();
         eventValues.put(AFInAppEventParameterName.CONTENT_ID, "1234567");
@@ -149,7 +160,7 @@ public class Hao123ActivityC extends AppCompatActivity {
         binding.txtGoogleLogin.setOnClickListener(view -> {
 //                PeopleApi api = new PeopleApi(Hao123Activity.this);
 //                api.startLocal();
-                Intent intent = new Intent(Hao123ActivityC.this, GooleLogin2Activity.class);
+            Intent intent = new Intent(Hao123ActivityC.this, GooleLogin2Activity.class);
 //            Intent intent = new Intent(Hao123Activity.this, GoogleOpActivity.class);
             startActivity(intent);
 
@@ -176,9 +187,32 @@ public class Hao123ActivityC extends AppCompatActivity {
         binding.txtWebupload.setOnClickListener(view -> {
             Intent intent = new Intent(Hao123ActivityC.this, UploadWebActivity.class);
             startActivity(intent);
+
+//            openOutUrl("https://play.google.com/store/apps/details?id=com.kash.credito.aztaca.paypal.dinero.banrural&gl=co&hl=es");
+
+//            openPlay("https://cl214.onelink.me/psuA/cy17htgd");
+
+        });
+
+        binding.txtPackageUsageStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Hao123ActivityC.this, PackageUsageStatsActivity.class);
+                startActivity(intent);
+            }
         });
     }
 
+
+    private void openPlay(String url) {
+
+        try {
+            Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+        } catch (Throwable throwable) {
+        }
+    }
 
     public void openOutUrl(String url) {
         try {

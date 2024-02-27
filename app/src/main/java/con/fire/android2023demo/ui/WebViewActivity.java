@@ -91,6 +91,7 @@ public class WebViewActivity extends AppCompatActivity {
         url = "https://checkout.toppaylatam.com/form/#/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoyNjMzMDcyfQ.2Dxxx29MsveldyS_ryALt5mQmWIqc-C6Q7EZdUyfzmM";
 
         url="https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb";
+        url=" https://web.creditlandsa.com/clause?userId=9752&detailId=18&chooseAmountIds=,7167793935007899649";
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0

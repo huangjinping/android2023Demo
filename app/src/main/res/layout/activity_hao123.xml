@@ -176,6 +176,15 @@
             android:layout_height="wrap_content"
             android:text="dialog"
             android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_packageUsageStats"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="packageUsageStats"
+            android:textStyle="bold"></TextView>
+
     </com.google.android.flexbox.FlexboxLayout>
 
 

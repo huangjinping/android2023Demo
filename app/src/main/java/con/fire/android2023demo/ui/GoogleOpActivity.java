@@ -69,16 +69,16 @@ public class GoogleOpActivity extends AppCompatActivity {
             }
         });
 
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).
-                requestEmail().requestScopes(new Scope("https://www.googleapis.com/auth/contacts")).build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        // [END config_signin]
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+//
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).
+//                requestEmail().requestScopes(new Scope("https://www.googleapis.com/auth/contacts")).build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        // [END config_signin]
+//
+//        // [START initialize_auth]
+//        // Initialize Firebase Auth
+//        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override

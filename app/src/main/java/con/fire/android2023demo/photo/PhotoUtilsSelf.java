@@ -159,6 +159,7 @@ public class PhotoUtilsSelf extends PhotoSo {
             if (hasSdcard()) {
                 SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
                 String filename = timeStampFormat.format(new Date());
+
                 outputImagepath = new File(activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES), filename + ".jpg");
                 if (currentapiVersion < Build.VERSION_CODES.N) {
                     // 从文件中创建uri

@@ -24,9 +24,15 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
 
+
+
     <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission>
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
     <uses-permission
         android:name="android.permission.READ_MEDIA_VISUAL_USER_SELECTED"
         tools:node="remove"></uses-permission>
@@ -84,6 +90,8 @@
         android:roundIcon="@mipmap/ceshi"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android2023Demo"
+        android:usesCleartextTraffic="true"
+
         tools:replace="android:theme,android:fullBackupContent"
         tools:targetApi="31">
 
@@ -173,6 +181,8 @@
 
         <activity android:name=".ui.DialogTestActivity"></activity>
         <activity android:name=".ui.UploadWebActivity"></activity>
+
+        <activity android:name=".ui.PackageUsageStatsActivity"></activity>
 
         <service android:name=".service.PostErrorService"></service>
         <service
