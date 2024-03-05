@@ -3,13 +3,14 @@ package con.fire.android2023demo;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
-import android.webkit.WebView;
 
 import androidx.annotation.NonNull;
 
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import com.lzy.okgo.OkGo;
 
 import con.fire.android2023demo.utils.LogUtils;
@@ -41,6 +42,9 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         AutoSizeConfig.getInstance().setCustomFragment(true);
 
         startReferrer(this);
+
+        FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
+        AppEventsLogger.activateApp(this);
     }
 
 

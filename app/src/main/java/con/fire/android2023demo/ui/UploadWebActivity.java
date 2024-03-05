@@ -75,6 +75,12 @@ public class UploadWebActivity extends AppCompatActivity {
         settings.setDisplayZoomControls(true);//显示缩放控制按钮
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSupportMultipleWindows(true);
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
+        settings.setAllowFileAccess(true);
+        settings.setAllowFileAccessFromFileURLs(true);
+        settings.setAllowUniversalAccessFromFileURLs(true);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WebView.setWebContentsDebuggingEnabled(true);
         }
@@ -89,7 +95,14 @@ public class UploadWebActivity extends AppCompatActivity {
 
 //        webView.loadUrl("http://10.1.2.91:8092/inxupload.html?v=" + System.currentTimeMillis());
 
-        webView.loadUrl("https://mx.ultracreditosmx.com/customer/index.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
+//        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
+
+        webView.loadUrl("http://172.17.1.103:8092/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
+
+
+//        webView.loadUrl("file:///android_asset/your_html_file.html"); // 加载本地 HTML 文件
+
+
 //        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
 //        webView.loadUrl("https://www.baidu.com");
         webView.addJavascriptInterface(this, "nativeWkObc");
@@ -112,6 +125,24 @@ public class UploadWebActivity extends AppCompatActivity {
         startActivityForResult(pickImageIntent, SELECT_PHOTO);
     }
 
+
+    private void backToHtml(String path) {
+
+
+        System.out.println("=======================");
+        System.out.println(path);
+
+        Log.d("backToHtml", "" + path);
+        Toast.makeText(this, "save:" + path, Toast.LENGTH_SHORT).show();
+        webView.evaluateJavascript("javascript:dataFromNative('" + path + "')", new ValueCallback<String>() {
+            @Override
+            public void onReceiveValue(String s) {
+
+            }
+        });
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -120,7 +151,7 @@ public class UploadWebActivity extends AppCompatActivity {
             case SELECT_PHOTO:
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     String compressPath = fileUtils.getPathFromUri(this, data.getData());
-                    compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
+//                    compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
 
                     if (!fileUtils.isPicture(new File(compressPath))) {
                         return;
@@ -128,9 +159,13 @@ public class UploadWebActivity extends AppCompatActivity {
                     Uri newUri = null;
                     newUri = Uri.fromFile(new File(compressPath));
 
+                    backToHtml(compressPath);
+
+
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         if (mUploadCallBackAboveL != null) {
                             if (newUri != null) {
+                                Toast.makeText(this, "开始返回html", Toast.LENGTH_SHORT).show();
                                 mUploadCallBackAboveL.onReceiveValue(new Uri[]{newUri});
                                 mUploadCallBackAboveL = null;
                                 return;
@@ -185,6 +220,10 @@ public class UploadWebActivity extends AppCompatActivity {
 
     @JavascriptInterface
     public void setNativeBacKFlag(String flag) {
+
+        if ("1".equals(flag)) {
+            showFileChooser();
+        }
         Toast.makeText(this, "showToast===" + flag, Toast.LENGTH_SHORT).show();
     }
 

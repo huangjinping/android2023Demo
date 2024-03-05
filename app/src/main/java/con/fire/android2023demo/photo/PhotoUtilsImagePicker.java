@@ -204,7 +204,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         }
         fileUriResolver.getFullImagePath(pendingCameraMediaUri != null ? pendingCameraMediaUri : Uri.parse(retrievePendingCameraMediaUriPath()), path -> {
             Log.d(TAG, "==path==1=" + path);
-            path = imageResizer.resizeImageIfNeeded(path, 1080d, 1920d, 90);
+            path = imageResizer.resizeImageIfNeeded(path, 880d, 820d, 60);
             Log.d(TAG, "==path==2=" + path);
 
             callback.getPath(pendingCameraMediaUri, path);

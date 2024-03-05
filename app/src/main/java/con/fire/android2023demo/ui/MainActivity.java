@@ -142,9 +142,16 @@ public class MainActivity extends AppCompatActivity {
             public void getPath(Uri uri, String path) {
 //                compress(path);
 
-                compress2(path);
-//                Glide.with(MainActivity.this).load(path).into(image_target);
+//                compress2(path);
+                Log.d("okhttps", "====000===11==>>>>" + path);
 
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Glide.with(MainActivity.this).load(path).into(image_target);
+
+                    }
+                });
             }
         });
 

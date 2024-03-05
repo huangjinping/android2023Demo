@@ -229,4 +229,30 @@
 
 
     </com.google.android.flexbox.FlexboxLayout>
+
+    <TextView
+        style="@style/flex_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SDK"></TextView>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:alignContent="stretch"
+        app:alignItems="stretch"
+        app:flexWrap="wrap">
+
+
+        <TextView
+            android:id="@+id/txt_facebooklog"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FacebookLog"
+            android:textStyle="bold"></TextView>
+
+
+
+    </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

@@ -27,8 +27,7 @@ public class ImageResizer {
     }
 
 
-    public String resizeImageIfNeeded(
-            String imagePath, @Nullable Double maxWidth, @Nullable Double maxHeight, int imageQuality) {
+    public String resizeImageIfNeeded(String imagePath, @Nullable Double maxWidth, @Nullable Double maxHeight, int imageQuality) {
         SizeFCompat originalSize = readFileDimensions(imagePath);
         if (originalSize.getWidth() == -1 || originalSize.getHeight() == -1) {
             return imagePath;
@@ -40,26 +39,14 @@ public class ImageResizer {
         try {
             String[] pathParts = imagePath.split("/");
             String imageName = pathParts[pathParts.length - 1];
-            SizeFCompat targetSize =
-                    calculateTargetSize(
-                            (double) originalSize.getWidth(),
-                            (double) originalSize.getHeight(),
-                            maxWidth,
-                            maxHeight);
+            SizeFCompat targetSize = calculateTargetSize((double) originalSize.getWidth(), (double) originalSize.getHeight(), maxWidth, maxHeight);
             BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize =
-                    calculateSampleSize(options, (int) targetSize.getWidth(), (int) targetSize.getHeight());
+            options.inSampleSize = calculateSampleSize(options, (int) targetSize.getWidth(), (int) targetSize.getHeight());
             Bitmap bmp = decodeFile(imagePath, options);
             if (bmp == null) {
                 return imagePath;
             }
-            File file =
-                    resizedImage(
-                            bmp,
-                            (double) targetSize.getWidth(),
-                            (double) targetSize.getHeight(),
-                            imageQuality,
-                            imageName);
+            File file = resizedImage(bmp, (double) targetSize.getWidth(), (double) targetSize.getHeight(), imageQuality, imageName);
             copyExif(imagePath, file.getPath());
             return file.getPath();
         } catch (IOException e) {
@@ -67,20 +54,13 @@ public class ImageResizer {
         }
     }
 
-    private File resizedImage(
-            Bitmap bmp, Double width, Double height, int imageQuality, String outputImageName)
-            throws IOException {
+    private File resizedImage(Bitmap bmp, Double width, Double height, int imageQuality, String outputImageName) throws IOException {
         Bitmap scaledBmp = createScaledBitmap(bmp, width.intValue(), height.intValue(), false);
-        File file =
-                createImageOnExternalDirectory("/scaled_" + outputImageName, scaledBmp, imageQuality);
+        File file = createImageOnExternalDirectory("/scaled_" + outputImageName, scaledBmp, imageQuality);
         return file;
     }
 
-    private SizeFCompat calculateTargetSize(
-            @NonNull Double originalWidth,
-            @NonNull Double originalHeight,
-            @Nullable Double maxWidth,
-            @Nullable Double maxHeight) {
+    private SizeFCompat calculateTargetSize(@NonNull Double originalWidth, @NonNull Double originalHeight, @Nullable Double maxWidth, @Nullable Double maxHeight) {
 
         boolean hasMaxWidth = maxWidth != null;
         boolean hasMaxHeight = maxHeight != null;
@@ -151,8 +131,7 @@ public class ImageResizer {
         return Bitmap.createScaledBitmap(bmp, width, height, filter);
     }
 
-    private int calculateSampleSize(
-            BitmapFactory.Options options, int targetWidth, int targetHeight) {
+    private int calculateSampleSize(BitmapFactory.Options options, int targetWidth, int targetHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int sampleSize = 1;
@@ -166,17 +145,13 @@ public class ImageResizer {
         return sampleSize;
     }
 
-    private File createImageOnExternalDirectory(String name, Bitmap bitmap, int imageQuality)
-            throws IOException {
+    private File createImageOnExternalDirectory(String name, Bitmap bitmap, int imageQuality) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         boolean saveAsPNG = bitmap.hasAlpha();
 
-        bitmap.compress(
-                saveAsPNG ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG,
-                imageQuality,
-                outputStream);
+        bitmap.compress(saveAsPNG ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, imageQuality, outputStream);
 
-        File cacheDirectory = context.getCacheDir();
+        File cacheDirectory = context.getExternalCacheDir();
         File imageFile = createFile(cacheDirectory, name);
         FileOutputStream fileOutput = createOutputStream(imageFile);
         fileOutput.write(outputStream.toByteArray());

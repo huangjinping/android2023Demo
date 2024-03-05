@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">android2023Demo</string>
+    <string name="facebook_app_id">856483418490712</string>
+    <string name="fb_client_token" translatable="false">b7d94b8a0f8844886f8deac9489a5b2e</string>
+
 </resources>

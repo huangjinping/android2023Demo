@@ -15,7 +15,10 @@ import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
 import com.appsflyer.AppsFlyerLib;
 import com.appsflyer.attribution.AppsFlyerRequestListener;
+import com.facebook.appevents.AppEventsLogger;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -56,9 +59,7 @@ public class Hao123ActivityC extends AppCompatActivity {
         String uuid = UUID.randomUUID().toString();
 
         Log.d("uuid", "" + uuid);
-        Log.d("uuid", "cbc060ee4a6141729083d75c13bcf325".length()+"");
-
-
+        Log.d("uuid", "cbc060ee4a6141729083d75c13bcf325".length() + "");
 
 
         Log.d("233Act", "" + io.branch.referral.util.BRANCH_STANDARD_EVENT.COMPLETE_REGISTRATION);
@@ -200,6 +201,17 @@ public class Hao123ActivityC extends AppCompatActivity {
                 Intent intent = new Intent(Hao123ActivityC.this, PackageUsageStatsActivity.class);
                 startActivity(intent);
             }
+        });
+
+        binding.txtFacebooklog.setOnClickListener(view -> {
+            AppEventsLogger logger = AppEventsLogger.newLogger(this);
+            String strDateFormat = "yyyyMMddHHmmss";//设置日期格式
+            SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat(strDateFormat);
+            Calendar instance = Calendar.getInstance();
+            String key = "Log" + simpleDateFormat2.format(instance.getTime());
+            Log.d("facekey", key);
+            logger.logEvent(key);
+
         });
     }
 
