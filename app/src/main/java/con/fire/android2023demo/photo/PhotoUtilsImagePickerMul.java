@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.UUID;
 
 import con.fire.android2023demo.FileUtils;
-import con.fire.android2023demo.utils.ExifDataCopier;
-import con.fire.android2023demo.utils.ImageResizer;
+import con.fire.android2023demo.utils.ExifInfoCopier;
+import con.fire.android2023demo.utils.AndroidImageResizer;
 
 
 public class PhotoUtilsImagePickerMul extends PhotoSo {
@@ -41,12 +41,12 @@ public class PhotoUtilsImagePickerMul extends PhotoSo {
     private Uri pendingCameraMediaUri;
     private FileUriResolver fileUriResolver;
     private String fileProviderName;
-    private ImageResizer imageResizer;
+    private AndroidImageResizer imageResizer;
 
     public PhotoUtilsImagePickerMul(AppCompatActivity activity) {
         super(activity);
         this.fileUtils = new FileUtils();
-        this.imageResizer = new ImageResizer(activity, new ExifDataCopier());
+        this.imageResizer = new AndroidImageResizer(activity, new ExifInfoCopier());
         this.fileProviderName = activity.getPackageName() + ".flutter.image_provider";
         this.fileUriResolver = new FileUriResolver() {
             @Override

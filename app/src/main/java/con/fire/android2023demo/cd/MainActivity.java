@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contractest);
         tv = findViewById(R.id.textView);
 
-
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

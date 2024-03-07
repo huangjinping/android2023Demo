@@ -28,8 +28,8 @@ import java.io.File;
 
 import con.fire.android2023demo.FileUtils;
 import con.fire.android2023demo.databinding.ActivityUploadwebBinding;
-import con.fire.android2023demo.utils.ExifDataCopier;
-import con.fire.android2023demo.utils.ImageResizer;
+import con.fire.android2023demo.utils.ExifInfoCopier;
+import con.fire.android2023demo.utils.AndroidImageResizer;
 
 /**
  * https://www.jianshu.com/p/444932cf5d41
@@ -45,7 +45,7 @@ public class UploadWebActivity extends AppCompatActivity {
     FileUtils fileUtils;
     String isCanBack = "1";
     private ActivityUploadwebBinding binding;
-    private ImageResizer imageResizer;
+    private AndroidImageResizer imageResizer;
 
     @SuppressLint("JavascriptInterface")
     @Override
@@ -62,7 +62,7 @@ public class UploadWebActivity extends AppCompatActivity {
 
         webView.setWebViewClient(new MyWebViewClient());
         this.fileUtils = new FileUtils();
-        this.imageResizer = new ImageResizer(this, new ExifDataCopier());
+        this.imageResizer = new AndroidImageResizer(this, new ExifInfoCopier());
 
         webView.setWebChromeClient(new MyWebChromeClient());
         WebSettings settings = webView.getSettings();

@@ -17,11 +17,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class ImageResizer {
+public class AndroidImageResizer {
     private final Context context;
-    private final ExifDataCopier exifDataCopier;
+    private final ExifInfoCopier exifDataCopier;
 
-    public ImageResizer(final @NonNull Context context, final @NonNull ExifDataCopier exifDataCopier) {
+    public AndroidImageResizer(final @NonNull Context context, final @NonNull ExifInfoCopier exifDataCopier) {
         this.context = context;
         this.exifDataCopier = exifDataCopier;
     }
@@ -148,9 +148,7 @@ public class ImageResizer {
     private File createImageOnExternalDirectory(String name, Bitmap bitmap, int imageQuality) throws IOException {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         boolean saveAsPNG = bitmap.hasAlpha();
-
         bitmap.compress(saveAsPNG ? Bitmap.CompressFormat.PNG : Bitmap.CompressFormat.JPEG, imageQuality, outputStream);
-
         File cacheDirectory = context.getExternalCacheDir();
         File imageFile = createFile(cacheDirectory, name);
         FileOutputStream fileOutput = createOutputStream(imageFile);

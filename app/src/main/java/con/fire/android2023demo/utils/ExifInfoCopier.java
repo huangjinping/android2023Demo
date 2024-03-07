@@ -11,7 +11,7 @@ import androidx.exifinterface.media.ExifInterface;
 import java.util.Arrays;
 import java.util.List;
 
-public class ExifDataCopier {
+public class ExifInfoCopier {
     private static void setIfNotNull(ExifInterface oldExif, ExifInterface newExif, String property) {
         if (oldExif.getAttribute(property) != null) {
             newExif.setAttribute(property, oldExif.getAttribute(property));

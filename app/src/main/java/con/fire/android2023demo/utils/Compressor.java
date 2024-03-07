@@ -16,14 +16,15 @@ public class Compressor {
     //max width and height values of the compressed image is taken as 612x816
     private int maxWidth = 612;
     private int maxHeight = 616;
+
+    private int quality = 60;
+
     private Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.JPEG;
-    private int quality = 50;
     private String destinationDirectoryPath;
 
     public Compressor(Context context) {
 //        destinationDirectoryPath = context.getCacheDir().getPath() + File.separator + "images";
         destinationDirectoryPath = context.getExternalCacheDir().getPath() + File.separator + "images";
-
 
     }
 

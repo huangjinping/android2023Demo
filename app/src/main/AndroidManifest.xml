@@ -25,7 +25,6 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS"></uses-permission>
 
 
-
     <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission>
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -113,10 +112,15 @@
         <activity
             android:name=".Hao123ActivityC"
             android:exported="true">
+
             <intent-filter>
                 <data
-                    android:host="rockguest"
-                    android:scheme="firepay" />
+                    android:host="possessequality"
+                    android:scheme="getprestamo" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

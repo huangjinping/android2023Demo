@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 import con.fire.android2023demo.FileUtils;
-import con.fire.android2023demo.utils.ExifDataCopier;
-import con.fire.android2023demo.utils.ImageResizer;
+import con.fire.android2023demo.utils.ExifInfoCopier;
+import con.fire.android2023demo.utils.AndroidImageResizer;
 
 
 public class PhotoUtilsImagePicker extends PhotoSo {
@@ -42,12 +42,12 @@ public class PhotoUtilsImagePicker extends PhotoSo {
     private Uri pendingCameraMediaUri;
     private FileUriResolver fileUriResolver;
     private String fileProviderName;
-    private ImageResizer imageResizer;
+    private AndroidImageResizer imageResizer;
 
     public PhotoUtilsImagePicker(AppCompatActivity activity) {
         super(activity);
         this.fileUtils = new FileUtils();
-        this.imageResizer = new ImageResizer(activity, new ExifDataCopier());
+        this.imageResizer = new AndroidImageResizer(activity, new ExifInfoCopier());
         this.fileProviderName = activity.getPackageName() + ".flutter.image_provider";
         this.fileUriResolver = new FileUriResolver() {
             @Override
@@ -204,13 +204,11 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         }
         fileUriResolver.getFullImagePath(pendingCameraMediaUri != null ? pendingCameraMediaUri : Uri.parse(retrievePendingCameraMediaUriPath()), path -> {
             Log.d(TAG, "==path==1=" + path);
-            path = imageResizer.resizeImageIfNeeded(path, 880d, 820d, 60);
+            path = imageResizer.resizeImageIfNeeded(path, 1080d, 1080d, 80);
             Log.d(TAG, "==path==2=" + path);
 
             callback.getPath(pendingCameraMediaUri, path);
         });
-
-
     }
 
     void savePendingCameraMediaUriPath(Uri uri) {

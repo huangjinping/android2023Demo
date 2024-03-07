@@ -39,6 +39,7 @@ import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
+import con.fire.android2023demo.photo.PhotoUtilsSelf;
 import con.fire.android2023demo.utils.Compressor;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -141,10 +142,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void getPath(Uri uri, String path) {
 //                compress(path);
-
-//                compress2(path);
                 Log.d("okhttps", "====000===11==>>>>" + path);
 
+//                compress2(path);
+//                Log.d("okhttps", "====000===11==>>>>" + path);
+//                String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
+//                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
+//                ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
