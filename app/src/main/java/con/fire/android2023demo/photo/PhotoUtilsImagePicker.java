@@ -176,6 +176,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                             return;
                         }
 
+                        path = imageResizer.resizeImageIfNeeded(path, 800d, 800d, 80);
 
                         if (callback != null && !TextUtils.isEmpty(path)) {
                             callback.getPath(uri, path);

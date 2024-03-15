@@ -39,8 +39,8 @@ import con.fire.android2023demo.R;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
-import con.fire.android2023demo.photo.PhotoUtilsSelf;
 import con.fire.android2023demo.utils.Compressor;
+import con.fire.android2023demo.utils.ImageSimpleUtils;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
 //                compress2(path);
 //                Log.d("okhttps", "====000===11==>>>>" + path);
 //                String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
-//                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
+////                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
 //                ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
                 runOnUiThread(new Runnable() {
                     @Override
@@ -382,9 +382,15 @@ public class MainActivity extends AppCompatActivity {
                         toLone = false;
                         Log.d("compress", "=======end===11==" + file.getAbsolutePath());
 
+
+                        String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
+//                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
+                        ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+
+
                                 Glide.with(MainActivity.this).load(file).into(image_target);
                             }
                         });
@@ -398,6 +404,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }.start();
     }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -16,6 +16,7 @@ import con.fire.android2023demo.R;
 
 public class MainActivity extends AppCompatActivity {
 
+
     private TextView tv;
 
     @SuppressLint("MissingInflatedId")

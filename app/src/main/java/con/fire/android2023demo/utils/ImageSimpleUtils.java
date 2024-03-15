@@ -30,6 +30,31 @@ public class ImageSimpleUtils {
         return outputImagepath.getAbsolutePath();
     }
 
+
+    private int calculateSampleSize(BitmapFactory.Options options, int targetWidth, int targetHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int sampleSize = 1;
+        if (height > targetHeight || width > targetWidth) {
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+            while ((halfHeight / sampleSize) >= targetHeight && (halfWidth / sampleSize) >= targetWidth) {
+                sampleSize *= 2;
+            }
+        }
+        return sampleSize;
+    }
+    public static void resizePicture(Context context, String srcPath, String desPath) {
+//        BitmapFactory.Options op = new BitmapFactory.Options();
+//        Bitmap scaledBitmap = BitmapFactory.decodeFile(srcPath, op);
+//
+//
+//        Bitmap bitmap = BitmapFactory.decodeFile(srcPath, op);
+//
+//        scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+//        saveBitmapFile(scaledBitmap, new File(getSimplePicPath(context)));
+    }
+
     public static void compressPicture(Context context, String srcPath, String desPath) {
 
         try {
@@ -56,57 +81,57 @@ public class ImageSimpleUtils {
             } else if (w < h && h > hh) {
                 be = (float) (h / hh);
             }
-            if (be <= 0) {
-                be = 1.0f;
+
+
+//            Bitmap scaledBitmap = BitmapFactory.decodeFile(srcPath, op);
+//
+//            //check the rotation of the image and display it properly
+//            ExifInterface exif;
+//            exif = new ExifInterface(srcPath);
+//            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
+//            Matrix matrix = new Matrix();
+//            if (orientation == 6) {
+//                matrix.postRotate(90);
+//            } else if (orientation == 3) {
+//                matrix.postRotate(180);
+//            } else if (orientation == 8) {
+//                matrix.postRotate(270);
+//            }
+//            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+//            saveBitmapFile(scaledBitmap, new File(getSimplePicPath(context)));
+//            Log.d("saveBitmapFile", "---------------------库-------");
+
+            //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+            op.inSampleSize = ImageUtil.calculateInSampleSize(op, 1000, 1000);// 设置缩放比例,这个数字越大,图片大小越小.
+            // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+            bitmap = BitmapFactory.decodeFile(srcPath, op);
+            int i = getPictureDegree(srcPath);
+            if (i != ExifInterface.ORIENTATION_UNDEFINED) {
+                bitmap = rotaingImageView(i, bitmap);
             }
 
-
-            Bitmap scaledBitmap = BitmapFactory.decodeFile(srcPath, op);
-
-            //check the rotation of the image and display it properly
-            ExifInterface exif;
-            exif = new ExifInterface(srcPath);
-            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 0);
-            Matrix matrix = new Matrix();
-            if (orientation == 6) {
-                matrix.postRotate(90);
-            } else if (orientation == 3) {
-                matrix.postRotate(180);
-            } else if (orientation == 8) {
-                matrix.postRotate(270);
-            }
-            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-            saveBitmapFile(scaledBitmap, new File(getSimplePicPath(context)));
+            saveBitmapFile(bitmap, new File(getSimplePicPath(context)));
             Log.d("saveBitmapFile", "------------------------1-------");
 
-//        op.inSampleSize = ImageUtil.calculateInSampleSize(op,1000,1000);// 设置缩放比例,这个数字越大,图片大小越小.
-//        // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-//        bitmap = BitmapFactory.decodeFile(srcPath, op);
-//        int i = getPictureDegree(srcPath);
-//        if (i != ExifInterface.ORIENTATION_UNDEFINED) {
-//            bitmap = rotaingImageView(i, bitmap);
-//        }
-//
+            int desWidth = (int) (w / be);
+            int desHeight = (int) (h / be);
+
+            bitmap = Bitmap.createScaledBitmap(bitmap, desWidth, desHeight, true);
 //        saveBitmapFile(bitmap, new File(getSimplePicPath(context)));
-//        Log.d("saveBitmapFile", "------------------------1-------");
-//
-//        int desWidth = (int) (w / be);
-//        int desHeight = (int) (h / be);
-//
-//        bitmap = Bitmap.createScaledBitmap(bitmap, desWidth, desHeight, true);
-////        saveBitmapFile(bitmap, new File(getSimplePicPath(context)));
-////        Log.d("saveBitmapFile", "------------------------2-------");
-//
-//        try {
-//            fos = new FileOutputStream(desPath);
-//            if (bitmap != null) {
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-//            }
-//
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//
-//        }
+//        Log.d("saveBitmapFile", "------------------------2-------");
+
+            try {
+                fos = new FileOutputStream(desPath);
+                if (bitmap != null) {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
