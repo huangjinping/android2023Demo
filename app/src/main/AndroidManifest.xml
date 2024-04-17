@@ -183,6 +183,7 @@
         <activity android:name=".ui.ReferrerActivity"></activity>
         <activity android:name=".ui.BaseWeb154Activity"></activity>
 
+        <activity android:name=".ui.TemplateActivity"></activity>
         <activity android:name=".ui.DialogTestActivity"></activity>
         <activity android:name=".ui.UploadWebActivity"></activity>
 

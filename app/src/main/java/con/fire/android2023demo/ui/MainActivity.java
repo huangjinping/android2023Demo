@@ -36,11 +36,13 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import con.fire.android2023demo.R;
+import con.fire.android2023demo.photo.ImageUtil131;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
 import con.fire.android2023demo.utils.Compressor;
 import con.fire.android2023demo.utils.ImageSimpleUtils;
+import con.fire.android2023demo.utils.u131.ImgCompressLinster;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -149,13 +151,23 @@ public class MainActivity extends AppCompatActivity {
 //                String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
 ////                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
 //                ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
-                runOnUiThread(new Runnable() {
+
+
+                ImageUtil131.openCompress(path, new ImgCompressLinster() {
                     @Override
-                    public void run() {
-                        Glide.with(MainActivity.this).load(path).into(image_target);
+                    public void success(@NonNull File file) {
+                        Log.d("okhttp", "========================>" + file.getAbsolutePath());
+                        Glide.with(MainActivity.this).load(file).into(image_target);
 
                     }
                 });
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        Glide.with(MainActivity.this).load(path).into(image_target);
+//
+//                    }
+//                });
             }
         });
 
@@ -446,6 +458,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("okhttps", "==onActivityResult==>onActivityResult>>>");
 //        setCompress(mImageUri.getPath(), CALLBACK_TYPE_CODE);
     }
+
 
     /*** 压缩图片*/
     public void setCompress(String path, int requestCode) {

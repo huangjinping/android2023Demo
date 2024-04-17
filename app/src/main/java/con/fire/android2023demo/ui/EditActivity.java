@@ -22,7 +22,6 @@ public class EditActivity extends AppCompatActivity {
         binding = ActivityEditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         getList();
         getReferrerApi();
         getReferrerReceiver();

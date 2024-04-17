@@ -2,6 +2,7 @@ package con.fire.android2023demo.photo;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.File;
 
@@ -61,6 +62,8 @@ public class ImageUtil131 {
      * @return
      */
     public static void openCompress(final String path, final ImgCompressLinster linster) {
+        long maxLength = 100 * 1024;
+
         Luban.with(App.application).load(path).ignoreBy(100)//不压缩的阈值，单位为K
                 .filter(new CompressionPredicate() {//设置开启压缩条件(图片为空或gif格式不压缩)
                     @Override
@@ -76,9 +79,17 @@ public class ImageUtil131 {
 
                     @Override
                     public void onSuccess(File file) {
-                        if (linster != null) {
-                            linster.success(file);
+                        Log.d("okhttps", "====000=33333==>>>>" + file.getAbsolutePath());
+
+                        if (file.length() > maxLength) {
+                            openCompress(file.getAbsolutePath(), linster);
+                        } else {
+                            if (linster != null) {
+                                linster.success(file);
+                            }
                         }
+
+
                     }
 
                     @Override

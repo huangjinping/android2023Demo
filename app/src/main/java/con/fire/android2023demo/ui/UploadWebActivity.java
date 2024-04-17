@@ -28,8 +28,8 @@ import java.io.File;
 
 import con.fire.android2023demo.FileUtils;
 import con.fire.android2023demo.databinding.ActivityUploadwebBinding;
-import con.fire.android2023demo.utils.ExifInfoCopier;
 import con.fire.android2023demo.utils.AndroidImageResizer;
+import con.fire.android2023demo.utils.ExifInfoCopier;
 
 /**
  * https://www.jianshu.com/p/444932cf5d41
@@ -97,9 +97,12 @@ public class UploadWebActivity extends AppCompatActivity {
 
 //        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
 
-        webView.loadUrl("http://172.17.1.103:8092/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
+//        webView.loadUrl("http://172.17.1.103:8092/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
 
+//        webView.loadUrl("https://peru.prestamopluspe.com/customers/index.html?frontSource=1&appSsid=200&mobile=1820000&v=" + System.currentTimeMillis());
+        webView.loadUrl("https://chile.ultracreditosmx.com/customer/index.html?frontSource=10&appSsid=9050&userId=5201&v=" + System.currentTimeMillis());
 
+//        webView.postUrl("https://www.sricredito.com/sricreditos/privacy.html", null);
 //        webView.loadUrl("file:///android_asset/your_html_file.html"); // 加载本地 HTML 文件
 
 
@@ -118,8 +121,9 @@ public class UploadWebActivity extends AppCompatActivity {
     private void showFileChooser() {
 
         Toast.makeText(this, "打开相册" + Thread.currentThread().getName(), Toast.LENGTH_SHORT).show();
-        Intent pickImageIntent;
         boolean usePhotoPicker = false;
+
+        Intent pickImageIntent;
         pickImageIntent = new Intent(Intent.ACTION_GET_CONTENT);
         pickImageIntent.setType("image/*");
         startActivityForResult(pickImageIntent, SELECT_PHOTO);
@@ -151,7 +155,7 @@ public class UploadWebActivity extends AppCompatActivity {
             case SELECT_PHOTO:
                 if (resultCode == Activity.RESULT_OK && data != null) {
                     String compressPath = fileUtils.getPathFromUri(this, data.getData());
-//                    compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
+                    compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
 
                     if (!fileUtils.isPicture(new File(compressPath))) {
                         return;
@@ -186,6 +190,7 @@ public class UploadWebActivity extends AppCompatActivity {
 
     }
 
+
     private void clearUploadMessage() {
         if (mUploadCallBackAboveL != null) {
             mUploadCallBackAboveL.onReceiveValue(null);
@@ -197,6 +202,7 @@ public class UploadWebActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onBackPressed() {
 
@@ -206,6 +212,7 @@ public class UploadWebActivity extends AppCompatActivity {
                 if ("0".equals(s)) {
 
                     Toast.makeText(UploadWebActivity.this, "不返回", Toast.LENGTH_SHORT).show();
+
 
                 } else {
                     if (webView.canGoBack()) {
@@ -353,6 +360,12 @@ public class UploadWebActivity extends AppCompatActivity {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
+            if (newProgress >= 100) {
+                binding.progressBar.setVisibility(View.GONE);
+            } else {
+                binding.progressBar.setVisibility(View.VISIBLE);
+                binding.progressBar.setProgress(newProgress);
+            }
         }
     }
 

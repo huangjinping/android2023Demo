@@ -185,6 +185,13 @@
             android:text="packageUsageStats"
             android:textStyle="bold"></TextView>
 
+        <TextView
+            android:id="@+id/txt_template"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="txt_template"
+            android:textStyle="bold"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 
 

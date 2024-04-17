@@ -25,8 +25,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 import con.fire.android2023demo.FileUtils;
-import con.fire.android2023demo.utils.ExifInfoCopier;
 import con.fire.android2023demo.utils.AndroidImageResizer;
+import con.fire.android2023demo.utils.ExifInfoCopier;
 
 
 public class PhotoUtilsImagePicker extends PhotoSo {
@@ -137,6 +137,8 @@ public class PhotoUtilsImagePicker extends PhotoSo {
             pickImageIntent.setType("image/*");
         }
         activity.startActivityForResult(pickImageIntent, SELECT_PHOTO);
+
+
     }
 
 //    public void take_Album() {
@@ -176,7 +178,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
                             return;
                         }
 
-                        path = imageResizer.resizeImageIfNeeded(path, 800d, 800d, 80);
+//                        path = imageResizer.resizeImageIfNeeded(path, 800d, 800d, 80);
 
                         if (callback != null && !TextUtils.isEmpty(path)) {
                             callback.getPath(uri, path);
@@ -205,7 +207,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
         }
         fileUriResolver.getFullImagePath(pendingCameraMediaUri != null ? pendingCameraMediaUri : Uri.parse(retrievePendingCameraMediaUriPath()), path -> {
             Log.d(TAG, "==path==1=" + path);
-            path = imageResizer.resizeImageIfNeeded(path, 1080d, 1080d, 80);
+//            path = imageResizer.resizeImageIfNeeded(path, 1080d, 1080d, 80);
             Log.d(TAG, "==path==2=" + path);
 
             callback.getPath(pendingCameraMediaUri, path);
