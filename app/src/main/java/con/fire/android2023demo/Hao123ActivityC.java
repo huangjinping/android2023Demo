@@ -25,6 +25,7 @@ import java.util.UUID;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.BaseWeb154Activity;
+import con.fire.android2023demo.ui.BluetoothActivity;
 import con.fire.android2023demo.ui.DialogTestActivity;
 import con.fire.android2023demo.ui.EditActivity;
 import con.fire.android2023demo.ui.GoogleOpActivity;
@@ -212,6 +213,17 @@ public class Hao123ActivityC extends AppCompatActivity {
             Log.d("facekey", key);
             logger.logEvent(key);
 
+        });
+        binding.txtBluetooth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                BluetoothHeadsetMonitor monitor = new BluetoothHeadsetMonitor(Hao123ActivityC.this);
+
+                Intent intent = new Intent(Hao123ActivityC.this, BluetoothActivity.class);
+                startActivity(intent);
+//                BluetoothListener bluetoothListener = new BluetoothListener(Hao123ActivityC.this);
+
+            }
         });
     }
 
