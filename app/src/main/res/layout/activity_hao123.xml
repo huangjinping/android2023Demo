@@ -269,5 +269,14 @@
             android:text="Bluetooth"
             android:textStyle="bold"></TextView>
 
+
+        <TextView
+            android:id="@+id/txt_facebookLogin"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="facebookLogin"
+            android:textStyle="bold"></TextView>
+
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

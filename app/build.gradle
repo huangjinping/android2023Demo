@@ -156,13 +156,14 @@ dependencies {
     implementation 'com.google.apis:google-api-services-people:v1-rev20220531-2.0.0'
     implementation 'pub.devrel:easypermissions:3.0.0'
     implementation 'com.facebook.android:facebook-android-sdk:15.1.0'
-
+    implementation 'com.facebook.android:facebook-login:latest.release'
 
     implementation 'com.meituan.android.walle:library:1.1.7'
-
-
     implementation 'io.github.justson:agentweb-core:v5.1.1-androidx'
     implementation 'io.github.justson:agentweb-filechooser:v5.1.1-androidx' // (可选)
     implementation 'com.github.Justson:Downloader:v5.0.4-androidx' // (可选)
+
+    implementation 'com.github.li-xiaojun:XPopup:2.10.0'
+//    implementation 'com.github.li-xiaojun:XPopup:2.9.16'
 
 }

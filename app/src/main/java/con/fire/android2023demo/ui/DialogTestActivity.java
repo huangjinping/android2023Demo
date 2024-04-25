@@ -17,11 +17,13 @@ import java.util.UUID;
 import con.fire.android2023demo.databinding.ActivityDialogtestBinding;
 import con.fire.android2023demo.ui.fragment.CommonChooseDialogFragment;
 import con.fire.android2023demo.ui.fragment.DialogFragment1;
+import con.fire.android2023demo.utils.LoadingDialogUtils;
 import con.fire.android2023demo.utils.LogUtils;
 
 public class DialogTestActivity extends AppCompatActivity {
     protected CommonChooseDialogFragment networkSettingDialogFragment;
     ActivityDialogtestBinding binding;
+    LoadingDialogUtils dialogUtils = new LoadingDialogUtils();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +48,28 @@ public class DialogTestActivity extends AppCompatActivity {
                 openzIndexV2();
             }
         });
+        binding.btn195.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show195();
+            }
+        });
     }
 
 
-    public void creatTestOOOFm() {
+    private void show195() {
+//        this.finish();
+        new Handler() {
+        }.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                dialogUtils.showLoadingDialog(DialogTestActivity.this, "ddddd");
+            }
+        }, 3000);
+    }
+
+    public void creatTestOOOFm( ) {
 
         new Thread() {
             @Override

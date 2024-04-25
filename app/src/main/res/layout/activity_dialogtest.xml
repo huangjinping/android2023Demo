@@ -15,4 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button1" />
+
+    <Button
+        android:id="@+id/btn_195"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="195" />
 </LinearLayout>

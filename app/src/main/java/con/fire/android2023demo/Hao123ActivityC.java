@@ -28,6 +28,7 @@ import con.fire.android2023demo.ui.BaseWeb154Activity;
 import con.fire.android2023demo.ui.BluetoothActivity;
 import con.fire.android2023demo.ui.DialogTestActivity;
 import con.fire.android2023demo.ui.EditActivity;
+import con.fire.android2023demo.ui.FaceBookTestActivity;
 import con.fire.android2023demo.ui.GoogleOpActivity;
 import con.fire.android2023demo.ui.GooleLogin2Activity;
 import con.fire.android2023demo.ui.InxAgentwebActivity;
@@ -223,6 +224,13 @@ public class Hao123ActivityC extends AppCompatActivity {
                 startActivity(intent);
 //                BluetoothListener bluetoothListener = new BluetoothListener(Hao123ActivityC.this);
 
+            }
+        });
+        binding.txtFacebookLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Hao123ActivityC.this, FaceBookTestActivity.class);
+                startActivity(intent);
             }
         });
     }

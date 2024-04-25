@@ -52,7 +52,7 @@ public class BluetoothActivity extends AppCompatActivity {
     public boolean checkPermission(Context context, String[] perm) {
         for (String item : perm) {
             if (ActivityCompat.checkSelfPermission(context, item) != PackageManager.PERMISSION_GRANTED) {
-                
+
                 return false;
             }
         }
