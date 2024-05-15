@@ -193,6 +193,15 @@
             android:layout_height="wrap_content"
             android:text="txt_template"
             android:textStyle="bold"></TextView>
+
+
+        <TextView
+            android:id="@+id/txt_snippets"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Snippets"
+            android:textStyle="bold"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 
 
@@ -277,6 +286,14 @@
             android:layout_height="wrap_content"
             android:text="facebookLogin"
             android:textStyle="bold"></TextView>
+
+
+        <TextView
+            style="@style/flex_item"
+            android:id="@+id/txt_audioManager"
+            android:layout_width="wrap_content"
+            android:text="AudioManager"
+            android:layout_height="wrap_content"></TextView>
 
     </com.google.android.flexbox.FlexboxLayout>
 </LinearLayout>

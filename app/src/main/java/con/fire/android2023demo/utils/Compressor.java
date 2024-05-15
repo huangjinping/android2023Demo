@@ -14,10 +14,10 @@ import io.reactivex.rxjava3.functions.Supplier;
 
 public class Compressor {
     //max width and height values of the compressed image is taken as 612x816
-    private int maxWidth = 612;
-    private int maxHeight = 616;
+    private int maxWidth = 400;
+    private int maxHeight = 400;
 
-    private int quality = 60;
+    private int quality = 57;
 
     private Bitmap.CompressFormat compressFormat = Bitmap.CompressFormat.JPEG;
     private String destinationDirectoryPath;

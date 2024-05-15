@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
+import con.fire.android2023demo.ui.AudioManagerActivity;
 import con.fire.android2023demo.ui.BaseWeb154Activity;
 import con.fire.android2023demo.ui.BluetoothActivity;
 import con.fire.android2023demo.ui.DialogTestActivity;
@@ -40,6 +41,7 @@ import con.fire.android2023demo.ui.QueriesActivity;
 import con.fire.android2023demo.ui.ReferrerActivity;
 import con.fire.android2023demo.ui.ScreenRecordActivity;
 import con.fire.android2023demo.ui.SelectContractActivity;
+import con.fire.android2023demo.ui.SnippetsActivity;
 import con.fire.android2023demo.ui.TimerActivity;
 import con.fire.android2023demo.ui.UIFragmentActivity;
 import con.fire.android2023demo.ui.UploadWebActivity;
@@ -231,6 +233,22 @@ public class Hao123ActivityC extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Hao123ActivityC.this, FaceBookTestActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        binding.txtSnippets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Hao123ActivityC.this, SnippetsActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.txtAudioManager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Hao123ActivityC.this, AudioManagerActivity.class);
+                startActivity(intent);
+
             }
         });
     }

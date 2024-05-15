@@ -17,6 +17,7 @@ import java.util.UUID;
 import con.fire.android2023demo.databinding.ActivityDialogtestBinding;
 import con.fire.android2023demo.ui.fragment.CommonChooseDialogFragment;
 import con.fire.android2023demo.ui.fragment.DialogFragment1;
+import con.fire.android2023demo.ui.fragment.RepayComplaintDialogFragment;
 import con.fire.android2023demo.utils.LoadingDialogUtils;
 import con.fire.android2023demo.utils.LogUtils;
 
@@ -54,6 +55,13 @@ public class DialogTestActivity extends AppCompatActivity {
                 show195();
             }
         });
+
+        binding.btn154.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                show154();
+            }
+        });
     }
 
 
@@ -69,7 +77,7 @@ public class DialogTestActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    public void creatTestOOOFm( ) {
+    public void creatTestOOOFm() {
 
         new Thread() {
             @Override
@@ -98,6 +106,7 @@ public class DialogTestActivity extends AppCompatActivity {
                 }
             }
         }.start();
+
 
     }
 
@@ -179,6 +188,20 @@ public class DialogTestActivity extends AppCompatActivity {
 
             }
         }, 4000);
+    }
+
+
+    private void show154() {
+        RepayComplaintDialogFragment dialogFragment1 = RepayComplaintDialogFragment.newInstance("2");
+        dialogFragment1.show(getSupportFragmentManager(), "3333");
+        new Handler() {
+        }.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                RepayComplaintDialogFragment dialogFragment1 = RepayComplaintDialogFragment.newInstance("2");
+                dialogFragment1.show(getSupportFragmentManager(), "3333");
+            }
+        }, 3000);
     }
 
 }

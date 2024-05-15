@@ -5,11 +5,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.pm.ServiceInfo;
 import android.graphics.BitmapFactory;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.VirtualDisplay;
@@ -17,7 +14,6 @@ import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Build;
-import android.os.Environment;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -65,6 +61,9 @@ public class ScreenRecordService extends Service {
 
         mResultCode = intent.getIntExtra("resultCode", 1);
         mResultData = intent.getParcelableExtra("data");
+        LogUtils.logS(TAG, "=KKKKKKK==" + Thread.currentThread().getName());
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createNotificationChannel();
         }
@@ -111,8 +110,8 @@ public class ScreenRecordService extends Service {
 //        mScreenHeight = ScreenUtils.getScreenHeight(this);
         mScreenWidth = 1088;
         mScreenHeight = 1920;
-
         mScreenDensity = ScreenUtils.getScreenDensityDpi(this);
+
     }
 
     private MediaProjection createMediaProjection() {

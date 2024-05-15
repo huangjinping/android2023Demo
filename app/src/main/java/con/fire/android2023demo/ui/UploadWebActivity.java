@@ -38,7 +38,7 @@ import con.fire.android2023demo.utils.ExifInfoCopier;
 public class UploadWebActivity extends AppCompatActivity {
 
     public static final int SELECT_PHOTO = 2;//启动相册标识
-    final String TAG = "UploadWe";
+    final String TAG = "Upl22oadWe";
     WebView webView;
     ValueCallback mUploadCallBack;
     ValueCallback<Uri[]> mUploadCallBackAboveL;
@@ -100,12 +100,16 @@ public class UploadWebActivity extends AppCompatActivity {
 //        webView.loadUrl("http://172.17.1.103:8092/inxupload.html?appSsid=252&frontSource=2&userId=2183&v=" + System.currentTimeMillis());
 
 //        webView.loadUrl("https://peru.prestamopluspe.com/customers/index.html?frontSource=1&appSsid=200&mobile=1820000&v=" + System.currentTimeMillis());
-        webView.loadUrl("https://chile.ultracreditosmx.com/customer/index.html?frontSource=10&appSsid=9050&userId=5201&v=" + System.currentTimeMillis());
+//        webView.loadUrl("https://chile.ultracreditosmx.com/customer/index.html?frontSource=10&appSsid=9050&userId=5201&v=" + System.currentTimeMillis());
 
 //        webView.postUrl("https://www.sricredito.com/sricreditos/privacy.html", null);
 //        webView.loadUrl("file:///android_asset/your_html_file.html"); // 加载本地 HTML 文件
 
+        webView.loadUrl("http://111.203.220.52:8091/inxuploadBack.html?v=" + System.currentTimeMillis());
 
+
+        http:
+//111.203.220.52:8091/inxuploadBack.html
 //        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
 //        webView.loadUrl("https://www.baidu.com");
         webView.addJavascriptInterface(this, "nativeWkObc");
@@ -204,8 +208,14 @@ public class UploadWebActivity extends AppCompatActivity {
 
 
     @Override
-    public void onBackPressed() {
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "-------onDestroy--------");
+    }
 
+    @Override
+    public void onBackPressed() {
+        
         webView.evaluateJavascript("javascript:onBackPressed()", new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String s) {
@@ -213,12 +223,12 @@ public class UploadWebActivity extends AppCompatActivity {
 
                     Toast.makeText(UploadWebActivity.this, "不返回", Toast.LENGTH_SHORT).show();
 
-
                 } else {
                     if (webView.canGoBack()) {
                         webView.goBack();
                     } else {
-                        UploadWebActivity.super.onBackPressed();
+//                        UploadWebActivity.super.onBackPressed();
+                        finish();
                     }
                 }
             }

@@ -152,15 +152,16 @@ public class MainActivity extends AppCompatActivity {
 ////                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
 //                ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
 
+                compressLuban(path);
 
-                ImageUtil131.openCompress(path, new ImgCompressLinster() {
-                    @Override
-                    public void success(@NonNull File file) {
-                        Log.d("okhttp", "========================>" + file.getAbsolutePath());
-                        Glide.with(MainActivity.this).load(file).into(image_target);
-
-                    }
-                });
+//                ImageUtil131.openCompress(path, new ImgCompressLinster() {
+//                    @Override
+//                    public void success(@NonNull File file) {
+//                        Log.d("okhttp", "========================>" + file.getAbsolutePath());
+//                        Glide.with(MainActivity.this).load(file).into(image_target);
+//
+//                    }
+//                });
 //                runOnUiThread(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -210,13 +211,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    private void compress(String path){
-//        Luban.with(this)
-//                .load(new File(path))
-//                .ignoreBy(100)
-////                .setTargetDir(getExternalCacheDir().getAbsolutePath())
-//
-//                .setCompressListener(new OnCompressListener() {
+    private void compressLuban(String path){
+        Luban.with(this)
+                .load(new File(path))
+                .ignoreBy(100)
+//                .setTargetDir(getExternalCacheDir().getAbsolutePath())
+
+                .setCompressListener(new OnCompressListener() {
+                    @Override
+                    public void onStart() {
+
+                    }
+
+                    @Override
+                    public void onSuccess(File file) {
+                        compress2(file.getAbsolutePath());
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
 //                    @Override
 //                    public void onStart() {
 //                    }
@@ -232,8 +247,8 @@ public class MainActivity extends AppCompatActivity {
 //                    public void onError(int index, Throwable e) {
 //
 //                    }
-//                }).launch();
-//    }
+                }).launch();
+    }
 
 
     private void compress2(String path) {

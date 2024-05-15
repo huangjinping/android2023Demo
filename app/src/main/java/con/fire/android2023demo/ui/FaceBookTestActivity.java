@@ -66,7 +66,8 @@ public class FaceBookTestActivity extends AppCompatActivity {
             }
         });
 
-        binding.loginButton.setPermissions(Arrays.asList(EMAIL,"pages_show_list"));
+        binding.loginButton.setPermissions(Arrays.asList(EMAIL));
+//        binding.loginButton.setPermissions(Arrays.asList("pages_show_list"));
 
 
         binding.loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
@@ -77,7 +78,6 @@ public class FaceBookTestActivity extends AppCompatActivity {
                 Log.d("okhttp", "====initfacebookLogin====0==" + loginResult.getAccessToken().getToken());
                 Log.d("okhttp", "====initfacebookLogin====1==" + loginResult.getAccessToken().getApplicationId());
                 Log.d("okhttp", "====initfacebookLogin====2==" + loginResult.getAccessToken().getUserId());
-
 
                 onfacebookResult(FaceBookTestActivity.this, loginResult);
 
@@ -103,7 +103,7 @@ public class FaceBookTestActivity extends AppCompatActivity {
 //        LoginManager.getInstance().logInWithReadPermissions(LancherAtivity.this, Arrays.asList("public_profile,email,user_birthday,user_gender"));
 
 
-//        LoginManager.getInstance().logInWithReadPermissions(FaceBookTestActivity.this, Arrays.asList("pages_show_list"));
+        LoginManager.getInstance().logInWithReadPermissions(FaceBookTestActivity.this, Arrays.asList("pages_show_list"));
 
         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
             @Override

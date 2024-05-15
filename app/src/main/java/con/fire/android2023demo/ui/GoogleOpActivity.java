@@ -60,25 +60,25 @@ public class GoogleOpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_googleop);
         button = findViewById(R.id.button);
-        Intent intent = getIntent();
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNext();
-            }
-        });
-
-
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).
-                requestEmail().requestScopes(new Scope("https://www.googleapis.com/auth/contacts")).build();
-
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        // [END config_signin]
-
-        // [START initialize_auth]
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+//        Intent intent = getIntent();
+//
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onNext();
+//            }
+//        });
+//
+//
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(getString(R.string.default_web_client_id)).
+//                requestEmail().requestScopes(new Scope("https://www.googleapis.com/auth/contacts")).build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        // [END config_signin]
+//
+//        // [START initialize_auth]
+//        // Initialize Firebase Auth
+//        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
