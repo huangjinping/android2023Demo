@@ -80,6 +80,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 
                                     installReferrerClient.endConnection();
                                 } catch (Exception ex) {
+                                    ex.printStackTrace();
                                     Log.e("InstallReferrerHelper", ex.toString());
                                     LogUtils.logSLocation(context, "InstallReferrerHelper", ex.toString());
 

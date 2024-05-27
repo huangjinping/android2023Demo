@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
+import con.fire.android2023demo.ui.AppCurrentActivity;
 import con.fire.android2023demo.ui.AudioManagerActivity;
 import con.fire.android2023demo.ui.BaseWeb154Activity;
 import con.fire.android2023demo.ui.BluetoothActivity;
@@ -33,6 +34,7 @@ import con.fire.android2023demo.ui.FaceBookTestActivity;
 import con.fire.android2023demo.ui.GoogleOpActivity;
 import con.fire.android2023demo.ui.GooleLogin2Activity;
 import con.fire.android2023demo.ui.InxAgentwebActivity;
+import con.fire.android2023demo.ui.LaoLinActivity;
 import con.fire.android2023demo.ui.MainActivity;
 import con.fire.android2023demo.ui.PackageUsageStatsActivity;
 import con.fire.android2023demo.ui.PermissionActivity;
@@ -249,6 +251,22 @@ public class Hao123ActivityC extends AppCompatActivity {
                 Intent intent = new Intent(Hao123ActivityC.this, AudioManagerActivity.class);
                 startActivity(intent);
 
+            }
+        });
+
+        binding.txtGetLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, AppCurrentActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.txtLaolin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, LaoLinActivity.class);
+                startActivity(intent);
             }
         });
     }
