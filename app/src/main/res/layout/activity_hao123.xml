@@ -211,6 +211,14 @@
                     android:layout_height="wrap_content"
                     android:text="Snippets"
                     android:textStyle="bold"></TextView>
+
+                <TextView
+                    android:id="@+id/txt_crash"
+                    style="@style/flex_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="crash"
+                    android:textStyle="bold"></TextView>
             </com.google.android.flexbox.FlexboxLayout>
 
 
@@ -318,6 +326,12 @@
                     android:layout_height="wrap_content"
                     android:text="laolin"></TextView>
 
+                <TextView
+                    android:id="@+id/txt_FCM"
+                    style="@style/flex_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FCM"></TextView>
             </com.google.android.flexbox.FlexboxLayout>
         </LinearLayout>
 

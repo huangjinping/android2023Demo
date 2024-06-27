@@ -8,5 +8,10 @@
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:layout_margin="20dp"
+        android:background="@color/black"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="获取解密信息"
+        android:textColor="@color/white" />
 </LinearLayout>

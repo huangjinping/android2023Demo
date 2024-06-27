@@ -13,6 +13,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 import com.lzy.okgo.OkGo;
 
+import con.fire.android2023demo.utils.CrashHandler;
 import con.fire.android2023demo.utils.LogUtils;
 import me.jessyan.autosize.AutoSizeConfig;
 
@@ -32,6 +33,8 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     public void onCreate() {
         super.onCreate();
         application = this;
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
         OkGo.getInstance().init(this);
 
 //        Branch.enableTestMode();

@@ -28,6 +28,7 @@ import con.fire.android2023demo.ui.AppCurrentActivity;
 import con.fire.android2023demo.ui.AudioManagerActivity;
 import con.fire.android2023demo.ui.BaseWeb154Activity;
 import con.fire.android2023demo.ui.BluetoothActivity;
+import con.fire.android2023demo.ui.CrashActivity;
 import con.fire.android2023demo.ui.DialogTestActivity;
 import con.fire.android2023demo.ui.EditActivity;
 import con.fire.android2023demo.ui.FaceBookTestActivity;
@@ -189,6 +190,14 @@ public class Hao123ActivityC extends AppCompatActivity {
             Intent intent = new Intent(Hao123ActivityC.this, DialogTestActivity.class);
             startActivity(intent);
 
+        });
+
+        binding.txtCrash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, CrashActivity.class);
+                startActivity(intent);
+            }
         });
 
         binding.txtWebupload.setOnClickListener(view -> {

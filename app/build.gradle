@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-//    id 'com.google.gms.google-services'
+    id 'com.google.gms.google-services'
 }
 
 def releaseTime() {
@@ -21,8 +21,8 @@ android {
     }
     compileSdk 34
     defaultConfig {
-        applicationId "con.fire.android2023demo"
-//        applicationId "con.modhe.myapplication"
+//        applicationId "con.fire.android2023demo"
+        applicationId "con.modhe.myapplication"
 
         minSdk 21
         targetSdk 34
@@ -169,4 +169,6 @@ dependencies {
 //    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 //    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
 
+    implementation 'com.google.firebase:firebase-messaging:23.0.3'
+    implementation 'com.google.firebase:firebase-core:20.1.2'
 }

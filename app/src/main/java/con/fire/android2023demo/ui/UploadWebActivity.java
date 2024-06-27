@@ -105,7 +105,7 @@ public class UploadWebActivity extends AppCompatActivity {
 //        webView.postUrl("https://www.sricredito.com/sricreditos/privacy.html", null);
 //        webView.loadUrl("file:///android_asset/your_html_file.html"); // 加载本地 HTML 文件
 
-        webView.loadUrl("http://111.203.220.52:8091/inxuploadBack.html?v=" + System.currentTimeMillis());
+        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
 
 
         http:

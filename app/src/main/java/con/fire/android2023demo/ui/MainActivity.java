@@ -146,13 +146,13 @@ public class MainActivity extends AppCompatActivity {
 //                compress(path);
                 Log.d("okhttps", "====000===11==>>>>" + path);
 
-//                compress2(path);
+                compress2(path);
 //                Log.d("okhttps", "====000===11==>>>>" + path);
 //                String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
 ////                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
 //                ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
 
-                compressLuban(path);
+//                compressLuban(path);
 
 //                ImageUtil131.openCompress(path, new ImgCompressLinster() {
 //                    @Override
