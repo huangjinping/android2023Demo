@@ -27,23 +27,23 @@ public class A162Fragment extends Fragment {
         binding = FragmentA162Binding.inflate(inflater);
 
         dialogViewModel = new ViewModelProvider(getActivity()).get(DialogViewModel.class);
-        dialogViewModel.dataLog.observe(getActivity(), new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Log.d("okhttp2", "ssss========" + s);
-
-                binding.txtTips.setText("ss" + s);
-                if (s.equals("3")) {
-                    dialogViewModel.dataLog2.observe(null, new Observer<String>() {
-                        @Override
-                        public void onChanged(String s) {
-
-                        }
-                    });
-                }
-
-            }
-        });
+//        dialogViewModel.dataLog.observe(getActivity(), new Observer<String>() {
+//            @Override
+//            public void onChanged(String s) {
+//                Log.d("okhttp2", "ssss========" + s);
+//
+//                binding.txtTips.setText("ss" + s);
+//                if (s.equals("3")) {
+//                    dialogViewModel.dataLog2.observe(null, new Observer<String>() {
+//                        @Override
+//                        public void onChanged(String s) {
+//
+//                        }
+//                    });
+//                }
+//
+//            }
+//        });
 
 //
 //        new Thread() {

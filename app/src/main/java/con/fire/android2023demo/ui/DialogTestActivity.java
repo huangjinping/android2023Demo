@@ -22,6 +22,7 @@ import java.util.UUID;
 import con.fire.android2023demo.R;
 import con.fire.android2023demo.databinding.ActivityDialogtestBinding;
 import con.fire.android2023demo.ui.fragment.A162Fragment;
+import con.fire.android2023demo.ui.fragment.A306Fragment;
 import con.fire.android2023demo.ui.fragment.CommonChooseDialogFragment;
 import con.fire.android2023demo.ui.fragment.DialogFragment1;
 import con.fire.android2023demo.ui.fragment.RepayComplaintDialogFragment;
@@ -96,6 +97,21 @@ public class DialogTestActivity extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 binding.btn162.setText("" + s);
+            }
+        });
+
+        binding.btn306.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                show306();
+
+
+                new  Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        show162();
+                    }
+                },3300);
             }
         });
     }
@@ -261,6 +277,15 @@ public class DialogTestActivity extends AppCompatActivity {
                 }
             }
         }, 8000);
+    }
+
+
+    private void show306() {
+
+        FragmentManager supportFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.layout_container, new A306Fragment());
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
     private void show162() {

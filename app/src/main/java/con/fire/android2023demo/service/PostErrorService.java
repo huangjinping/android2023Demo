@@ -16,4 +16,18 @@ public class PostErrorService extends Service {
         Log.d("posterror", "---" + error);
         return new Binder();
     }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+            }
+        }.start();
+        return super.onStartCommand(intent, flags, startId);
+    }
 }

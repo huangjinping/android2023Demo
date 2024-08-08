@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -105,9 +106,10 @@ public class UploadWebActivity extends AppCompatActivity {
 //        webView.postUrl("https://www.sricredito.com/sricreditos/privacy.html", null);
 //        webView.loadUrl("file:///android_asset/your_html_file.html"); // 加载本地 HTML 文件
 
-        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
+//        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
 
-
+//        webView.loadUrl("https://www.soleadomx.com/customer/submitResult.html?aiType=0&workOrderId=2447&missNum=4&appSsid=313&type=2&mobile=1832111111");
+        webView.loadUrl("https://www.soleadomx.com/customer/index.html?aiType=0&workOrderId=2447&missNum=4&appSsid=313&type=2&mobile=1832111111");
         http:
 //111.203.220.52:8091/inxuploadBack.html
 //        webView.loadUrl("http://111.203.220.52:8091/inxupload.html?v=" + System.currentTimeMillis());
@@ -157,45 +159,61 @@ public class UploadWebActivity extends AppCompatActivity {
 
         switch (requestCode) {
             case SELECT_PHOTO:
-                if (resultCode == Activity.RESULT_OK && data != null) {
-                    String compressPath = fileUtils.getPathFromUri(this, data.getData());
-                    compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
+                Log.d(TAG, "===================1");
 
-                    if (!fileUtils.isPicture(new File(compressPath))) {
-                        return;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d(TAG, "===================4");
+//                        setData(requestCode, resultCode, data);
+                        clearUploadMessage();
                     }
-                    Uri newUri = null;
-                    newUri = Uri.fromFile(new File(compressPath));
-
-                    backToHtml(compressPath);
-
-
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        if (mUploadCallBackAboveL != null) {
-                            if (newUri != null) {
-                                Toast.makeText(this, "开始返回html", Toast.LENGTH_SHORT).show();
-                                mUploadCallBackAboveL.onReceiveValue(new Uri[]{newUri});
-                                mUploadCallBackAboveL = null;
-                                return;
-                            }
-                        }
-                    } else if (mUploadCallBack != null) {
-                        if (newUri != null) {
-                            mUploadCallBack.onReceiveValue(newUri);
-                            mUploadCallBack = null;
-                            return;
-                        }
-                    }
-                } else {
-                    clearUploadMessage();
-                }
+                }, 4000);
                 break;
         }
 
     }
 
 
+    private void setData(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            String compressPath = fileUtils.getPathFromUri(this, data.getData());
+            compressPath = imageResizer.resizeImageIfNeeded(compressPath, 1080d, 1920d, 90);
+
+            if (!fileUtils.isPicture(new File(compressPath))) {
+                return;
+            }
+            Uri newUri = null;
+            newUri = Uri.fromFile(new File(compressPath));
+
+            backToHtml(compressPath);
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (mUploadCallBackAboveL != null) {
+                    if (newUri != null) {
+                        Toast.makeText(this, "开始返回html", Toast.LENGTH_SHORT).show();
+                        mUploadCallBackAboveL.onReceiveValue(new Uri[]{newUri});
+                        mUploadCallBackAboveL = null;
+                        return;
+                    }
+                }
+            } else if (mUploadCallBack != null) {
+                if (newUri != null) {
+                    mUploadCallBack.onReceiveValue(newUri);
+                    mUploadCallBack = null;
+                    return;
+                }
+            }
+        } else {
+            clearUploadMessage();
+        }
+    }
+
     private void clearUploadMessage() {
+//        mUploadCallBackAboveL.onReceiveValue(null);
+//        mUploadCallBackAboveL = null;
+//        mUploadCallBack.onReceiveValue(null);
+//        mUploadCallBack = null;
         if (mUploadCallBackAboveL != null) {
             mUploadCallBackAboveL.onReceiveValue(null);
             mUploadCallBackAboveL = null;
@@ -215,7 +233,7 @@ public class UploadWebActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        
+
         webView.evaluateJavascript("javascript:onBackPressed()", new ValueCallback<String>() {
             @Override
             public void onReceiveValue(String s) {
@@ -308,7 +326,6 @@ public class UploadWebActivity extends AppCompatActivity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-
 
             try {
                 if (url.contains("/MPsuccess.html")) {

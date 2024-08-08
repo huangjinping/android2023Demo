@@ -9,7 +9,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.appsflyer.AFInAppEventParameterName;
 import com.appsflyer.AFInAppEventType;
@@ -23,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import con.fire.android2023demo.base.BaseActivity;
 import con.fire.android2023demo.databinding.ActivityHao123Binding;
 import con.fire.android2023demo.ui.AppCurrentActivity;
 import con.fire.android2023demo.ui.AudioManagerActivity;
@@ -45,27 +45,41 @@ import con.fire.android2023demo.ui.ReferrerActivity;
 import con.fire.android2023demo.ui.ScreenRecordActivity;
 import con.fire.android2023demo.ui.SelectContractActivity;
 import con.fire.android2023demo.ui.SnippetsActivity;
+import con.fire.android2023demo.ui.SysModelActivity;
 import con.fire.android2023demo.ui.TimerActivity;
 import con.fire.android2023demo.ui.UIFragmentActivity;
 import con.fire.android2023demo.ui.UploadWebActivity;
 import con.fire.android2023demo.ui.ViewActivity;
 import con.fire.android2023demo.ui.WebViewActivity;
+import con.fire.android2023demo.ui.login.SystemLoginActivity;
+import con.fire.android2023demo.utils.Constants;
 import con.fire.android2023demo.utils.ToastUtils;
 import im.crisp.client.ChatActivity;
 import im.crisp.client.Crisp;
 
-public class Hao123ActivityC extends AppCompatActivity {
+//Android 12之启动画面Splash Screens（一） -- 适配
+//https://openatomworkshop.csdn.net/664ff735b12a9d168eb73c7a.html
+public class Hao123ActivityC extends BaseActivity {
     ActivityHao123Binding binding;
+//    App appContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+//        appContext = App.getAppContext();
         super.onCreate(savedInstanceState);
+//        appContext.showToastApp();
+        app.showToastApp();
+//        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+
         binding = ActivityHao123Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickListener();
         String uuid = UUID.randomUUID().toString();
 
-        Log.d("uuid", "" + uuid);
+//        com.facebook.appevents.AppEventsConstants.
+//                EVENT_NAME_SUBSCRIBE
+
+        Log.d("uuid", uuid);
         Log.d("uuid", "cbc060ee4a6141729083d75c13bcf325".length() + "");
 
 
@@ -76,6 +90,7 @@ public class Hao123ActivityC extends AppCompatActivity {
         AppsFlyerLib.getInstance().logEvent(getApplicationContext(), AFInAppEventType.LOGIN, eventValues, new AppsFlyerRequestListener() {
             @Override
             public void onSuccess() {
+
             }
 
             @Override
@@ -195,6 +210,8 @@ public class Hao123ActivityC extends AppCompatActivity {
         binding.txtCrash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Constants.sSsid(Hao123ActivityC.this, "100");
+
                 Intent intent = new Intent(Hao123ActivityC.this, CrashActivity.class);
                 startActivity(intent);
             }
@@ -275,6 +292,20 @@ public class Hao123ActivityC extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Hao123ActivityC.this, LaoLinActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.txtSysModel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, SysModelActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.txtSystemlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, SystemLoginActivity.class);
                 startActivity(intent);
             }
         });

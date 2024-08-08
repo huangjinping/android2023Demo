@@ -35,6 +35,14 @@
             android:layout_height="wrap_content"
             android:text="glideclear"
             android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/txt_appssid151"
+            style="@style/flex_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="151appssid"
+            android:textStyle="bold"></TextView>
     </com.google.android.flexbox.FlexboxLayout>
 
     <ImageView

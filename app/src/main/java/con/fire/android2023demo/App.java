@@ -3,6 +3,7 @@ package con.fire.android2023demo;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -28,11 +29,14 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
     String EVENT_ADDED_TO_CART = "EVENT_SUBSCRIBE";
     String EVENT_CHECKOUT = "EVENT_SUBSCRIBE";
 
+    public static App getAppContext() {
+
+        return application;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        application = this;
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this);
         OkGo.getInstance().init(this);
@@ -43,11 +47,16 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 //        Thread.setDefaultUncaughtExceptionHandler(this);
 //        BugCrash.initStatus(this);
         AutoSizeConfig.getInstance().setCustomFragment(true);
-
         startReferrer(this);
-
         FacebookSdk.setApplicationId(getString(R.string.facebook_app_id));
         AppEventsLogger.activateApp(this);
+
+        application = this;
+
+    }
+
+    public void showToastApp() {
+        Toast.makeText(application, "showToastApp", Toast.LENGTH_SHORT).show();
     }
 
 
