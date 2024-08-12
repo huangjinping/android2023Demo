@@ -1,7 +1,6 @@
-package con.fire.android2023demo.ui.fragment;
+package con.fire.android2023demo.ui.ap162;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +8,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import con.fire.android2023demo.databinding.FragmentA162Binding;
-import con.fire.android2023demo.vm.DialogViewModel;
 
-public class A162Fragment extends Fragment {
+public class Tab0Fragment extends Fragment {
 
     FragmentA162Binding binding;
 
@@ -25,6 +21,7 @@ public class A162Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentA162Binding.inflate(inflater);
+        binding.txtTips.setText("Tab0Fragment");
 
 //        dialogViewModel = new ViewModelProvider(getActivity()).get(DialogViewModel.class);
 //        dialogViewModel.dataLog.observe(getActivity(), new Observer<String>() {

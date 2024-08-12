@@ -1,21 +1,21 @@
-package con.fire.android2023demo.ui.fragment;
+package con.fire.android2023demo.ui.ap162;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import con.fire.android2023demo.databinding.FragmentA162Binding;
-import con.fire.android2023demo.vm.DialogViewModel;
+import con.fire.android2023demo.ui.fragment.DialogFragment1;
 
-public class A162Fragment extends Fragment {
+public class Tab2Fragment extends Fragment {
 
     FragmentA162Binding binding;
 
@@ -25,6 +25,28 @@ public class A162Fragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentA162Binding.inflate(inflater);
+        binding.txtTips.setText("Tab2Fragment");
+
+        binding.txtTips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "========", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (isAdded()) {
+                            Log.d("okhtt22", "==============1");
+
+                            addChange();
+                        } else {
+                            Log.d("okhtt22", "==============2");
+
+                        }
+
+                    }
+                }, 5000);
+            }
+        });
 
 //        dialogViewModel = new ViewModelProvider(getActivity()).get(DialogViewModel.class);
 //        dialogViewModel.dataLog.observe(getActivity(), new Observer<String>() {
@@ -69,5 +91,14 @@ public class A162Fragment extends Fragment {
         return binding.getRoot();
 
 
+    }
+
+    private void addChange() {
+
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.banner);
+//        binding.imgIcon.setImageBitmap(bitmap);
+
+        DialogFragment1 dialogFragment1 = new DialogFragment1();
+        dialogFragment1.show(getChildFragmentManager(), "333", 1);
     }
 }

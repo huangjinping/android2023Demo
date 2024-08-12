@@ -204,7 +204,6 @@ public class Hao123ActivityC extends BaseActivity {
         binding.txtTestdialog.setOnClickListener(view -> {
             Intent intent = new Intent(Hao123ActivityC.this, DialogTestActivity.class);
             startActivity(intent);
-
         });
 
         binding.txtCrash.setOnClickListener(new View.OnClickListener() {
@@ -305,6 +304,7 @@ public class Hao123ActivityC extends BaseActivity {
         binding.txtSystemlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int a = 1 / 0;
                 Intent intent = new Intent(Hao123ActivityC.this, SystemLoginActivity.class);
                 startActivity(intent);
             }
@@ -334,4 +334,16 @@ public class Hao123ActivityC extends BaseActivity {
         }
     }
 
+
+    protected void gotoGooglePlay() {
+        Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        intent.setPackage("com.android.vending");
+        // 判断是否安装了谷歌商店
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+//            Utils.toast("Please download and install Google Play first");
+        }
+    }
 }

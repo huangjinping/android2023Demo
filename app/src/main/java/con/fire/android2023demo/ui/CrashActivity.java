@@ -23,6 +23,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import con.fire.android2023demo.App;
 import con.fire.android2023demo.databinding.ActivityCrashBinding;
+import con.fire.android2023demo.ui.ap162.ViewPager2Activity;
 import con.fire.android2023demo.utils.CommonUtil;
 import con.fire.android2023demo.utils.Constants;
 
@@ -128,6 +129,13 @@ public class CrashActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clear();
+            }
+        });
+        binding.txtViewpager2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CrashActivity.this, ViewPager2Activity.class);
+                startActivity(intent);
             }
         });
     }

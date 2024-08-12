@@ -216,6 +216,7 @@
         <activity android:name=".ui.login.PhoneLoginActivity"></activity>
         <activity android:name=".ui.login.EmailLoginActivity"></activity>
         <activity android:name=".ui.login.SystemLoginActivity"></activity>
+        <activity android:name=".ui.ap162.ViewPager2Activity"></activity>
         <activity
             android:name=".ui.SnippetsActivity"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"

@@ -2,6 +2,7 @@ package con.fire.android2023demo;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -34,9 +35,28 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
         return application;
     }
 
+
+    private void upCatchMsg(Throwable e) {
+        Log.d("upCatchMsg", "" + e.toString());
+
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            upCatchMsg(e); // 读取异常堆栈并上传
+            if (t == Looper.getMainLooper().getThread()) {
+                // 如果发生异常的线程是主线程，则保护主线程不闪退
+                while (true) {
+                    try {
+                        Looper.loop();
+                    } catch (Throwable e1) {
+                    }
+                }
+            }
+        });
+
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(this);
         OkGo.getInstance().init(this);
