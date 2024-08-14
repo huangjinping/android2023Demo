@@ -1,5 +1,6 @@
 package con.fire.android2023demo.ui.login;
 
+import android.Manifest;
 import android.app.PendingIntent;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
@@ -12,8 +13,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,10 +31,12 @@ import com.google.android.gms.auth.api.credentials.HintRequest;
 import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest;
 import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.phone.SmsRetriever;
+import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
 import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,6 +50,11 @@ import con.fire.android2023demo.databinding.ActivityPhoneloginBinding;
  * <p>
  * 获取验证码
  * https://developers.google.com/identity/sms-retriever/user-consent/request?hl=en
+ * <p>
+ * https://91fintek.yuque.com/zdsakl/vq7wq0/unenin
+ * <p>
+ * com.google.android.gms.auth.api.phone.permission.SEND
+ * com.google.android.gms.auth.api.phone.SMS_RETRIEVED
  */
 public class PhoneLoginActivity extends AppCompatActivity {
 
@@ -51,8 +65,12 @@ public class PhoneLoginActivity extends AppCompatActivity {
     private final BroadcastReceiver smsVerificationReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            Log.d("okhttv2p", "=============1=");
+
             if (SmsRetriever.SMS_RETRIEVED_ACTION.equals(intent.getAction())) {
                 Bundle extras = intent.getExtras();
+                Log.d("okhttv2p", "============2==");
+
                 Status smsRetrieverStatus = (Status) extras.get(SmsRetriever.EXTRA_STATUS);
                 switch (smsRetrieverStatus.getStatusCode()) {
                     case CommonStatusCodes.SUCCESS:
@@ -66,16 +84,70 @@ public class PhoneLoginActivity extends AppCompatActivity {
             }
         }
     };
+    ActivityResultLauncher activityResultSingle = registerForActivityResult(new ActivityResultContracts.RequestPermission(), new ActivityResultCallback<Boolean>() {
+        @Override
+        public void onActivityResult(Boolean result) {
+
+            Toast.makeText(PhoneLoginActivity.this, "cccr-esult" + result, Toast.LENGTH_SHORT).show();
+            if (result) {
+//                getCode();
+                requestSMSVerification();
+            }
+
+        }
+    });
+    String permissionsSingle = Manifest.permission.RECEIVE_SMS;
     private ActivityPhoneloginBinding binding;
 
+
+    private void requestSMSVerification() {
+        SmsRetrieverClient client = SmsRetriever.getClient(this);
+        Task<Void> task = client.startSmsRetriever();
+        task.addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(PhoneLoginActivity.this, "onSuccess", Toast.LENGTH_SHORT).show();
+            }
+        });
+        task.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@androidx.annotation.NonNull Exception e) {
+                Toast.makeText(PhoneLoginActivity.this, "onFailure", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         binding = ActivityPhoneloginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.btnGetPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPhone();
+            }
+        });
+        binding.btnGetCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityResultSingle.launch(permissionsSingle);
+
+            }
+        });
     }
 
     private void getCode() {
+        Toast.makeText(this, "获取验证码", Toast.LENGTH_SHORT).show();
+//        String phone = binding.editTextPhone.getText().toString();
+//        if (TextUtils.isEmpty(phone)) {
+//            Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+        Log.d("okhttv2p", "============0==");
+
         SmsRetriever.getClient(this).startSmsUserConsent(null);
         IntentFilter intentFilter = new IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -88,6 +160,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
     }
 
     private void getPhone() {
+        Toast.makeText(this, "获取手机号", Toast.LENGTH_SHORT).show();
         boolean hasSim = false;
         try {
             TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -159,6 +232,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
             } else {
                 // 通用打点-自动填充手机号成功
                 // 填充手机号
+                binding.editTextPhone.setText(phone);
             }
         } else if (requestCode == SMS_CONSENT_REQUEST) {
             SmsRetriever.getClient(this).startSmsUserConsent(null);
@@ -168,6 +242,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 String smsCode = findVerificationCode(message);
                 if (smsCode != null) {
                     // do something
+
+                    binding.editCode.setText(smsCode);
                 }
             }
         }

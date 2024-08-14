@@ -3,6 +3,8 @@ package con.fire.android2023demo.ui.login;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +20,7 @@ import con.fire.android2023demo.databinding.ActivityEmailloginBinding;
 /**
  * 电话号码提示
  * https://developers.google.cn/identity/phone-number-hint/android?authuser=3&%3Bhl=zh-cn&hl=zh-cn
- *
+ * <p>
  * https://developers.google.com/identity/sms-retriever/user-consent/request?hl=en
  */
 public class EmailLoginActivity extends AppCompatActivity {
@@ -27,10 +29,16 @@ public class EmailLoginActivity extends AppCompatActivity {
     private ActivityEmailloginBinding binding;
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         binding = ActivityEmailloginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.btbEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getEmail();
+            }
+        });
     }
 
     private void getEmail() {
@@ -58,6 +66,7 @@ public class EmailLoginActivity extends AppCompatActivity {
             }
             if (!email.isEmpty()) {
                 // 填充邮箱
+                binding.editTextEmail.setText(email);
             }
         }
     }

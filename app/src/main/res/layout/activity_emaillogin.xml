@@ -24,7 +24,7 @@
                 android:inputType="textEmailAddress" />
 
             <Button
-                android:id="@+id/btb_getCode"
+                android:id="@+id/btb_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="getCode" />

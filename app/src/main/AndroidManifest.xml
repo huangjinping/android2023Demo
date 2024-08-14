@@ -27,6 +27,8 @@
     <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+
     <uses-permission android:name="android.permission.USE_BIOMETRIC" />
     <uses-permission android:name="android.permission.INSTALL_PACKAGES"></uses-permission>
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"></uses-permission>
@@ -118,8 +120,7 @@
 
         <activity
             android:name=".Hao123ActivityC"
-            android:exported="true"
-            >
+            android:exported="true">
 
             <intent-filter>
                 <data
@@ -242,6 +243,15 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PACKAGE_FIRST_LAUNCH" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".receiver.SMSReceiver"
+            android:enabled="true"
+            android:exported="true"
+            >
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED" />
             </intent-filter>
         </receiver>
 

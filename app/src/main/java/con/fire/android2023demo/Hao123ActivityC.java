@@ -51,6 +51,8 @@ import con.fire.android2023demo.ui.UIFragmentActivity;
 import con.fire.android2023demo.ui.UploadWebActivity;
 import con.fire.android2023demo.ui.ViewActivity;
 import con.fire.android2023demo.ui.WebViewActivity;
+import con.fire.android2023demo.ui.login.EmailLoginActivity;
+import con.fire.android2023demo.ui.login.PhoneLoginActivity;
 import con.fire.android2023demo.ui.login.SystemLoginActivity;
 import con.fire.android2023demo.utils.Constants;
 import con.fire.android2023demo.utils.ToastUtils;
@@ -304,8 +306,23 @@ public class Hao123ActivityC extends BaseActivity {
         binding.txtSystemlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int a = 1 / 0;
+//                int a = 1 / 0;
                 Intent intent = new Intent(Hao123ActivityC.this, SystemLoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.txtAuthlogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, PhoneLoginActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.txtAuthemail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Hao123ActivityC.this, EmailLoginActivity.class);
                 startActivity(intent);
             }
         });

@@ -234,6 +234,22 @@
                     android:layout_height="wrap_content"
                     android:text="Systemlogin"
                     ></TextView>
+
+                <TextView
+                    android:id="@+id/txt_authlogin"
+                    style="@style/flex_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Authlogin"
+                    ></TextView>
+
+                <TextView
+                    android:id="@+id/txt_authemail"
+                    style="@style/flex_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AuthEmail"
+                    ></TextView>
             </com.google.android.flexbox.FlexboxLayout>
 
 
