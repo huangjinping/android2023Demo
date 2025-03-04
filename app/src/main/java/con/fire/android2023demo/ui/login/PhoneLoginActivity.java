@@ -10,7 +10,6 @@ import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -188,7 +187,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
-                public void onFailure(@NonNull Exception e) {
+                public void onFailure( Exception e) {
                     getPhone2(); // 读取sim卡手机号失败时，读取google绑定的手机号
                 }
             });

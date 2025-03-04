@@ -2,6 +2,7 @@ package con.fire.android2023demo.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -68,6 +69,18 @@ public class SelectContractActivity extends AppCompatActivity {
         binding.button6.setOnClickListener(v -> startIntent6());
         binding.button7.setOnClickListener(v -> startIntent7());
         binding.button8.setOnClickListener(v -> startIntent8());
+
+        binding.button9.setOnClickListener((v -> startIntent9()));
+    }
+
+    private void startIntent9() {
+
+        try {
+            startActivityForResult(new Intent("android.intent.action.PICK", ContactsContract.CommonDataKinds.Phone.CONTENT_URI), REQUEST_CONTRACT);
+        } catch (ActivityNotFoundException e9) {
+            e9.printStackTrace();
+//            b0.d("No se ha podido obtener el contacto, por favor rellene manualmente");
+        }
 
     }
 
@@ -191,11 +204,34 @@ public class SelectContractActivity extends AppCompatActivity {
 //        onResult3(requestCode, resultCode, data);
 //        onResult4(requestCode, resultCode, data);
 //        onResult5(requestCode, resultCode, data);
-        onResult6(requestCode, resultCode, data);
-
+//        onResult6(requestCode, resultCode, data);
+        onResult9(requestCode, resultCode, data);
 
     }
 
+
+    private void onResult9(int i9, int i10, @Nullable Intent intent) {
+        Uri data;
+        if (intent == null || (data = intent.getData()) == null) {
+            return;
+        }
+        try {
+            Cursor query = getContentResolver().query(data, new String[]{"data1", "display_name"}, null, null, null);
+            if (query != null && query.moveToFirst()) {
+                String string = query.getString(0);
+                String string2 = query.getString(1);
+
+                setData(string, string2);
+                if (!query.isClosed()) {
+                    query.close();
+                }
+            }
+        } catch (IllegalArgumentException e9) {
+            e9.printStackTrace();
+        } catch (SecurityException unused) {
+        }
+
+    }
 
     /**
      * 线上

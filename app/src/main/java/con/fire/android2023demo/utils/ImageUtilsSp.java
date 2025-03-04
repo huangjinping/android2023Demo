@@ -10,9 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
+
 
 public class ImageUtilsSp {
 
@@ -28,27 +26,27 @@ public class ImageUtilsSp {
             }
             outputStream.close();
             inputStream.close();
-            Luban.with(context).load(srcPath).ignoreBy(500).setTargetDir(context.getExternalCacheDir().getAbsolutePath()).filter(new CompressionPredicate() {
-                @Override
-                public boolean apply(String path) {
-                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                }
-            }).setCompressListener(new OnCompressListener() {
-                @Override
-                public void onStart() {
-
-                }
-
-                @Override
-                public void onSuccess(File file) {
-                    callback.callback(file.getPath());
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    callback.callback("");
-                }
-            }).launch();
+//            Luban.with(context).load(srcPath).ignoreBy(500).setTargetDir(context.getExternalCacheDir().getAbsolutePath()).filter(new CompressionPredicate() {
+//                @Override
+//                public boolean apply(String path) {
+//                    return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+//                }
+//            }).setCompressListener(new OnCompressListener() {
+//                @Override
+//                public void onStart() {
+//
+//                }
+//
+//                @Override
+//                public void onSuccess(File file) {
+//                    callback.callback(file.getPath());
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//                    callback.callback("");
+//                }
+//            }).launch();
         } catch (IOException e) {
             e.printStackTrace();
             callback.callback("");

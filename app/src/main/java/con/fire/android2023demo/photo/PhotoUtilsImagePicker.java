@@ -31,7 +31,7 @@ import con.fire.android2023demo.utils.ExifInfoCopier;
 
 public class PhotoUtilsImagePicker extends PhotoSo {
     public static final int TAKE_PHOTO = 1;//启动相机标识
-    public static final int SELECT_PHOTO = 2;//启动相册标识
+    public static final int SELECT_PHOTO = 201;//启动相册标识
     static final String SHARED_PREFERENCES_NAME = "flutter_image_picker_shared_preference";
     private static final String TAG = "PhotoUtils12ImagePicker";
     private static final String SHARED_PREFERENCE_PENDING_IMAGE_URI_PATH_KEY = "flutter_image_picker_pending_image_uri";
@@ -151,7 +151,7 @@ public class PhotoUtilsImagePicker extends PhotoSo {
 
     public void take_Album1() {
         Intent pickImageIntent;
-        boolean usePhotoPicker = false;
+        boolean usePhotoPicker = true;
         if (usePhotoPicker && Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             pickImageIntent = new ActivityResultContracts.PickVisualMedia().createIntent(activity, new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
         } else {
@@ -166,8 +166,12 @@ public class PhotoUtilsImagePicker extends PhotoSo {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         try {
+            Log.d(TAG, "==189===============11111111");
+
             switch (requestCode) {
                 case SELECT_PHOTO:
+                    Log.d(TAG, resultCode+"==189===============22222222222==="+requestCode);
+
                     if (resultCode == Activity.RESULT_OK && data != null) {
 
                         Log.d(TAG, "==189=" + data.getData().getEncodedPath());

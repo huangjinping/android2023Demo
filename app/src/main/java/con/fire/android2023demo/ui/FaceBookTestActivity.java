@@ -16,7 +16,6 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.lzy.okgo.OkGo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -284,9 +283,9 @@ public class FaceBookTestActivity extends AppCompatActivity {
                 public void run() {
                     super.run();
                     try {
-                        Response execute = OkGo.get(url).execute();
-
-                        Log.d("okhttp", execute.body().string());
+//                        Response execute = OkGo.get(url).execute();
+//
+//                        Log.d("okhttp", execute.body().string());
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);

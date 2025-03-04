@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -35,19 +38,17 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import con.fire.android2023demo.FileUtils;
 import con.fire.android2023demo.R;
-import con.fire.android2023demo.photo.ImageUtil131;
 import con.fire.android2023demo.photo.PhotoCallback;
 import con.fire.android2023demo.photo.PhotoSo;
 import con.fire.android2023demo.photo.PhotoUtilsImagePicker;
 import con.fire.android2023demo.utils.Compressor;
 import con.fire.android2023demo.utils.ImageSimpleUtils;
-import con.fire.android2023demo.utils.u131.ImgCompressLinster;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -56,6 +57,27 @@ public class MainActivity extends AppCompatActivity {
     PhotoSo photoSo;
     String tempMemory = "tempMemorytempMemorytempMemorytempMemorytempMemorytempMemory";
     StringBuilder builder = new StringBuilder();
+    FileUtils fileUtils;
+
+    ActivityResultLauncher<PickVisualMediaRequest> pickMedia = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+        // Callback is invoked after the user selects a media item or closes the
+        // photo picker.
+        if (uri != null) {
+
+
+
+            String path = fileUtils.getPathFromUri(MainActivity.this, uri);
+
+//            MainActivity.this.img_load_album.setImageURI(uri);
+
+            Glide.with(MainActivity.this).load(path).into(MainActivity.this.img_load_album);
+
+
+            Log.d("PhotoPicker", "Selected URI: " + uri);
+        } else {
+            Log.d("PhotoPicker", "No media selected");
+        }
+    });
     private ImageView img_load_take;
     private ImageView img_load_album;
     private ImageView image_target;
@@ -129,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.fileUtils = new FileUtils();
+
         img_load_take = findViewById(R.id.img_load_take);
         img_load_album = findViewById(R.id.img_load_album);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -198,7 +222,9 @@ public class MainActivity extends AppCompatActivity {
                 image_target = img_load_album;
                 Log.d("okhttps", "====000===11==>>>>");
 //                ActivityCompat.requestPermissions(MainActivity.this, permissionArr, 101);
-                photoSo.take_Album();
+//                photoSo.take_Album();
+                pickMedia.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
+
             }
         });
 
@@ -210,46 +236,42 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    private void compressLuban(String path){
-        Luban.with(this)
-                .load(new File(path))
-                .ignoreBy(100)
-//                .setTargetDir(getExternalCacheDir().getAbsolutePath())
-
-                .setCompressListener(new OnCompressListener() {
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onSuccess(File file) {
-                        compress2(file.getAbsolutePath());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
+    private void compressLuban(String path) {
+//        Luban.with(this).load(new File(path)).ignoreBy(100)
+////                .setTargetDir(getExternalCacheDir().getAbsolutePath())
+//
+//                .setCompressListener(new OnCompressListener() {
 //                    @Override
 //                    public void onStart() {
+//
 //                    }
 //
 //                    @Override
-//                    public void onSuccess(int index, File compressFile) {
-//                        Log.d("onActivityResult", "0000000000000000005" + compressFile.getAbsolutePath());
-//
-//                        Glide.with(MainActivity.this).load(compressFile).into(image_target);
+//                    public void onSuccess(File file) {
+//                        compress2(file.getAbsolutePath());
 //                    }
 //
 //                    @Override
-//                    public void onError(int index, Throwable e) {
+//                    public void onError(Throwable e) {
 //
 //                    }
-                }).launch();
+////                    @Override
+////                    public void onStart() {
+////                    }
+////
+////                    @Override
+////                    public void onSuccess(int index, File compressFile) {
+////                        Log.d("onActivityResult", "0000000000000000005" + compressFile.getAbsolutePath());
+////
+////                        Glide.with(MainActivity.this).load(compressFile).into(image_target);
+////                    }
+////
+////                    @Override
+////                    public void onError(int index, Throwable e) {
+////
+////                    }
+//                }).launch();
     }
-
 
     private void compress2(String path) {
         new Compressor(this).compressToFileAsFlowable(new File(path)).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<File>() {
@@ -397,37 +419,37 @@ public class MainActivity extends AppCompatActivity {
 //                }
                 Log.d("compress", "=======start===000==");
 
-                Luban.with(MainActivity.this).load(path).ignoreBy(350).setCompressListener(new OnCompressListener() {
-
-                    @Override
-                    public void onStart() {
-
-                    }
-
-                    @Override
-                    public void onSuccess(File file) {
-                        toLone = false;
-                        Log.d("compress", "=======end===11==" + file.getAbsolutePath());
-
-
-                        String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
-//                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
-                        ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-
-                                Glide.with(MainActivity.this).load(file).into(image_target);
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-                }).launch();
+//                Luban.with(MainActivity.this).load(path).ignoreBy(350).setCompressListener(new OnCompressListener() {
+//
+//                    @Override
+//                    public void onStart() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(File file) {
+//                        toLone = false;
+//                        Log.d("compress", "=======end===11==" + file.getAbsolutePath());
+//
+//
+//                        String simplePicPath = ImageSimpleUtils.getSimplePicPath(MainActivity.this);
+////                Log.d("okhttps", "====000===22==>>>>" + simplePicPath);
+//                        ImageSimpleUtils.compressPicture(MainActivity.this, path, simplePicPath);
+//                        runOnUiThread(new Runnable() {
+//                            @Override
+//                            public void run() {
+//
+//
+//                                Glide.with(MainActivity.this).load(file).into(image_target);
+//                            }
+//                        });
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//
+//                    }
+//                }).launch();
             }
         }.start();
     }

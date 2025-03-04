@@ -30,6 +30,7 @@ import con.fire.android2023demo.R;
 public class WebViewActivity extends AppCompatActivity {
 
     final String tag = "WebV1iewActi1vity";
+
     WebView webview;
 
     @Override
@@ -67,8 +68,6 @@ public class WebViewActivity extends AppCompatActivity {
         //        -----------------------------___>>>>>>>>>>>>>>>>>1>>>>>>>
 
 
-
-
         String url = "https://qr.pay.wave.com/c/cos-1ctbn5v7g21zm?a=1025&c=XOF&m=S-FINTECH%20TECHNOLOGIE";
 //        webview.loadUrl("http://www.baidu.com");
 //        url = "https://www.jianshu.com/p/4860097148c0";
@@ -90,8 +89,10 @@ public class WebViewActivity extends AppCompatActivity {
 
         url = "https://checkout.toppaylatam.com/form/#/?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjb2RlIjoyNjMzMDcyfQ.2Dxxx29MsveldyS_ryALt5mQmWIqc-C6Q7EZdUyfzmM";
 
-        url="https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb";
-        url=" https://web.creditlandsa.com/clause?userId=9752&detailId=18&chooseAmountIds=,7167793935007899649";
+        url = "https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb";
+        url = " https://web.creditlandsa.com/clause?userId=9752&detailId=18&chooseAmountIds=,7167793935007899649";
+
+        url = "https://pay-met.ec:6080/#/metodo-pago/VE9LRU4gR0VORVJBIFJFQ0FVRE8xNjEzMTE=";
         webview.loadUrl(url);
 //        webview.loadUrl("https://www.inx-fintech.com/#/home/index");
 //jianshu://notes/4860097148c0

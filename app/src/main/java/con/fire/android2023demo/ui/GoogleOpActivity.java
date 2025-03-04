@@ -33,7 +33,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.lzy.okgo.OkGo;
+//import com.lzy.okgo.OkGo;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -181,9 +181,9 @@ public class GoogleOpActivity extends AppCompatActivity {
                 public void run() {
                     super.run();
                     try {
-                        Response execute = OkGo.get("https://www.baidu.com").execute();
-
-                        Log.d("okhttp", execute.body().string());
+//                        Response execute = OkGo.get("https://www.baidu.com").execute();
+//
+//                        Log.d("okhttp", execute.body().string());
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);

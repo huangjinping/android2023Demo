@@ -13,7 +13,6 @@ import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.lzy.okgo.OkGo;
 
 import con.fire.android2023demo.utils.CrashHandler;
 import con.fire.android2023demo.utils.LogUtils;
@@ -57,9 +56,9 @@ public class App extends Application implements Thread.UncaughtExceptionHandler 
 //            }
 //        });
 
-//        CrashHandler crashHandler = CrashHandler.getInstance();
-//        crashHandler.init(this);
-        OkGo.getInstance().init(this);
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(this);
+//        OkGo.getInstance().init(this);
 
 //        Branch.enableTestMode();
 //        Branch.getAutoInstance(this);

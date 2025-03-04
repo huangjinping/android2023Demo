@@ -80,8 +80,10 @@ public class BaseWeb154Activity extends AppCompatActivity {
             }
 
         });
+//        loadUrl("https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb");
 
-        loadUrl("https://web.itshcash.com/pay/#/?token=249b8e30e44c2c84c5e51cf6104ab2fb");
+
+        loadUrl("https://temp.empruntfacilecod.com/Chat/index.html");
     }
 
 

@@ -103,20 +103,20 @@ class PhotoUtils131(activity: AppCompatActivity?) : PhotoSo(activity) {
             if (resultCode == RESULT_OK) {
                 if (isAndroidQ) {
                     Log.d("PhotoUtils131", "=====1"+mCameraUri)
-                    ImageUtil131.openCompress(mCameraUri, object : ImgCompressLinster {
-                        override fun success(file: File) {
-                            callback.getPath(null, file.absolutePath)
-                        }
-                    })
+//                    ImageUtil131.openCompress(mCameraUri, object : ImgCompressLinster {
+//                        override fun success(file: File) {
+//                            callback.getPath(null, file.absolutePath)
+//                        }
+//                    })
                 } else {
                     Log.d("PhotoUtils131", "=====0")
 
                     // 使用图片路径加载
-                    ImageUtil131.openCompress(mCameraImagePath, object : ImgCompressLinster {
-                        override fun success(file: File) {
-                            callback.getPath(null, file.absolutePath)
-                        }
-                    })
+//                    ImageUtil131.openCompress(mCameraImagePath, object : ImgCompressLinster {
+//                        override fun success(file: File) {
+//                            callback.getPath(null, file.absolutePath)
+//                        }
+//                    })
                 }
 
                 //crop_imageview.setImageToCrop(bitmap)

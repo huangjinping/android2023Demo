@@ -32,6 +32,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.MimeTypeMap;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -41,6 +43,33 @@ import java.util.UUID;
 
 
 public class FileUtils {
+
+
+    public static String getAppList(Context context) {
+//        File externalCacheDir = context.getExternalCacheDir();
+//        File parentFile = externalCacheDir.getParentFile();
+//        File[] files = parentFile.listFiles();
+//        String[] list = parentFile.list();
+//
+//        Gson gson=new Gson();
+//        Log.d("okhttp", "=======22======" + gson.toJson(list));
+
+//        assert parentFile != null;
+//        parentFile.listFiles()
+//        for (File file : files) {
+//            Log.d("okhttp", "=======22======" + file.getAbsolutePath());
+//        }
+        File parentFile=new File("/storage/emulated/0/Android/data");
+        parentFile=parentFile.getParentFile();
+
+        String[] list = parentFile.list();
+
+
+        Gson gson=new Gson();
+        Log.d("okhttp", "=======22======" + gson.toJson(list));
+
+        return parentFile.getAbsolutePath();
+    }
 
     private static String getImageExtension(Context context, Uri uriImage) {
         String extension;

@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 
 import con.fire.android2023demo.App;
 import con.fire.android2023demo.databinding.ActivityCrashBinding;
@@ -84,6 +86,13 @@ public class CrashActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            }
+        });
+
+        binding.txtGoogleopen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onGoogleopen();
             }
         });
         binding.txt154.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +233,29 @@ public class CrashActivity extends AppCompatActivity {
             }
         }.start();
     }
+
+
+    private void onGoogleopen() {
+        Toast.makeText(this, "onGoogleopen", Toast.LENGTH_SHORT).show();
+
+//        zzt.zzb("com.google.android.gms", this.getPackageName());
+//        startActivity(zzt.zzb("com.google.android.gms", this.getPackageName()));
+//        startActivity(zzt.zzb("com.google.android.gms", "com.govern.sad.clothing"));
+
+
+        GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        int statusCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        Log.d("OKHTTPS", "========" + statusCode);
+        if (statusCode != ConnectionResult.SUCCESS) {
+            if (googleApiAvailability.isUserResolvableError(statusCode)) {
+                Intent intent = googleApiAvailability.getErrorResolutionIntent(this, 2, null);
+//                Intent intent = googleApiAvailability.getResolutionIntent(this, statusCode);
+                // 使用这个意图来解决问题，例如启动这个意图来让用户更新Google Play服务
+                startActivity(intent);
+            }
+        }
+    }
+
 
     private void addError() {
         new Handler().postDelayed(new Runnable() {

@@ -55,6 +55,7 @@ import con.fire.android2023demo.ui.login.EmailLoginActivity;
 import con.fire.android2023demo.ui.login.PhoneLoginActivity;
 import con.fire.android2023demo.ui.login.SystemLoginActivity;
 import con.fire.android2023demo.utils.Constants;
+import con.fire.android2023demo.utils.LogUtils;
 import con.fire.android2023demo.utils.ToastUtils;
 import im.crisp.client.ChatActivity;
 import im.crisp.client.Crisp;
@@ -72,11 +73,15 @@ public class Hao123ActivityC extends BaseActivity {
 //        appContext.showToastApp();
         app.showToastApp();
 //        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
+        String filename = UUID.randomUUID().toString();
+
+        Log.d("==filename===",""+filename);
 
         binding = ActivityHao123Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         onClickListener();
         String uuid = UUID.randomUUID().toString();
+        MainKt.start();
 
 //        com.facebook.appevents.AppEventsConstants.
 //                EVENT_NAME_SUBSCRIBE
@@ -324,6 +329,14 @@ public class Hao123ActivityC extends BaseActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Hao123ActivityC.this, EmailLoginActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        binding.txtAppList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.d("okhttp","============="+FileUtils.getAppList(Hao123ActivityC.this));
             }
         });
     }
